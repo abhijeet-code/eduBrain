@@ -25,7 +25,7 @@ export default function ForgetOTP({ onClose, onGoBack, onContinue, context }) {
     }
     
     try {
-      const res = await fetch('${BASE_URL}/api/auth/verify-otp', {
+      const res = await fetch(`${BASE_URL}/api/auth/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp: otpCode }),
