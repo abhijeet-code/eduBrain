@@ -24,9 +24,10 @@ const Certificate = () => {
             alt="Certificate of completion sample"
             src={"/certificate.png"}
           />
-          <Faq/>
+          
         </section>
       </main>
+      <Faq/>
     </div>
   )
 }

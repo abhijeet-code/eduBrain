@@ -38,7 +38,7 @@ export default function ContactInfo() {
             <Mail color='#1545C2 '/>
             <span className=" font-bold mr-2">Email:</span>
             </div>
-            <span className="ml-8 text-base underline underline-offset-2 decoration-[1.1px] decoration-blue-500 max-sm:text-sm">support@tutedude.com</span>
+            <span className="ml-8 text-base underline underline-offset-2 decoration-[1.1px] decoration-blue-500 max-sm:text-sm">edubraining@gmail.com</span>
           </div>
         </div>
       </section>

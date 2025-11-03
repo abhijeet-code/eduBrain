@@ -11,7 +11,7 @@ import Navbar from "./component/Navbar";
 import Login from "./component/Login";
 import Signup from "./component/Signup";
 import Password from "./component/Password";
-// import OTP from "./component/Otp"; // No longer needed as ForgetOTP handles both flows
+
 import Forget from "./component/Forget";
 import CoursesSection from "./component/Courses/CoursesSection";
 import CoursePage from "./component/Course Page/CoursePage";
@@ -215,7 +215,7 @@ export default function App() {
       ),
     },
     {
-      path: "/course-details",
+      path: "/courses/:courseId",
       element: (
         <ModalWrapper>
           <CoursePage />
@@ -234,7 +234,8 @@ export default function App() {
       path: "/profile-dashboard",
       element: (
         <ProtectedRoute isLoggedIn={isLoggedIn} loading={loading}>
-          <Dashboard />
+        {/* <Dashboard /> */}
+        <Dashboard onLogout={handleLogout} />
         </ProtectedRoute>
       ),
       children: [

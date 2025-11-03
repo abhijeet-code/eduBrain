@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 import BackgroundSvg from '../../Contact Us/BackgroundSvg';
 
 
-function Dashboard() {
+function Dashboard({onLogout}) {
   const [opacity, setOpacity] = useState(0.11);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <Navbar opacity={opacity} />
+      <Navbar opacity={opacity} onLogout={onLogout} />
     </div>
   );
 }

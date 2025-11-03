@@ -2,14 +2,15 @@ import { Mail, Share2Icon, ShareIcon } from "lucide-react";
 import React from "react";
 
 
-export const CourseDetailsSection = () => {
-  const courseFeatures = [
-    { icon: "/check2.png", text: "76 Lectures" },
-    { icon: "/check2.png", text: "30h+ content" },
-    { icon: "/check2.png", text: "Lifetime access" },
-    { icon: "/check2.png", text: "Certificate of completion" },
-  ];
-
+export const CourseDetailsSection = ({course}) => {
+  // const courseFeatures = [
+  //   { icon: "/check2.png", text: "76 Lectures" },
+  //   { icon: "/check2.png", text: "30h+ content" },
+  //   { icon: "/check2.png", text: "Lifetime access" },
+  //   { icon: "/check2.png", text: "Certificate of completion" },
+  // ];
+  
+  const courseFeatures = course.sidebarFeatures || [];
   
 
   const contactInfo = [
@@ -21,7 +22,7 @@ export const CourseDetailsSection = () => {
     {
       icon: "/check22.png",
       label: "Email us at",
-      value: "support@tutedude.com",
+      value: "edubraining@gmail.com",
     },
   ];
 
@@ -30,12 +31,14 @@ export const CourseDetailsSection = () => {
   <article className="flex flex-col w-full max-w-[361.51px] items-start gap-3 sm:gap-5 md:gap-8 lg:gap-[13px] relative flex-[0_0_auto] mx-auto">
         <header className="flex flex-col items-start gap-[16.16px] pt-0 pb-[13.71px] px-0 relative self-stretch w-full flex-[0_0_auto] border-b-[0.49px] [border-bottom-style:solid] border-[#3e3e3e]">
           <h1 className="relative self-stretch mt-[-0.49px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-white text-[18.4px] tracking-[0]  leading-[21.5px]">
-            Powerful Data Analysis with Power BI: From Beginner to Pro
+            {course.longTitle || 'Course Detail'}
           </h1>
         </header>
 
         <div className="flex flex-col items-center relative self-stretch w-full flex-[0_0_auto] bg-[#0c0c0d] rounded-[6.93px] border-[0.87px] border-solid border-[#2d2d2d] shadow-[0px_0px_0px_transparent,0px_0px_0px_transparent,0px_8.66px_12.99px_-2.6px_#0000001a,0px_3.46px_5.19px_-3.46px_#0000001a]">
-          <div className="relative self-stretch w-full h-[140px] sm:h-[160px] md:h-[183.55px] rounded-t-[6.93px] overflow-hidden bg-[url(/powerbi.png)] bg-cover bg-top bg-no-repeat">
+          <div className="relative self-stretch w-full h-[140px] sm:h-[160px] md:h-[183.55px] rounded-t-[6.93px] overflow-hidden bg-[url(/powerbi.png)] bg-cover bg-top bg-no-repeat"
+          style={{ backgroundImage: `url(${course.sidebarImage})` }}
+          >
             <div className="absolute top-2 left-0 w-full flex items-center justify-between px-3 sm:px-4 md:px-6">
               <div className="md:inline-flex hidden items-center justify-center gap-[6.93px] px-[8.66px] py-[4.33px] bg-red-500 rounded-[3.46px] overflow-hidden">
                 <span className="mt-[-0.69px] [font-family:'Roboto-Bold',Helvetica] font-bold text-white text-[9.7px] leading-[13.9px] w-fit tracking-[0] whitespace-nowrap">
@@ -65,12 +68,12 @@ export const CourseDetailsSection = () => {
                     <img
                       className="absolute w-[11px] h-2 top-[3px] left-px"
                       alt=""
-                      src={feature.icon}
+                      src="/check2.png"
                     />
                   </div>
 
                   <span className="relative w-[271.87px] mt-[-0.87px] [font-family:'Roboto-Regular',Helvetica] font-normal text-variable-collection-color-dull-duplicate text-[12.1px] tracking-[0] leading-[15.6px] overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] text-gray-400 [-webkit-box-orient:vertical]">
-                    {feature.text}
+                    {feature}
                   </span>
                 </li>
               ))}
@@ -117,7 +120,7 @@ export const CourseDetailsSection = () => {
             <Mail color='#1545C2 '/>
             <span className=" font-bold mr-2">Email:</span>
             </div>
-            <span className="ml-8 text-lg underline underline-offset-2 decoration-[1.1px] decoration-blue-500 max-sm:text-sm">support@tutedude.com</span>
+            <span className="ml-8 text-lg underline underline-offset-2 decoration-[1.1px] decoration-blue-500 max-sm:text-sm">edubraining@gmail.com</span>
           </div>
         </div>
       </section>

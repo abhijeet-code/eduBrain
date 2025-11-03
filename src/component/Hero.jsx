@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
 import WhyEduBraining from './Hero/WhyEduBraining';
 import SkillsMaster from './Hero/SkillsMaster';
@@ -8,10 +8,16 @@ const EdubrainingHero = () => {
   const [cartCount, setCartCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
 
-  const addToCart = () => {
-    setCartCount(prev => prev + 1);
-    setCartTotal(prev => prev + 299); // Example course price
+  const navigate = useNavigate(); 
+
+  const handleClick = () => {
+    navigate('/courses'); 
   };
+
+  // const addToCart = () => {
+  //   setCartCount(prev => prev + 1);
+  //   setCartTotal(prev => prev + 299); // Example course price
+  // };
 /*
 
 <defs>
@@ -80,7 +86,7 @@ const EdubrainingHero = () => {
                   <span className="text-white font-bold font-roboto">Edubraining</span> is your gateway to a high-growth tech career. Founded by
                 </p>
                 <p className="mb-2">
-                <span className="text-[#1763FF]  cursor-pointer">Vidit Agarwal</span> and <span className="text-[#1763FF]  cursor-pointer">Ishan Ghihar</span>, we're on a mission to make top-
+                <span className="text-[#1763FF]  cursor-pointer">Name1</span> and <span className="text-[#1763FF]  cursor-pointer">Name2</span>, we're on a mission to make top-
                 </p>
                 <p className="">
                   tier technical education accessible, affordable, and truly career-
@@ -93,7 +99,7 @@ const EdubrainingHero = () => {
             </div>
 
             <button
-              onClick={addToCart}
+              onClick={handleClick}
               className="mt-2 bg-white text-black w-full sm:w-[193px] h-[40px] rounded-full font-semibold text-base sm:text-lg px-4 sm:px-6 py-3 whitespace-nowrap cursor-pointer flex justify-center items-center"
             >
               Explore Courses
@@ -122,7 +128,7 @@ const EdubrainingHero = () => {
             </div>
 
   {/* Cart Widget - Below the Image */}
-            <div className="mt-8 flex justify-center w-full px-2 md:px-0">
+            {/* <div className="mt-8 flex justify-center w-full px-2 md:px-0">
               <div className="bg-[slate-800/90] backdrop-blur-sm border border-[#1750BF] rounded-xl p-2 sm:p-4 shadow-2xl w-full max-w-[320px] md:max-w-xs mx-auto">
                 <div className="flex items-center justify-between gap-2 sm:gap-4 lg:gap-8 min-w-0">
                   <div className="flex flex-col items-center">
@@ -130,7 +136,7 @@ const EdubrainingHero = () => {
                     <div className="text-xs sm:text-sm text-gray-400">Courses</div>
                   </div>
                   <div className="flex flex-col items-center bg-[#1545C20D]">
-                    <div className="text-base sm:text-lg md:text-2xl font-bold text-white">0</div>
+                    <div className="text-base sm:text-lg md:text-2xl font-bold text-white">0</div>
                     <div className="text-xs sm:text-sm text-gray-400">Total</div>
                   </div>
                   <button className="bg-gradient-to-r from-[#72A0FF] via-[#246CFF] to-[#0054FF] text-white px-2 py-2 sm:px-4 sm:py-2 rounded-lg flex items-center gap-1 sm:gap-2 transition-colors duration-200">
@@ -139,7 +145,7 @@ const EdubrainingHero = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
 </div>
 
 

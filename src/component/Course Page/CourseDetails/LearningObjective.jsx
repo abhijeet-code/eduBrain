@@ -1,15 +1,15 @@
 import * as React from "react";
 
-function LearningObjectives() {
-  const objectives = [
-    "Master Power BI for data-driven decision making and business intelligence",
-    "Create stunning interactive dashboards and reports with Power BI visuals",
-    "Clean, transform, and model real-world data using Power Query and DAX",
-    "Perform insightful data analysis using DAX measures and calculated columns",
-    "Understand and apply key data visualization and storytelling techniques",
-    "Use Power BI Service for publishing, sharing, and collaboration",
-    "Use Power BI Service for publishing, sharing, and collaboration"
-  ];
+function LearningObjectives({ objectives = [] }) {
+  // const objectives = [
+  //   "Master Power BI for data-driven decision making and business intelligence",
+  //   "Create stunning interactive dashboards and reports with Power BI visuals",
+  //   "Clean, transform, and model real-world data using Power Query and DAX",
+  //   "Perform insightful data analysis using DAX measures and calculated columns",
+  //   "Understand and apply key data visualization and storytelling techniques",
+  //   "Use Power BI Service for publishing, sharing, and collaboration",
+  //   "Use Power BI Service for publishing, sharing, and collaboration"
+  // ];
 
   return (
     <section className="mt-8 md:mt-12 w-full max-md:max-w-full mx-auto">

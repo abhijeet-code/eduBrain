@@ -1,7 +1,8 @@
 import React from 'react';
 import CourseIcon from './CourseIcon';
+import { Link } from 'react-router-dom'; 
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ course, courseId }) => {
   const {
     image,
     icon,
@@ -72,18 +73,19 @@ const CourseCard = ({ course }) => {
           </div>
 
           <div className="flex relative gap-2 justify-center items-center mb-4 w-full max-sm:flex-wrap max-sm:gap-1">
-            <span className="text-base leading-6 text-black line-through">₹2999</span>
-            <span className="text-xl font-bold leading-7 text-black">₹2700</span>
+            <span className="text-base leading-6 text-black line-through">₹1450</span>
+            <span className="text-xl font-bold leading-7 text-black">₹1299</span>
             <span className="inline-flex justify-center items-center px-2 py-1 rounded-full shadow-sm bg-white bg-opacity-0">
               <span className="text-xs leading-4 text-green-600">10% OFF</span>
             </span>
           </div>
 
-          <button className="flex justify-center items-center px-16 pt-3 pb-3 w-full bg-gray-900 rounded-lg transition-all cursor-pointer border-[none] duration-[0.2s] ease-[ease]">
+          <Link
+            to={`/courses/${courseId}`} className="flex justify-center items-center px-16 pt-3 pb-3 w-full bg-gray-900 rounded-lg transition-all cursor-pointer border-[none] duration-[0.2s] ease-[ease]">
             <span className="text-base leading-6 text-blue-300">
               Let's Explore It
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </article>

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CourseCard from './CourseCard';
 import DecorativeVectors from './DecorativeVectors';
 
 const CoursesSectionHome = () => {
-  const courses = [
+  const staticCourses = [
     {
       image: {
         src: "https://api.builder.io/api/v1/image/assets/TEMP/3427d9bbfceb5b86d68d1d1d11dbebb3341ec001?width=572",
@@ -20,9 +20,9 @@ const CoursesSectionHome = () => {
       ],
       lectures: "76",
       duration: "10h 30m",
-  originalPrice: "₹2999",
-  discountedPrice: "₹2700",
-  discount: "10% OFF"
+  originalPrice: "₹2598",
+  discountedPrice: "₹1299",
+  discount: "50% OFF"
     },
     {
       image: {
@@ -42,9 +42,9 @@ const CoursesSectionHome = () => {
       ],
       lectures: "67",
       duration: "15h 43m",
-  originalPrice: "₹2999",
-  discountedPrice: "₹2700",
-  discount: "10% OFF"
+  originalPrice: "₹2598",
+  discountedPrice: "₹1299",
+  discount: "50% OFF"
     },
     {
       image: {
@@ -64,9 +64,9 @@ const CoursesSectionHome = () => {
       ],
       lectures: "80",
       duration: "13h 36m",
-  originalPrice: "₹2999",
-  discountedPrice: "₹2700",
-  discount: "10% OFF"
+  originalPrice: "₹2598",
+  discountedPrice: "₹1299",
+  discount: "50% OFF"
     },
     {
       image: {
@@ -76,11 +76,7 @@ const CoursesSectionHome = () => {
       icon: `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 36px; margin-bottom: 16px">
         <path d="M14.3454 18.3179C14.697 18.6695 15.2668 18.6695 15.6184 18.3179L16.2546 17.6817C16.6061 17.3302 16.6061 16.7603 16.2546 16.4088L14.2453 14.4001L16.254 12.3908C16.6056 12.0393 16.6056 11.4695 16.254 11.1179L15.6178 10.4817C15.2662 10.1302 14.6964 10.1302 14.3449 10.4817L11.0632 13.7633C10.7117 14.1149 10.7117 14.6847 11.0632 15.0363L14.3454 18.3179ZM19.746 17.6823L20.3822 18.3185C20.7337 18.67 21.3036 18.67 21.6551 18.3185L24.9368 15.0368C25.2883 14.6853 25.2883 14.1155 24.9368 13.7639L21.6551 10.4823C21.3036 10.1307 20.7337 10.1307 20.3822 10.4823L19.746 11.1185C19.3944 11.47 19.3944 12.0398 19.746 12.3914L21.7547 14.4001L19.746 16.4093C19.3944 16.7609 19.3944 17.3307 19.746 17.6823ZM35.1 27.0001H21.4616C21.42 28.1144 20.6342 28.8001 19.62 28.8001H16.2C15.1487 28.8001 14.3426 27.8174 14.3567 27.0001H0.9C0.405 27.0001 0 27.4051 0 27.9001V28.8001C0 30.7801 1.62 32.4001 3.6 32.4001H32.4C34.38 32.4001 36 30.7801 36 28.8001V27.9001C36 27.4051 35.595 27.0001 35.1 27.0001ZM32.4 6.3001C32.4 4.8151 31.185 3.6001 29.7 3.6001H6.3C4.815 3.6001 3.6 4.8151 3.6 6.3001V25.2001H32.4V6.3001ZM28.8 21.6001H7.2V7.2001H28.8V21.6001Z" fill="black"></path>
       </svg>`,
-      title: {
-        line1: "Full Stack",
-        line2: "Development",
-        isMultiLine: true
-      },
+      title: { line1: "Full Stack", line2: "Development", isMultiLine: true},
       description: [
         "Learn to build complete web",
         "applications by mastering both",
@@ -89,8 +85,8 @@ const CoursesSectionHome = () => {
       ],
       lectures: "84",
       duration: "15h 36m",
-  originalPrice: "₹2999",
-  discountedPrice: "₹2700",
+  originalPrice: "₹2598",
+  discountedPrice: "₹1299",
   discount: "10% OFF"
     },
     {
@@ -117,9 +113,9 @@ const CoursesSectionHome = () => {
       ],
       lectures: "32",
       duration: "6h 10m",
-  originalPrice: "₹2999",
-  discountedPrice: "₹2700",
-  discount: "10% OFF"
+  originalPrice: "₹2598",
+  discountedPrice: "₹1299",
+  discount: "50% OFF"
     },
     {
       image: {
@@ -145,9 +141,9 @@ const CoursesSectionHome = () => {
       ],
       lectures: "50",
       duration: "9h 10m",
-  originalPrice: "₹2999",
-  discountedPrice: "₹2700",
-  discount: "10% OFF"
+  originalPrice: "₹2598",
+  discountedPrice: "₹1299",
+  discount: "50% OFF"
     },
     {
       image: {
@@ -174,9 +170,9 @@ const CoursesSectionHome = () => {
       ],
       lectures: "70",
       duration: "11h 50m",
-  originalPrice: "₹2999",
-  discountedPrice: "₹2700",
-  discount: "10% OFF"
+  originalPrice: "₹2598",
+  discountedPrice: "₹1299",
+  discount: "50% OFF"
     },
     {
       image: {
@@ -202,9 +198,9 @@ const CoursesSectionHome = () => {
       ],
       lectures: "34",
       duration: "11h 50m",
-  originalPrice: "₹2999",
-  discountedPrice: "₹2700",
-  discount: "10% OFF"
+  originalPrice: "₹2598",
+  discountedPrice: "₹1299",
+  discount: "50% OFF"
     },
     {
       image: {
@@ -291,6 +287,25 @@ const CoursesSectionHome = () => {
     }
   ];
 
+  const [dbCourses, setDbCourses] = useState([]);
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  useEffect(() => {
+    // This fetch is ONLY to get the IDs
+    const fetchCourseIds = async () => {
+      try {
+        const res = await fetch(`${BASE_URL}/api/courses`);
+        if (res.ok) {
+          const data = await res.json();
+          setDbCourses(data); // This will be an array like [{ _id: '...', title: 'Power BI' }, ...]     
+        }
+      } catch (error) {
+        console.error("Error fetching course IDs:", error);
+      }
+    };
+    fetchCourseIds();
+  }, []);
+  const courseIdMap = new Map(dbCourses.map(course => [course.title, course._id]));
+
   return (
   <section className="relative px-28 py-20 w-full min-h-screen bg-[#0C0C0D] max-xl:px-16 max-lg:px-10 max-md:px-6 max-md:pt-20 max-md:pb-0 max-sm:px-2 max-sm:pt-10 max-sm:pb-0">
     {/* glow effect */}
@@ -328,9 +343,26 @@ const CoursesSectionHome = () => {
       </header>
 
   <main className="flex flex-wrap gap-7 justify-center content-start items-start mx-auto my-0 max-xl:gap-6 max-lg:gap-5 max-md:gap-4 max-md:justify-center max-md:w-full max-sm:gap-3 max-sm:flex-col max-sm:items-center">
-        {courses.map((course, index) => (
+        {/* {courses.map((course, index) => (
           <CourseCard key={index} course={course} />
-        ))}
+        ))} */}
+         {/* {staticCourses.map((course, index) => {
+          const courseId = courseIdMap.get(course.title.text);
+          if (!courseId) return null; */}
+        {staticCourses.map((course, index) => {
+  const lookupTitle = course.title.isMultiLine 
+    ? `${course.title.line1} ${course.title.line2}` 
+    : course.title.text;
+  const courseId = courseIdMap.get(lookupTitle);
+  if (!courseId) return null;
+          return (
+            <CourseCard 
+              key={index} 
+              course={course} // Pass your detailed static data
+              courseId={courseId} // Pass the real database ID
+            />
+          );
+        })}
       </main>
 
       <DecorativeVectors />

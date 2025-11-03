@@ -1,39 +1,40 @@
 
 
 import * as React from "react";
-
-function CourseCard() {
-  const courseFeatures = [
-    "76 Lectures",
-    "30h+ content",
-    "Lifetime access",
-    "Certificate of completion"
-  ];
+import { Link } from 'react-router-dom';
+function CourseCard({course}) {
+  if(!course) return null;
+  const courseFeatures =  course.sidebarFeatures || [];
 
   return (
   <article className="w-full max-w-[406px] min-w-60 rounded-lg border border-solid shadow-sm bg-blend-normal bg-neutral-950 border-zinc-800 mx-auto md:max-w-full md:w-full md:min-w-0 md:mx-auto">
     <div className="flex overflow-hidden relative flex-col px-2 pt-2 pb-32 sm:px-2.5 sm:pt-2.5 sm:pb-44 w-full text-xs font-bold leading-none rounded-lg bg-blend-normal aspect-[1.906] max-md:pb-24">
-      <img src="https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/3719a5aec29253617aeee99fefdefb369506eacb?placeholderIfAbsent=true" className="object-cover absolute inset-0 size-full" alt="Course thumbnail" />
+      <img src={course.sidebarImage} className="object-cover absolute inset-0 size-full" alt="Course thumbnail" />
+      {course.discountPercentage && (
       <div className="flex relative gap-10 justify-between items-center mb-0 w-full max-md:mb-2.5">
         <div className="flex overflow-hidden gap-2 justify-center items-center self-stretch px-2.5 py-1.5 my-auto text-white bg-red-500 rounded">
-          <span className="self-stretch my-auto">10% OFF</span>
+          <span className="self-stretch my-auto">{course.discountPercentage}%OFF</span>
         </div>
         <div className="flex overflow-hidden gap-2 justify-center items-center self-stretch px-2.5 py-1.5 my-auto text-black whitespace-nowrap bg-white rounded">
           <span className="self-stretch my-auto">Featured</span>
         </div>
       </div>
+      )}
     </div>
     <div className="px-2 sm:px-4 py-4 sm:py-5 w-full">
       <div className="w-full">
         <div className="w-full">
           <div className="flex gap-2 items-end w-full whitespace-nowrap bg-blend-normal">
-            <span className="text-lg sm:text-xl font-extrabold leading-snug text-white">₹2700</span>
-            <span className="text-xs sm:text-sm leading-6 line-through text-zinc-400">₹2999</span>
-          </div>
+            <span className="text-lg sm:text-xl font-extrabold leading-snug text-white">₹{course.price}</span>
+            {course.originalPrice && (
+            <span className="text-xs sm:text-sm leading-6 line-through text-zinc-400">₹{course.originalPrice}</span>
+            )}
+            </div>
           <div className="flex flex-col mt-2.5 w-full">
-            <a href="/billing" className="flex gap-2.5 justify-center items-center px-4 sm:px-8 md:px-16 py-2 w-full text-sm sm:text-base text-black bg-white rounded-lg bg-blend-normal max-md:px-3">
+            <Link 
+              to={`/billing?course=${course._id}`} className="flex gap-2.5 justify-center items-center px-4 sm:px-8 md:px-16 py-2 w-full text-sm sm:text-base text-black bg-white rounded-lg bg-blend-normal max-md:px-3">
               <span className="self-stretch my-auto">Buy Now</span>
-            </a>
+            </Link>
             <p className="self-start mt-2 text-xs sm:text-sm text-center text-ellipsis text-zinc-400">Purchase this course to get access</p>
           </div>
         </div>

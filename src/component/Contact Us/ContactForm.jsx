@@ -7,7 +7,11 @@ export default function ContactForm() {
     email: '',
     message: ''
   });
-
+   
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(""); // 'error' or 'success'
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -16,11 +20,39 @@ export default function ContactForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
+    setIsLoading(true);
+    setMessage("");
+    try {
+      const res = await fetch(`${BASE_URL}/api/contact/send`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.msg || 'Failed to send message.');
+      }
+
+      // Success
+      setMessage('Message sent successfully!');
+      setMessageType('success');
+      setFormData({ name: '', email: '', message: '' }); // Clear the form
+      
+    } catch (error) {
+      console.error('Submission error:', error);
+      setMessage(error.message);
+      setMessageType('error');
+    } finally {
+      setIsLoading(false);
+    }
   };
+  
 
   return (
     <section
@@ -82,15 +114,22 @@ export default function ContactForm() {
 
         <button
           type="submit"
+          disabled={isLoading}
           className="flex flex-row justify-center items-center px-8 py-3 w-full sm:w-[135px] h-[48px] bg-gradient-to-r from-[#72A0FF] via-[#246CFF] to-[#0054FF] rounded-[37px] text-[16px] mt-2"
         >
           <span className="text-base leading-6 text-white tracking-[2px] max-sm:text-sm">
-            SEND
+          {isLoading ? 'SENDING...' : 'SEND'}
           </span>
         </button>
       </form>
 
-      <p className="w-full text-base sm:text-lg text-neutral-200 max-sm:text-base mt-2">
+      {message && (<p className={`w-full text-base sm:text-lg text-neutral-200 max-sm:text-base mt-2 ${
+        messageType === 'error' ? 'text-red-500' : 'text-green-500'
+      }`}>
+        {message}
+      </p>)}
+
+      <p className="w-full text-base  sm:text-lg text-neutral-200 max-sm:text-base mt-2">
         We look forward to helping you grow and achieve your tech career
         goals!
       </p>

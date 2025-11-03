@@ -1,6 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EduBrainingWebsite = () => {
+  const navigate = useNavigate(); 
+
+  const handleClick = () => {
+    navigate('/courses'); 
+  };
   return (
     <div className="min-h-screen relative bg-[#0C0C0D] text-[#F5F8FF]">
       {/* Glow effect  */}
@@ -81,14 +87,15 @@ const EduBrainingWebsite = () => {
               <div className="text-white font-size-24px font-roboto leading-relaxed space-y-8 mt-4 text-base sm:text-xl lg:text-2xl">
                 <p>
                   At <span className="text-white font-roboto font-semibold ">EduBraining</span>, we believe that world-class technical 
-                  education should be accessible, affordable, and transformative. Founded by Vidhi Aggarwal and 
-                  Lakhan Chahar, our mission is to shape the tech pioneers of tomorrow through innovative, industry-aligned learning powered by the latest advancements 
+                  education should be accessible, affordable, and transformative. Founded by Name1 and 
+                  Name2, our mission is to shape the tech pioneers of tomorrow through innovative, industry-aligned learning powered by the latest advancements 
                   in artificial intelligence.
                 </p>
               </div>
 
-              <button className="bg-white cursor-pointer text-[#000000] px-4 sm:px-6 py-2 rounded-full font-medium transition-colors duration-300 text-center mt-4 w-full sm:w-auto">
-                Explore Courses
+              <button className="bg-white cursor-pointer text-[#000000] px-4 sm:px-6 py-2 rounded-full font-medium transition-colors duration-300 text-center mt-4 w-full sm:w-auto"
+                onClick={handleClick}>
+                Explore Courses!
               </button>
             </div>
 
@@ -99,7 +106,7 @@ const EduBrainingWebsite = () => {
                 <p className="text-[#FFFFFF] font-roboto italic text-base sm:text-lg leading-6 sm:leading-8 md:leading-9 break-words whitespace-pre-line mb-4">
                   Education is not just about skills, but about building possibilities - one learner at a time.
                 </p>
-                <span className="block text-[#6C94FF] font-medium text-sm sm:text-base mt-4 mb-2 pl-0 text-left" style={{lineHeight:'1.6'}}>— Vidhi Aggarwal, Co-Founder</span>
+                <span className="block text-[#6C94FF] font-medium text-sm sm:text-base mt-4 mb-2 pl-0 text-left" style={{lineHeight:'1.6'}}>— XYZ, Co-Founder</span>
               </blockquote>
             </div>
           </div>

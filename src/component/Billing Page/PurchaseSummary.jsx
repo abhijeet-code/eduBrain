@@ -2,32 +2,127 @@ import React, { useState } from "react";
 import Hr from "../Hr";
 import { EnrollmentModal } from "./EnrollmentModal";
 
-export const PurchaseSummarySection = () => {
+export const PurchaseSummarySection = ({course, userData}) => {
   const [couponCode, setCouponCode] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const testimonialData = {
     quote:
       "Edubraining truly transformed my skills! The mentorship and projects prepared me for my dream tech job.",
     author: "Aman Singh, Data Analyst",
   };
+  // const purchaseData = {
+  //   price: 2999,
+  //   discount: 300,
+  //   discountPercent: 10,
+  //   total: 2699,
+  //   savings: 300,
+  // };
   const purchaseData = {
-    price: 2999,
-    discount: 300,
-    discountPercent: 10,
-    total: 2699,
-    savings: 300,
-  };
+    price: course.originalPrice || 0,
+    discount: (course.originalPrice || 0) - course.price,
+    discountPercent: course.discountPercentage || 0,
+    total: course.price || 0,
+    savings: (course.originalPrice || 0) - course.price,
+};
 
-  const handleCouponApply = () => {
-    // Handle coupon application logic
-    console.log("Applying coupon:", couponCode);
-  };
+   // const handleProceedToPay = () => {
+  // setShowModal(true);
+  // setTimeout(() => setShowModal(false), 5000);
+  // };
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.body.appendChild(script);
+    });
+};
 
-  const handleProceedToPay = () => {
-  setShowModal(true);
-  setTimeout(() => setShowModal(false), 5000);
-  };
+const handleProceedToPay = async () => {
+  const scriptLoaded = await loadRazorpayScript();
+  if (!scriptLoaded) {
+      alert("Payment gateway failed to load. Please check your internet connection.");
+      return;
+  }
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+      alert("You must be logged in to make a purchase.");
+      // You might want to trigger the login modal here
+      return;
+  }
+
+  try {
+      // 1. Create the Order
+      const orderRes = await fetch(`${BASE_URL}/api/payments/create-order`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ courseId: course._id })
+      });
+
+      if (!orderRes.ok) {
+          const errorData = await orderRes.json();
+          throw new Error(errorData.msg || 'Failed to create payment order.');
+      }
+      const orderData = await orderRes.json();
+
+      // 2. Configure Razorpay Options
+      const options = {
+          key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: "EduBraining",
+          description: `Enrollment for ${course.title}`,
+          order_id: orderData.id,
+          
+          // 3. Verification Handler
+          handler: async (response) => {
+              const verificationRes = await fetch(`${BASE_URL}/api/payments/verify-payment`, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${token}`
+                  },
+                  body: JSON.stringify({ ...response, courseId: course._id })
+              });
+
+              if (!verificationRes.ok) {
+                  const errorData = await verificationRes.json();
+                  throw new Error(errorData.msg || 'Payment verification failed.');
+              }
+              
+              // --- SUCCESS ---
+              setShowModal(true); // Show the success modal
+          },
+          prefill: {
+              name: userData?.name || "Valued User", // You can get this from your /api/auth/user endpoint
+              email: userData?.email || "user.email@example.com",
+          },
+          theme: {
+              color: "#1545C2"
+          }
+      };
+
+      // 4. Open the Razorpay Checkout
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+
+  } catch (error) {
+      console.error(error);
+      alert(error.message);
+  }
+};
+
+const handleCouponApply = () => {
+  // Handle coupon application logic
+  console.log("Applying coupon:", couponCode);
+};
 
   return (
     <section
@@ -124,10 +219,10 @@ export const PurchaseSummarySection = () => {
                   className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md"
                   onClick={() => setShowModal(false)}
                 >
-                  <div className="relative" onClick={e => e.stopPropagation()}>
+                  {/* <div className="relative" onClick={e => e.stopPropagation()}> */}
                     <EnrollmentModal />
-                  </div>
-                </div>
+                 {/* </div> */}
+                 </div>
               )}
               <div className="relative w-full text-white">
                 <input placeholder="Apply Coupon code"

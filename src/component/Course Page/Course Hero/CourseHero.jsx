@@ -1,6 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+export const CourseHero= ({ course }) => {
+  if (!course) return null;
 
-export const CourseHero= () => {
+  const handleScrollToCurriculum = () => {
+    // Find the element by the ID we just created
+    const element = document.getElementById('curriculum');
+    if (element) {
+      // Smoothly scroll to it
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }; 
   return (
   <header className="relative w-full bg-[#0C0C0D]">
       {/* Decorative SVG Elements */}
@@ -22,21 +32,24 @@ export const CourseHero= () => {
       {/* Hero Section */}
       <section className="flex flex-col gap-9 items-center px-4 md:px-5 py-12 md:py-20  w-full">
         <h1 className="text-3xl sm:text-4xl md:text-6xl text-center text-white leading-10 sm:leading-[55px] md:leading-[80px] max-w-[824px] font-semibold">
-          Are you Ready to become Master in Power BI?
+            {course.heroTitle} 
         </h1>
         <div className="flex flex-col gap-3.5 items-center w-full">
           <div className="flex flex-row gap-4 sm:gap-7 items-center w-full max-w-[400px] justify-center ">
-            <button className="flex gap-3.5 justify-center items-center px-6 py-3 bg-white rounded-xl w-fit min-w-fit max-w-[180px]">
-              <span className="text-base font-medium leading-6 text-black">Enrol Now</span>
-            </button>
-            <button className="flex gap-3.5 justify-center items-center px-5 py-3 rounded-xl border border-white border-solid w-fit min-w-[120px] max-w-[180px]">
+            <Link 
+            to= {`/billing?course=${course._id}`} className="flex gap-3.5 justify-center items-center px-6 py-3 bg-white rounded-xl w-fit min-w-fit max-w-[180px]">
+              <span className="text-base font-medium leading-6 text-black">Enroll Now</span>
+            </Link>
+            <button
+            onClick={handleScrollToCurriculum} className="flex gap-3.5 justify-center items-center px-5 py-3 rounded-xl border border-white border-solid w-fit min-w-[120px] max-w-[180px]">
               <span className="text-base font-medium leading-6 text-white">See the curriculum</span>
             </button>
           </div>
             <div className="flex gap-2 items-end mt-2">
-              <span className="text-base sm:text-xl font-bold leading-7 text-white">₹2700</span>
-              <span className="text-xs sm:text-sm leading-6 text-zinc-400 flex gap-2"> <span className='line-through'>₹2999</span>
-            (10% OFF)</span>
+              <span className="text-base sm:text-xl font-bold leading-7 text-white">₹{course.price}</span>
+              {course.originalPrice && course.discountPercentage && (
+              <span className="text-xs sm:text-sm leading-6 text-zinc-400 flex gap-2"> <span className='line-through'>₹{course.originalPrice}</span>
+            ({course.discountPercentage}% OFF)</span> )}
             </div>
         </div>
       </section>
@@ -45,27 +58,21 @@ export const CourseHero= () => {
       <section className="flex flex-col gap-6 md:gap-8 px-4 md:px-5 py-8 md:py-12 mx-auto my-0 w-full max-w-[1076px]">
         <div className="flex flex-col gap-4 md:gap-8 items-start pb-5 md:pb-7 w-full border-b-2 border-solid border-b-neutral-700">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-7 text-white">
-            Powerful Data Analysis with Power BI: From Beginner to Pro
+          {course.longTitle}
           </h2>
           <p className="text-lg sm:text-xl md:text-2xl leading-7 sm:leading-9 text-zinc-400">
-            Unlock the full potential of your data! Master Power BI for insightful data analysis and stunning visualizations that drive smarter decisions.
+             {course.heroSubtitle}
           </p>
         </div>
         <div className="flex flex-col w-full gap-2 ">
-          <div className="flex gap-2 items-center px-3 py-1 rounded-xl bg-[#1545C233] bg-opacity-20 w-full sm:w-fit">
-            <p className="text-xs sm:text-sm leading-5 text-white">
-              <strong>No prior technical knowledge</strong> required to successfully engage with the course.
-            </p>
-          </div>
-          <div className="flex gap-2 items-center px-3 py-1 rounded-xl bg-[#1545C233] bg-opacity-20 w-full sm:w-fit">
-            <p className="text-xs sm:text-sm leading-5 text-white">
-              All lectures are pre-recorded for <strong>flexible</strong>, <strong>self-paced learning</strong>.
-            </p>
-          </div>
+        {(course.taglines || []).map((tagline, index) => (
+          <div key = {index} className="flex gap-2 items-center px-3 py-1 rounded-xl bg-[#1545C233] bg-opacity-20 w-full sm:w-fit">
+            <p className="text-xs sm:text-sm leading-5 text-white" dangerouslySetInnerHTML={{ __html: tagline }} />
+          </div> ))}
         </div>
       </section>
     </header>
   );
 };
 
-export default CourseHero
+export default CourseHero;

@@ -1,22 +1,41 @@
 import React, { useState, useEffect } from "react";
-import check from "../../../public/check.png"
+import check from "../../../public/check.png";
+import { useNavigate } from "react-router-dom";
 export const EnrollmentModal = () => {
   const [countdown, setCountdown] = useState(5);
+  const navigate = useNavigate(); // 2. Initialize navigate
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          // Handle redirect logic here
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+    const handleRedirectClick = () => {
+        navigate('/profile-dashboard/my-courses'); // 4. Redirect manually
+    };
+  
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCountdown((prev) => {
+                if (prev <= 1) {
+                    clearInterval(timer);
+                    navigate('/profile-dashboard/my-courses'); // 3. Auto-redirect
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [navigate]);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCountdown((prev) => {
+  //       if (prev <= 1) {
+  //         clearInterval(timer);
+  //         // Handle redirect logic here
+  //         return 0;
+  //       }
+  //       return prev - 1;
+  //     });
+  //   }, 1000);
 
-    return () => clearInterval(timer);
-  }, []);
+  //   return () => clearInterval(timer);
+  // }, []);
 
   const instructionItems = [
     {
@@ -37,10 +56,6 @@ export const EnrollmentModal = () => {
     },
   ];
 
-  const handleRedirectClick = () => {
-    // Handle manual redirect logic here
-    console.log("Manual redirect clicked");
-  };
 
   return (
     <main className="inline-flex flex-col items-center gap-[30px] px-[30px] py-[60px] relative bg-[#20c2151a] rounded-[15px] border border-solid border-[#00bd45] text-white">

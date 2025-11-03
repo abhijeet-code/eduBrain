@@ -1,6 +1,39 @@
 import React from 'react';
+import {Link } from 'react-router-dom';
+function CourseCard({ courseId, title, enrollmentDate, progress }) {
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const handleCertificateDownload = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const res = await fetch(`${BASE_URL}/api/certificates/download/${courseId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
 
-function CourseCard({ title, enrollmentDate, progress }) {
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.msg || 'Failed to download certificate.');
+      }
+
+      // Handle the file download
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${title.replace(/\s+/g, '_')}_Certificate.pdf`; // e.g., Power_BI_Certificate.pdf
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+      console.error(error);
+      alert(error.message); // Use alert as requested
+    }
+  };
+  const formattedDate = enrollmentDate ? enrollmentDate.split('T')[0] : '';
+  // Check if course is complete
+  const isComplete = progress === 100;
+
   return (
     <div className="px-4 py-4 rounded-md border border-blue-600 border-solid bg-[#246bfd]/21  bg-opacity-10 min-w-60 w-[350px]">
       <h3 className="text-lg font-medium leading-5 text-white">
@@ -14,7 +47,7 @@ function CourseCard({ title, enrollmentDate, progress }) {
             alt=""
           />
           <span className="self-stretch my-auto text-blue-600 text-ellipsis w-[272px]">
-            Enrolled on {enrollmentDate}
+            Enrolled on {formattedDate}
           </span>
         </div>
         <div className="flex gap-1.5 items-center mt-1.5 w-full">
@@ -30,7 +63,9 @@ function CourseCard({ title, enrollmentDate, progress }) {
         </div>
       </div>
       <div className="flex gap-2.5 items-start mt-3 w-full text-base leading-tight whitespace-nowrap">
-        <button className="flex flex-1 shrink gap-2.5 justify-center items-center px-8 py-3 text-blue-600 rounded-md border border-blue-600 border-solid basis-0 min-h-[45px] max-md:px-5">
+        <Link
+         to={`/courses/${courseId}`}
+         className="flex flex-1 shrink gap-2.5 justify-center items-center px-8 py-3 text-blue-600 rounded-md border border-blue-600 border-solid basis-0 min-h-[45px] max-md:px-5">
           <span className="self-stretch my-auto text-blue-600">
             Resume
           </span>
@@ -39,8 +74,11 @@ function CourseCard({ title, enrollmentDate, progress }) {
             className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
             alt=""
           />
-        </button>
-        <button className="flex flex-1 shrink gap-2.5 justify-center items-center px-8 py-3 text-white bg-blue-600 rounded-md basis-0 min-h-[45px] max-md:px-5">
+        </Link>
+        <button 
+        onClick={handleCertificateDownload}
+        disabled={!isComplete}
+        className="flex flex-1 shrink gap-2.5 justify-center items-center px-8 py-3 text-white bg-blue-600 rounded-md basis-0 min-h-[45px] max-md:px-5">
           <span className="self-stretch my-auto">
             Certificate
           </span>

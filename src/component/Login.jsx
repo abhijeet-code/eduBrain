@@ -6,13 +6,16 @@ export default function Login({ onClose, onSignupClick, onForgotPassword, onLogi
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
-
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
   const handleContinue = async () => {
+    setMessage("");
+
     if (!name.trim() || !email.trim()) {
-      alert("Please fill in both email and password.");
+      setMessage("Please fill in both email and password.");
+      setMessageType("error");
       return;
-    }
-    console.log("Sending login request with:", { name, email });
+    }  
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     try {
       const res = await fetch(BASE_URL + '/api/auth/login', {
@@ -24,7 +27,10 @@ export default function Login({ onClose, onSignupClick, onForgotPassword, onLogi
       const data = await res.json();
       console.log("Response data:", data);
       if (!res.ok) {
-        throw new Error(data.error || 'Login failed');
+        // Use the error message from the backend
+        setMessage(data.msg || 'Login failed');
+        setMessageType('error');
+        return; // Stop the function here
       }
       localStorage.setItem('token', data.token);
       onLoginSuccess(); 
@@ -32,7 +38,8 @@ export default function Login({ onClose, onSignupClick, onForgotPassword, onLogi
   
     } catch (err) {
       console.error("Fetch error:", err.message);
-      alert(`Login error: ${err.message}`);
+      setMessage("A network error occurred. Please try again.");
+      setMessageType("error");
     }
   };
 
@@ -129,7 +136,13 @@ export default function Login({ onClose, onSignupClick, onForgotPassword, onLogi
                 className="w-full px-4 py-3 bg-transparent border border-blue-600 rounded-full text-white placeholder-blue-400 focus:outline-none focus:border-blue-400 text-center"
               />
             </div>
-
+            {message && (
+              <p className={`text-center text-sm font-medium ${
+                messageType === 'error' ? 'text-red-500' : 'text-green-500'
+              }`}>
+                {message}
+              </p>
+            )}
             <div
               onClick={() => {
                 onForgotPassword();
