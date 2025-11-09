@@ -18,17 +18,17 @@ function SidebarMenuItem({ icon, label }) {
   const to = `/profile-dashboard/${routeMap[label]}`;
   // Check if current location matches this route
   const isActive = location.pathname === to || (to === '/profile-dashboard/' && location.pathname === '/profile-dashboard');
-  const textClasses = isActive ? "text-white" : "text-blue-600";
+  const textClasses = isActive ? "text-white font-semibold" : "text-blue-400";
   return (
     <Link to={to} className={`${baseClasses} ${isActive ? activeClasses  : ''}`}>
-      <div className="flex gap-3.5 justify-center items-center self-stretch px-1.5 my-auto  bg-[#246bfd]/21 bg-opacity-20 h-[34px] min-h-[34px] rounded-[30px] w-[34px]">
-        <img
+            <div className={`flex justify-center items-center shrink-0 w-[34px] h-[34px] rounded-full ${isActive ? 'bg-blue-600/10' : 'bg-blue-600/20'}`}>
+            <img
           src={icon}
-          className="object-contain self-stretch my-auto w-6 aspect-square"
+          className="w-5 h-5"
           alt=""
         />
       </div>
-      <span className={`self-stretch my-auto text-xl font-medium leading-none ${textClasses}`}>
+      <span className={`text-lg font-medium ${textClasses}`}>
         {label}
       </span>
     </Link>

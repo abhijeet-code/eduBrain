@@ -19,29 +19,33 @@ const imageMap = {
 const CourseCard = ({ course }) => {
   const progressWidthStyle = `${course.progress || 0}%`;
   return (
-    <article className="flex flex-col w-[300px] items-center relative bg-[#0c0c0d] rounded-[6.93px] border-[0.87px] border-solid border-[#2d2d2d] shadow-[0px_0px_0px_transparent,0px_0px_0px_transparent,0px_8.66px_12.99px_-2.6px_#0000001a,0px_3.46px_5.19px_-3.46px_#0000001a]">
-      <div
-        className="relative self-stretch w-full h-[183.55px] rounded-[6.93px_6.93px_0px_0px] bg-cover bg-[50%_50%]"
+    <article className="flex flex-col w-full bg-[#0c0c0d] rounded-[6.93px] border-[0.87px] border-solid border-[#2d2d2d] shadow-[0px_0px_0px_transparent,0px_0px_0px_transparent,0px_8.66px_12.99px_-2.6px_#0000001a,0px_3.46px_5.19px_-3.46px_#0000001a] overflow-hidden">
+    <div
+        className="relative self-stretch w-full h-[183.55px] bg-cover bg-center"
         style={{ backgroundImage: `url(${course.image})` }}
         role="img"
         aria-label={`Course thumbnail for ${course.title}`}
       />
-      <div className="flex flex-col items-start gap-[12.12px] px-[14.72px] py-[17.32px] relative self-stretch w-full flex-[0_0_auto]">
-        <h3 className="relative w-[271.87px] mt-[-0.87px] mr-[-3.04px] [font-family:'Roboto-Medium',Helvetica] font-medium text-white text-[17.3px] tracking-[0] leading-[20.6px] overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
-          {course.title}
-        </h3>
-        <div className="flex text-gray-400 flex-col items-start gap-[5px] relative self-stretch w-full flex-[0_0_auto]">
+      <div className="flex flex-col flex-grow items-start gap-4 p-4">
+                <h3 className="text-base font-medium text-white leading-snug h-12 overflow-hidden">
+                    {course.title}
+                </h3>
+          <div className="w-full">
+                    <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs text-gray-400">Progress</span>
+                        <span className="text-xs font-medium text-white">{course.progress}%</span>
+                    </div>
           <div
-            className="relative self-stretch w-full h-1.5 bg-[#f1f2f5] rounded-[5px] overflow-hidden"
+            className="w-full h-1.5 bg-gray-700 rounded-full overflow-hidden"
             role="progressbar"
             aria-valuenow={course.progress}
             aria-valuemin="0"
             aria-valuemax="100"
-            aria-label={`Course progress: ${course.progress}% completed`}
+            // aria-label={`Course progress: ${course.progress}% completed`}
           >
             <div
-              className="h-1.5 bg-emerald-500 rounded-[5px]"
-              style={{ width: course.progressWidth }}
+              className="h-full bg-emerald-500 rounded-full"
+              style={{ width: course.progress }}
             />
           </div>
           <div className="w-full flex justify-end mt-1">
@@ -123,14 +127,14 @@ export const MyCourses = () => {
   }
 
   return (
-    <main className="flex flex-col w-[1220px] items-start gap-[54px] p-10 relative rounded-[5px] mt-10 border border-solid border-[#1545c2]">
-      <header className="inline-flex items-center justify-center gap-[19.51px] px-0 py-[19.51px] relative flex-[0_0_auto]">
-        <h1 className="relative w-fit mt-[-3.90px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-[#0356ff] text-[41.9px] tracking-[0] leading-[39.1px] whitespace-nowrap">
+    <main className="w-full md:w-[1220px] flex flex-col items-start gap-[54px] md:gap-10 p-4 sm:p-6 lg:p-8 mt-10 md:mt-20 rounded-[5px] border border-solid border-[#1545c2]  md:ml-5">
+      <header className="w-full max-w-7xl mx-auto">
+        <h1 className="text-3xl md:text-4xl font-semibold text-[#0356ff] leading-tight">
           My Courses
         </h1>
       </header>
       <section
-        className="inline-flex items-center gap-[30px] relative flex-[0_0_auto] mr-[-20.00px]"
+        className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
         aria-label="Course list"
       >
         {courses.map((course) => (

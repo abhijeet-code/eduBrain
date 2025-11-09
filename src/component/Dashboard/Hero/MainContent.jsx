@@ -155,19 +155,19 @@ function MainContent() {
   ];
 
 return (
-    <main className="ml-5 w-4/5 max-md:ml-0 max-md:w-full">
+    <main className="ml-5 w-4/5 max-md:ml-5 max-md:w-full">
         <div className="mt-14 w-full max-md:mt-10 max-md:max-w-full">
             <div className="w-full max-w-[1060px] max-md:max-w-full">
                 <div className="w-full max-md:max-w-full">
                     <div className="w-full max-md:max-w-full">
                         <div className="flex justify-between items-center w-full text-5xl font-semibold leading-none text-blue-600 max-md:max-w-full max-md:text-4xl">
-                            <h1 className="self-stretch my-auto max-md:max-w-full max-md:text-4xl">
+                        <h1 className="font-semibold text-3xl md:text-4xl text-[#0554F7] mb-2">
                                 Welcome back, {userName || 'there'}!
                             </h1>
                         </div>
-                        <p className="mt-4 text-lg leading-none text-zinc-400 max-md:max-w-full">
-                            Here's a snapshot of your learning journey.
-                        </p>
+                        <p className="text-base md:text-lg text-[#B9B9B9]">
+            Here's a snapshot of your learning journey.
+          </p>
                     </div>
                     <section className="flex flex-row flex-wrap justify-between items-center mt-11 max-md:mt-10 max-md:max-w-full gap-6">
                         {dynamicStatsData.map((stat, index) => (
@@ -195,7 +195,7 @@ return (
                                 title={course.title}
                                 enrollmentDate={course.enrollmentDate}
                                 progress={course.progress}
-                                // className="bg-[rgba(36,107,253,0.5)]"
+                                className="bg-[rgba(36,1,253,0.5)]"
                             />
                         ))
                       ) : (<p className="text-zinc-400">No courses enrolled yet.</p>)}

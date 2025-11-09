@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {Link} from 'react-router-dom';
-const Navbar = ({onLogout}) => {
+const Navbar = ({onLogout, isSidebarOpen, setIsSidebarOpen}) => {
   const navLinkMap = {
     "About Us": "/#about",
     "Courses": "/#courses",
@@ -97,19 +97,31 @@ const Navbar = ({onLogout}) => {
     : `#0c0c0d`;
 
   return (
-    <header className="flex top-0 right-0 z-0 flex-col shadow-sm bg-blend-normal w-full h-[89px] max-md:max-w-full fixed">
+    <header className="flex top-0 right-0 z-30 flex-col shadow-sm bg-blend-normal w-full h-[89px] fixed">
       <nav
-        className="flex z-10 flex-col items-center justify-center px-24 py-2.5 w-full border border-blue-800 border-solid bg-blend-normal max-md:px-5 max-md:max-w-full"
-        style={{ backgroundColor: background, transition: 'background-color 0.3s' }}
+        className="flex z-10 flex-col items-center justify-center px-4 md:px-12 lg:px-24 py-2.5 w-full border-b border-blue-800 border-solid bg-blend-normal"
+        style={{ backgroundColor: background, transition: 'background-color 0.3s ease-in-out' }}
       >
-        <div className="flex flex-wrap gap-10 justify-between items-center w-full max-w-[1453px] max-md:max-w-full">
+        <div className="flex justify-between items-center w-full max-w-screen-2xl">
+        <div className="flex items-center gap-4">
+            {/* Hamburger Menu Icon for mobile */}
+            <button
+              className="p-2 md:hidden text-white rounded-md hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              aria-label="Open sidebar"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           <img
             src="https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/553368b5f4c2cdeed08ef104347ef0eae9e681d4?placeholderIfAbsent=true"
             className="object-contain shrink-0 self-stretch my-auto aspect-[1.45] w-[104px]"
             alt="Logo"
           />
-          <ul className="flex gap-8 items-start self-stretch my-auto text-lg bg-blend-normal min-h-[27px] min-w-60 text-slate-50 max-md:max-w-full">
-            {navLinks.map((linkName, index) => (
+          </div>
+          <ul className="hidden md:flex gap-8 items-center text-lg text-slate-50">
+           {navLinks.map((linkName, index) => (
               <li key={index}>
                 <Link 
                   to={navLinkMap[linkName]}className="hover:text-blue-400 transition-colors text-xl">
@@ -118,20 +130,22 @@ const Navbar = ({onLogout}) => {
               </li>
             ))}
           </ul>
-          <div className="flex gap-2.5 items-center self-stretch my-auto relative" ref={dropdownRef}>
+          <div className="flex gap-2.5 items-center" ref={dropdownRef}>
             <button
               onClick={toggleDropdown}
-              className="flex overflow-hidden gap-3.5 justify-center items-center self-stretch px-2 my-auto w-12 h-12 bg-[#246bfd]/21 bg-opacity-20 min-h-12 rounded-[30px]"
+              className="flex gap-2.5 items-center w-12 h-12 bg-[#246bfd]/21 rounded-full"
               aria-label="Profile menu"
               aria-expanded={isDropdownOpen}
             >
+               <div className="flex justify-center items-center w-12 h-12 bg-[#246bfd]/21 rounded-full">
               <img
                 src="https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/5b4b42d7d1ca285f45eb1ea05cbf129da772d265?placeholderIfAbsent=true"
-                className="object-contain self-stretch my-auto w-7 aspect-square"
+                // className="object-contain self-stretch my-auto w-7 aspect-circle"
                 alt="User avatar"
               />
+              </div>
             </button>
-            <span className="self-stretch my-auto text-2xl leading-none text-white max-w-[200px] truncate">
+            <span className="hidden sm:block my-auto text-xl leading-none text-white">
               {userName}
             </span>
             {isDropdownOpen && (

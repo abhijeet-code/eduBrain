@@ -2,7 +2,7 @@ import React from 'react';
 import SidebarMenuItem from './SidebarMenuItem';
 import { Link } from 'react-router-dom';
 
-function Sidebar() {
+function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
   const menuItems = [
     {
       icon: "https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/f73ecf0537097552816b53b848bf2653c7e8fbf8?placeholderIfAbsent=true",
@@ -36,28 +36,30 @@ function Sidebar() {
   ];
 
   return (
-    <aside className="w-1/5 max-md:ml-0 max-md:w-full z-10 fixed  left-0 top-[93px] h-[calc(100vh-89px)]">
-      <nav className="px-2.5 py-5 mx-auto flex flex-col items-center  w-full border-r bg-[#246bfd]/11 border-blue-600 border-solid h-full max-md:mt-10 ">
-       <div className="flex flex-col gap-3 justify-center items-start w-full px-6 mx-auto pb-3">
+    <aside className={`w-3/4 md:w-1/5 z-20 fixed left-0 top-0 pt-[89px] h-screen transform transition-transform duration-300 ease-in-out bg-[#0c0c0d] ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
+    <nav className="flex flex-col w-full border-r border-blue-600 h-full overflow-y-auto">
+      <div className="flex flex-col gap-3 p-4">
           {menuItems.map((item, index) => (
-         <div key={index} className={index > 0 ? "mt-4" : ""}>
+         <div key={index}  onClick={() => setIsSidebarOpen(false)}>
+         <div className={index > 0 ? "mt-2" : ""}>
               <SidebarMenuItem
                 icon={item.icon}
                 label={item.label}
                 isActive={item.isActive}
               />
             </div>
+            </div>
           ))}
         </div>
-        <Link to={'/profile-dashboard/my-profile'} className="flex gap-2.5 justify-center items-center pr-10 py-2.5  w-full border-t border-blue-600 max-md:mt-10  cursor-pointer">
-          <div className="flex overflow-hidden gap-3.5 justify-center items-center self-stretch px-1.5 my-auto bg-opacity-20 h-[34px] min-h-[34px] rounded-[30px] w-[34px]">
-            <img
+        <Link to={'/profile-dashboard/my-profile'} onClick={() => setIsSidebarOpen(false)}   className="flex gap-4 items-center p-4 mt-auto w-full border-t border-blue-600 hover:bg-white/5 transition-colors">
+        <div className="flex justify-center items-center w-[34px] h-[34px] rounded-full bg-blue-500/20">
+        <img
               src="https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/e544583d6e8bf8d8ef70a3fa4f8fb8ac22497152?placeholderIfAbsent=true"
-              className="object-contain self-stretch my-auto aspect-square w-[22px]"
-              alt=""
+              className="w-[22px] h-[22px]"
+               alt=""
             />
           </div>
-          <span className="self-stretch my-auto text-xl font-medium leading-none text-blue-600 cursor-pointer">
+          <span className="text-lg font-medium text-blue-600">
             My Profile
           </span>
         </Link>

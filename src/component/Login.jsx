@@ -34,6 +34,7 @@ export default function Login({ onClose, onSignupClick, onForgotPassword, onLogi
       }
       localStorage.setItem('token', data.token);
       onLoginSuccess(); 
+      navigate('profile-dashboard');
       onClose();
   
     } catch (err) {

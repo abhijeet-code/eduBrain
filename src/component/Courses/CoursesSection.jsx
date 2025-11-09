@@ -251,7 +251,7 @@ export const CoursesSection = () => {
                     <rect width="433" height="275" transform="matrix(1 0 0 -1 -138 475)" fill="url(#paint0_linear_396_1025)" fillOpacity="0.3" />
                 </g>
                 <defs>
-                    <filter id="filter0_f_396_1025" x="-338" y="0" width="833" height="675" filterUnits="userSpaceOnUse" colorInterpolation-filters="sRGB">
+                    <filter id="filter0_f_396_1025" x="-338" y="0" width="833" height="675" filterUnits="userSpaceOnUse" colorinterpolation-filters="sRGB">
                         <feFlood floodOpacity="0" result="BackgroundImageFix" />
                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                         <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_396_1025" />

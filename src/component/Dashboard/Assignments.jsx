@@ -115,9 +115,9 @@ const Assignments = () => {
     }
 
     return (
-        <div className="w-full flex bg-transparent">
-            <div className="mt-20 min-h-[200px] w-full max-w-4xl rounded-lg border border-solid border-[#1545c2] bg-[#0c0c0d] p-8">
-                <h1 className="text-4xl font-semibold text-[#0356ff] mb-8">Assignments</h1>
+        <div className="w-full p-4 md:p-6 lg:p-8">
+        <div className="mt-10 md:mt-20 min-h-[200px] w-full max-w-7xl mx-auto rounded-xl border border-solid border-[#1545c2] bg-[#0c0c0d] p-6 md:p-10 flex flex-col justify-start">
+          <h1 className="text-4xl font-semibold text-[#0356ff] mb-8">Assignments</h1>
 
                 {assignmentsByCourse.length > 0 ? (
                     <div className="space-y-8">

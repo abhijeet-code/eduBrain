@@ -148,22 +148,21 @@ const Profile = () => {
   ];
 
   return (
-    <div className="inline-flex flex-col items-start gap-[54px] p-10 mt-20 relative rounded-[5px] border border-solid border-[#1545c2]">
-      <header className="flex flex-col items-start gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-        <div className="inline-flex items-center justify-center gap-[19.51px] px-0 py-[19.51px] relative flex-[0_0_auto]">
-          <h1 className="relative w-fit mt-[-3.90px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-[#0356ff] text-[41.9px] tracking-[0] leading-[39.1px] whitespace-nowrap">
+    <div className="w-full p-4 md:p-6 lg:p-8">
+    <div className="mt-10 md:mt-20 w-full max-w-7xl mx-auto rounded-xl border border-solid border-[#1545c2] bg-[#0c0c0d] p-6 md:p-10 flex flex-col gap-8">
+      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-3xl md:text-4xl font-semibold text-[#0356ff] leading-tight">
             My Profile
           </h1>
-        </div>
-
-        <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
-          <h2 className="relative w-fit [font-family:'Inter-Regular',Helvetica] font-normal text-gray-500 text-3xl tracking-[0] leading-[20.1px] whitespace-nowrap">
+          <h2 className="text-lg md:text-xl text-gray-400 mt-1">
             Personal Details
           </h2>
+        </div>
 
           <button
-            className="inline-flex items-center gap-3.5 p-2.5 relative flex-[0_0_auto] bg-[#1545c21a] rounded-[5px] border border-solid border-[#1545c2] hover:bg-[#1545c230] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1545c2] focus:ring-offset-2"
-            onClick={toggleEditMode}
+             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#6687ff] bg-[#1545c2]/10 border border-transparent rounded-lg hover:bg-[#1545c2]/20 focus:outline-none focus:ring-2 focus:ring-[#1545c2] focus:ring-offset-2 focus:ring-offset-black transition-colors self-start sm:self-center"
+             onClick={toggleEditMode}
             aria-label={isEditing ? "Cancel Editing" : "Edit Profile"}
           >
             <div className="relative w-6 h-6" aria-hidden="true">
@@ -184,23 +183,20 @@ const Profile = () => {
               {isEditing ? "Cancel" : "Edit Profile"}
             </span>
           </button>
-        </div>
       </header>
 
-      <main className="flex items-center gap-10 relative self-stretch w-full flex-[0_0_auto]">
-        <div className="flex flex-col w-[450px] items-start gap-[24.83px] relative">
-          {formFields.slice(0, 2).map((field) => (
+      <main className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+       {formFields.slice(0, 2).map((field) => (
             <div
               key={field.id}
-              className="flex flex-col items-start gap-2.5 relative self-stretch w-full flex-[0_0_auto]"
+              className="flex flex-col gap-2 relative self-stretch w-full flex-[0_0_auto]"
             >
               <label
                 htmlFor={field.id}
-                className="relative w-fit mt-[-1.00px] [font-family:'Inter-Medium',Helvetica] font-medium text-[#6687ff] text-xl tracking-[0] leading-[normal] whitespace-nowrap"
+                className="font-medium text-[#6687ff] text-base"
               >
                 {field.label}
               </label>
-              <div className="flex h-[50px] items-center gap-[8.28px] px-3 py-[8.28px] relative self-stretch w-full rounded-[5px] border-[0.83px] border-solid border-[#1545c2] focus-within:border-[#0356ff] focus-within:ring-1 focus-within:ring-[#0356ff]">
                 <input
                   id={field.id}
                   type={field.type}
@@ -208,27 +204,25 @@ const Profile = () => {
                   onChange={(e) => handleInputChange(field.id, e.target.value)}
                   placeholder={field.placeholder}
                   disabled={!isEditing}
-                  className="relative w-full [font-family:'Inter-Regular',Helvetica] font-normal text-gray-500 text-[15.8px] tracking-[0] leading-[normal] bg-transparent border-none outline-none placeholder:text-gray-500 disabled:cursor-not-allowed disabled:opacity-80"
-                  aria-describedby={`${field.id}-description`}
+                  className="h-12 px-3 w-full rounded-md border border-solid border-[#1545c2] bg-transparent text-gray-300 placeholder:text-gray-500 focus:border-[#0356ff] focus:ring-1 focus:ring-[#0356ff] outline-none transition-all"
+                 aria-describedby={`${field.id}-description`}
                 />
-              </div>
             </div>
           ))}
-        </div>
 
-        <div className="flex flex-col w-[450px] items-start gap-[24.83px] relative">
-          {formFields.slice(2, 4).map((field) => (
+
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6"> */}
+         {formFields.slice(2, 4).map((field) => (
             <div
               key={field.id}
-              className="flex flex-col items-start gap-2.5 relative self-stretch w-full flex-[0_0_auto]"
-            >
+              className="flex flex-col gap-2 relative self-stretch w-full flex-[0_0_auto]"
+              >
               <label
                 htmlFor={field.id}
-                className="relative w-fit mt-[-1.00px] [font-family:'Inter-Medium',Helvetica] font-medium text-[#6687ff] text-xl tracking-[0] leading-[normal] whitespace-nowrap"
-              >
+                className="font-medium text-[#6687ff] text-base"
+                >
                 {field.label}
               </label>
-              <div className="flex h-[50px] items-center gap-[8.28px] px-3 py-[8.28px] relative self-stretch w-full rounded-[5px] border-[0.83px] border-solid border-[#1545c2] focus-within:border-[#0356ff] focus-within:ring-1 focus-within:ring-[#0356ff]">
                 <input
                   id={field.id}
                   type={field.type}
@@ -236,14 +230,15 @@ const Profile = () => {
                   onChange={(e) => handleInputChange(field.id, e.target.value)}
                   placeholder={field.placeholder}
                   disabled={!isEditing}
-                  className="relative w-full [font-family:'Inter-Regular',Helvetica] font-normal text-gray-500 text-[15.8px] tracking-[0] leading-[normal] bg-transparent border-none outline-none placeholder:text-gray-500 disabled:cursor-not-allowed disabled:opacity-80"
+                  className="h-12 px-3 w-full rounded-md border border-solid border-[#1545c2] bg-transparent text-gray-300 placeholder:text-gray-500 focus:border-[#0356ff] focus:ring-1 focus:ring-[#0356ff] outline-none transition-all"
                   aria-describedby={`${field.id}-description`}
                 />
               </div>
-            </div>
           ))}
-        </div>
       </main>
+      </div>
+      
+
 
       {isEditing && (
         <footer className="flex justify-end gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
@@ -252,13 +247,13 @@ const Profile = () => {
             onClick={handleSaveProfile}
             aria-label="Save Profile"
           >
-            <span className="relative w-fit [font-family:'Inter-Medium',Helvetica] font-medium text-[#6687ff] text-base tracking-[0] leading-[normal] whitespace-nowrap">
+            <span className="relative w-fit [font-family:'Inter-Medium',Helvetica] font-medium text-[#6687ff] text-base tracking-[3] leading-[normal] whitespace-nowrap">
               Save Profile
             </span>
           </button>
         </footer>
       )}
-    </div>
+      </div>
   );
 };
 
