@@ -14,7 +14,7 @@ import Tab from './Tab Page/Tab';
 import Footer from '../Footer';
 
 
-const Home = () => {
+const Home = ({isLoggedIn}) => {
   const location = useLocation();
   useEffect(() => {
     if (location.hash) {
@@ -38,7 +38,7 @@ const Home = () => {
                   <WhatMakesUsDifferent />
                   {/* <CoursesSectionHome/> */}
                   <section id="courses">
-        <CoursesSectionHome />
+        <CoursesSectionHome isLoggedIn={isLoggedIn}/>
       </section>
                   {/* <ProcessSection/> */}
                   <section id="process">

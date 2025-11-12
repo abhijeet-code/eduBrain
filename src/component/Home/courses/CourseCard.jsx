@@ -2,7 +2,7 @@ import React from 'react';
 import CourseIcon from './CourseIcon';
 import { Link } from 'react-router-dom'; 
 
-const CourseCard = ({ course, courseId }) => {
+const CourseCard = ({ course, courseId, isLoggedIn }) => {
   const {
     image,
     icon,
@@ -71,7 +71,7 @@ const CourseCard = ({ course, courseId }) => {
             </div>
             <span className="text-sm leading-5 text-black">{duration}</span>
           </div>
-
+        {isLoggedIn ?(
           <div className="flex relative gap-2 justify-center items-center mb-4 w-full max-sm:flex-wrap max-sm:gap-1">
             <span className="text-base leading-6 text-black line-through">₹1450</span>
             <span className="text-xl font-bold leading-7 text-black">₹1299</span>
@@ -79,7 +79,11 @@ const CourseCard = ({ course, courseId }) => {
               <span className="text-xs leading-4 text-green-600">10% OFF</span>
             </span>
           </div>
-
+        ) : (
+          <div className="h-[48px] flex items-center mb-4">
+            <span className="text-base text-zinc-400">Login to see price</span>
+          </div>
+        )}
           <Link
             to={`/courses/${courseId}`} className="flex justify-center items-center px-16 pt-3 pb-3 w-full bg-gray-900 rounded-lg transition-all cursor-pointer border-[none] duration-[0.2s] ease-[ease]">
             <span className="text-base leading-6 text-blue-300">

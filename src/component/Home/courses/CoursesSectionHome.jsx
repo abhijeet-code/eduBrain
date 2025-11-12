@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CourseCard from './CourseCard';
 import DecorativeVectors from './DecorativeVectors';
 
-const CoursesSectionHome = () => {
+const CoursesSectionHome = ({isLoggedIn={isLoggedIn}}) => {
   const staticCourses = [
     {
       image: {
@@ -360,6 +360,7 @@ const CoursesSectionHome = () => {
               key={index} 
               course={course} // Pass your detailed static data
               courseId={courseId} // Pass the real database ID
+              isLoggedIn={isLoggedIn}
             />
           );
         })}

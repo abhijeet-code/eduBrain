@@ -2,7 +2,7 @@
  import { Link } from 'react-router-dom';
 import BackgroundSVG from './Faq/BackgroundSVG'
       
-      const FinalAreU = ({ course }) => {
+      const FinalAreU = ({ course,isLoggedIn }) => {
         if (!course) return null;
         const handleScrollToCurriculum = () => {
           const element = document.getElementById('curriculum');
@@ -29,12 +29,13 @@ import BackgroundSVG from './Faq/BackgroundSVG'
               <span className="text-base font-medium leading-6 text-white">See the curriculum</span>
             </button>
           </div>
+          {isLoggedIn && (
           <div className="flex gap-2 items-end mt-2">
             <span className="text-base sm:text-xl font-bold leading-7 text-white">₹{course.price}</span>
             {course.originalPrice && course.discountPercentage && (
             <span className="text-xs sm:text-sm leading-6 text-zinc-400 flex gap-2"> <span className='line-through'>₹{course.originalPrice}</span>
           (LIMITED TIME OFFER)</span>)}
-          </div>
+          </div>)}
         </div>
       </section>
           </div>

@@ -1,8 +1,6 @@
-
-
 import * as React from "react";
 import { Link } from 'react-router-dom';
-function CourseCard({course}) {
+function CourseCard({course,isLoggedIn, isEnrolled}) {
   if(!course) return null;
   const courseFeatures =  course.sidebarFeatures || [];
 
@@ -23,21 +21,25 @@ function CourseCard({course}) {
     </div>
     <div className="px-2 sm:px-4 py-4 sm:py-5 w-full">
       <div className="w-full">
-        <div className="w-full">
-          <div className="flex gap-2 items-end w-full whitespace-nowrap bg-blend-normal">
+      {!isEnrolled && ( <div className="w-full">
+          {isLoggedIn ? ( <div className="flex gap-2 items-end w-full whitespace-nowrap bg-blend-normal">
             <span className="text-lg sm:text-xl font-extrabold leading-snug text-white">₹{course.price}</span>
             {course.originalPrice && (
             <span className="text-xs sm:text-sm leading-6 line-through text-zinc-400">₹{course.originalPrice}</span>
             )}
-            </div>
-          <div className="flex flex-col mt-2.5 w-full">
+            </div>) : (
+    <div className="h-[48px] flex items-center mb-4">
+      <span className="text-base text-zinc-400">Login to see price</span>
+    </div>
+  )}
+            <div className="flex flex-col mt-2.5 w-full">
             <Link 
               to={`/billing?course=${course._id}`} className="flex gap-2.5 justify-center items-center px-4 sm:px-8 md:px-16 py-2 w-full text-sm sm:text-base text-black bg-white rounded-lg bg-blend-normal max-md:px-3">
               <span className="self-stretch my-auto">Buy Now</span>
-            </Link>
+            </Link> 
             <p className="self-start mt-2 text-xs sm:text-sm text-center text-ellipsis text-zinc-400">Purchase this course to get access</p>
           </div>
-        </div>
+        </div>)}
       </div>
       <div className="mt-3.5 text-lg sm:text-xl font-medium leading-none text-white">This course includes</div>
       <div className="flex flex-col items-start pb-3.5 mt-3.5 w-full text-xs sm:text-sm leading-none border-b border-zinc-800 text-zinc-400">

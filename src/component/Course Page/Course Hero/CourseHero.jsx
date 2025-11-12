@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-export const CourseHero= ({ course }) => {
+export const CourseHero= ({ course,isLoggedIn }) => {
   if (!course) return null;
 
   const handleScrollToCurriculum = () => {
@@ -45,12 +45,16 @@ export const CourseHero= ({ course }) => {
               <span className="text-base font-medium leading-6 text-white">See the curriculum</span>
             </button>
           </div>
-            <div className="flex gap-2 items-end mt-2">
+            {isLoggedIn ? (<div className="flex gap-2 items-end mt-2">
               <span className="text-base sm:text-xl font-bold leading-7 text-white">₹{course.price}</span>
               {course.originalPrice && course.discountPercentage && (
               <span className="text-xs sm:text-sm leading-6 text-zinc-400 flex gap-2"> <span className='line-through'>₹{course.originalPrice}</span>
             ({course.discountPercentage}% OFF)</span> )}
-            </div>
+            </div>) : (
+          <div className="h-[48px] flex items-center mb-4">
+            <span className="text-base text-zinc-400">Login to see price</span>
+          </div>
+        )}
         </div>
       </section>
 

@@ -194,7 +194,7 @@ export default function App() {
       path: "/",
       element: (
         <ModalWrapper>
-          <Home />
+          <Home isLoggedIn={isLoggedIn} />
         </ModalWrapper>
       ),
     },
@@ -210,7 +210,7 @@ export default function App() {
       path: "/courses",
       element: (
         <ModalWrapper>
-          <CoursesSection />
+          <CoursesSection isLoggedIn={isLoggedIn} />
         </ModalWrapper>
       ),
     },
@@ -218,7 +218,7 @@ export default function App() {
       path: "/courses/:courseId",
       element: (
         <ModalWrapper>
-          <CoursePage />
+          <CoursePage isLoggedIn={isLoggedIn}  />
         </ModalWrapper>
       ),
     },

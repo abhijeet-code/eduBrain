@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DecorativeVectors from './DecorativeVectors';
 import CourseCard from './CourseCard';
     
-export const CoursesSection = () => {
+export const CoursesSection = ({isLoggedIn}) => {
     const [liveCourses, setLiveCourses] = useState([]);
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -12,7 +12,7 @@ export const CoursesSection = () => {
                 const res = await fetch(`${BASE_URL}/api/courses`);
                 if (res.ok) {
                     const data = await res.json();
-                    setLiveCourses(data); // Stores [{_id: '...', title: '...'}, ...]
+                    setLiveCourses(data); 
                 }
             } catch (error) {
                 console.error("Failed to fetch courses:", error);
@@ -281,16 +281,10 @@ export const CoursesSection = () => {
             </header>
 
             <main className="flex flex-wrap gap-7 justify-center content-start items-start mx-auto my-0 max-xl:gap-6 max-lg:gap-5 max-md:gap-4 max-md:justify-center max-md:w-full max-sm:gap-3 max-sm:flex-col max-sm:items-center">
-                {/* {courses.map((course, index) => (
-                    <CourseCard key={index} course={course} />
-                ))} */}
                 {courses.map((course, index) => {
-                    // 5. Look up the dynamic ID using the static course's title
                     const dynamicId = courseIdMap[course.title.text];
-
-                    // Only render the card if we found a matching ID from the backend
                     return dynamicId ? (
-                        <CourseCard key={index} course={course} courseId={dynamicId} />
+                        <CourseCard key={index} course={course} courseId={dynamicId} isLoggedIn={isLoggedIn} />
                     ) : null;
                 })}
             </main>

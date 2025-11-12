@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CourseCard = ({ course,courseId }) => {
+const CourseCard = ({ course,courseId,isLoggedIn }) => {
     // Destructure all properties from the course object for easier use
     const {
         image,
@@ -62,23 +62,17 @@ const CourseCard = ({ course,courseId }) => {
                     </span>
                 </div>
 
-                <div className="mt-auto">
+      <div className="mt-auto">
                     {/* Pricing */}
-                    <div className="flex gap-3 items-center mb-5">
+                    {isLoggedIn ? (     <div className="flex gap-3 items-center mb-5">
                         <span className="text-2xl font-bold text-slate-50">{discountedPrice}</span>
                         <span className="text-md line-through text-zinc-400">{originalPrice}</span>
                         <span className="text-xs font-semibold text-green-400 bg-green-500/10 px-2 py-1 rounded">
                             {discount}
                         </span>
-                    </div>
-
-                    {/* Action Button */}
-                    {/* <a
-                        href="/course-details"
-                        className="block w-full text-center p-3 text-base font-semibold rounded-lg cursor-pointer bg-slate-50 text-neutral-950 hover:bg-slate-200 transition-colors"
-                    >
-                        View Course
-                    </a> */}
+                    </div> ) : (
+        <p className="text-sm text-zinc-400 mb-5">Log in to view pricing</p>
+      )}
                     <Link
                     to={`/courses/${courseId}`}
                     className="block w-full text-center p-3 text-base font-semibold rounded-lg cursor-pointer bg-slate-50 text-neutral-950 hover:bg-slate-200 transition-colors"

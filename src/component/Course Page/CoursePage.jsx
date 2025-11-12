@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CourseDetailPage from './CourseDetails/CourseDetailPage';
 import FAQSection from './Faq/FAQSection';
-// --- ADD THE IMPORT HERE ---
 import { CourseHero } from './Course Hero/CourseHero';
 import Footer from '../Footer';
 import SuccessStories from './SuccessStories';
@@ -11,12 +10,12 @@ import { ReferAndEarn } from './ReferAndEarn';
 import { Certificate } from './Certificate';
 import FinalAreU from './FinalAreU';
 
-const CoursePage = () => {
+const CoursePage = ({isLoggedIn}) => {
   const [course, setCourse] = useState(null);
   const { courseId } = useParams();
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [isEnrolled, setIsEnrolled] = useState(false);
-
+  
   useEffect(() => {
     const fetchCourse = async () => {
       setCourse(null);
@@ -54,15 +53,14 @@ const CoursePage = () => {
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-[#0C0C0D] gap-10 overflow-x-hidden">
-      {!isEnrolled && <CourseHero course={course} />}
-      <CourseDetailPage course={course} isEnrolled={isEnrolled} />
+      {!isEnrolled && <CourseHero course={course} isLoggedIn={isLoggedIn}/>}
+      <CourseDetailPage course={course} isEnrolled={isEnrolled} isLoggedIn={isLoggedIn}/>
       {!isEnrolled && <Certificate />}
       <SuccessStories heading={"Real Success Stories"} subheading={"Learners Growing with Edubraining"} />
       <RealProject />
       <ReferAndEarn />
       <FAQSection />
-      {!isEnrolled && <FinalAreU course={course} />}
-      
+      {!isEnrolled && <FinalAreU course={course}  isLoggedIn={isLoggedIn}/>}
       <Footer />
     </div>
   );
