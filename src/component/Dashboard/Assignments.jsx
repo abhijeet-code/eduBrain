@@ -111,51 +111,53 @@ const Assignments = () => {
     };
 
     if (loading) {
-        return <div className="text-white p-10 mt-10">Loading assignments...</div>;
+        return <div className="text-text-secondary p-10 mt-10">Loading assignments...</div>;
     }
 
     return (
-        <div className="w-full p-4 md:p-6 lg:p-8">
-        <div className="mt-10 md:mt-20 min-h-[200px] w-full max-w-7xl mx-auto rounded-xl border border-solid border-[#1545c2] bg-[#0c0c0d] p-6 md:p-10 flex flex-col justify-start">
-          <h1 className="text-4xl font-semibold text-[#0356ff] mb-8">Assignments</h1>
+        <div className="w-full p-6 md:p-10">
+            <div className="w-full max-w-[1060px] mx-auto">
+                <div className="mb-10">
+                    <h1 className="text-3xl md:text-4xl font-bold text-[#9411a8] mb-2">Assignments</h1>
+                    <p className="text-base md:text-lg text-text-secondary">Track and submit your course assignments.</p>
+                </div>
 
                 {assignmentsByCourse.length > 0 ? (
                     <div className="space-y-8">
                         {assignmentsByCourse.map(courseGroup => (
-                            <div key={courseGroup.courseId}>
-                                <h2 className="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-800 pb-2">
+                            <div key={courseGroup.courseId} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                                <h2 className="text-2xl font-semibold text-[#9411a8] mb-6 border-b border-gray-100 pb-4">
                                     {courseGroup.courseTitle}
                                 </h2>
                                 <div className="space-y-6">
                                     {courseGroup.assignments.map(assignment => (
-                                        <div key={assignment._id} className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
-                                            <div className="flex justify-between items-center mb-4">
-                                                <h3 className="text-xl text-white">{assignment.title}</h3>
-                                                <span className={`px-3 py-1 text-sm rounded-full ${
-                                                    assignment.submissionStatus === 'Submitted' ? 'bg-yellow-500/20 text-yellow-300' :
-                                                    assignment.submissionStatus === 'Evaluated' ? 'bg-green-500/20 text-green-300' :
-                                                    'bg-gray-500/20 text-gray-300'
-                                                }`}>
+                                        <div key={assignment._id} className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                                            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+                                                <h3 className="text-xl font-medium text-gray-800">{assignment.title}</h3>
+                                                <span className={`px-4 py-1.5 text-sm font-medium rounded-full ${assignment.submissionStatus === 'Submitted' ? 'bg-yellow-100 text-yellow-700' :
+                                                        assignment.submissionStatus === 'Evaluated' ? 'bg-green-100 text-green-700' :
+                                                            'bg-gray-200 text-gray-600'
+                                                    }`}>
                                                     {assignment.submissionStatus}
                                                 </span>
                                             </div>
-                                            
-                                            <button onClick={() => handleViewTask(assignment._id)} className="text-blue-400 hover:text-blue-300 mb-4">
-                                                View Task &rarr;
+
+                                            <button onClick={() => handleViewTask(assignment._id)} className="text-[#9411a8] hover:text-[#7a0e8a] font-medium mb-6 flex items-center gap-2 transition-colors">
+                                                View Task <span>&rarr;</span>
                                             </button>
 
-                                            <div className="flex gap-2">
+                                            <div className="flex flex-col sm:flex-row gap-3">
                                                 <input
                                                     type="url"
                                                     placeholder="Paste your submission link here (e.g., Google Doc, GitHub)"
                                                     value={submissionLinks[assignment._id] || assignment.submittedLink}
                                                     onChange={(e) => handleLinkChange(assignment._id, e.target.value)}
-                                                    className="flex-grow bg-gray-700 text-white p-2 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    className="flex-grow bg-white text-gray-800 p-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#9411a8]/20 focus:border-[#9411a8] transition-all placeholder:text-gray-400"
                                                     disabled={assignment.submissionStatus === 'Evaluated'}
                                                 />
-                                                <button 
-                                                    onClick={() => handleSubmit(assignment._id)} 
-                                                    className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed"
+                                                <button
+                                                    onClick={() => handleSubmit(assignment._id)}
+                                                    className="bg-[#e0f2fe] text-[#0284c7] font-semibold py-3 px-8 rounded-lg hover:bg-[#bae6fd] transition-colors disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
                                                     disabled={assignment.submissionStatus === 'Evaluated'}
                                                 >
                                                     Submit
@@ -163,9 +165,9 @@ const Assignments = () => {
                                             </div>
 
                                             {assignment.feedback && (
-                                                <div className="mt-4 p-3 bg-gray-700/50 border border-gray-600 rounded-md">
-                                                    <p className="font-semibold text-white mb-1">Feedback:</p>
-                                                    <p className="text-gray-300 whitespace-pre-wrap">{assignment.feedback}</p>
+                                                <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-lg">
+                                                    <p className="font-semibold text-[#9411a8] mb-2">Feedback:</p>
+                                                    <p className="text-gray-600 whitespace-pre-wrap leading-relaxed">{assignment.feedback}</p>
                                                 </div>
                                             )}
                                         </div>
@@ -175,12 +177,14 @@ const Assignments = () => {
                         ))}
                     </div>
                 ) : (
-                    <p className="text-xl text-zinc-400 font-normal">You have no assignments for your enrolled courses.</p>
+                    <div className="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-center">
+                        <p className="text-xl text-gray-500">You have no assignments for your enrolled courses.</p>
+                    </div>
                 )}
             </div>
         </div>
     );
 };
- 
+
 
 export default Assignments;

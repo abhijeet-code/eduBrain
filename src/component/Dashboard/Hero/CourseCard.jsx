@@ -35,62 +35,61 @@ function CourseCard({ courseId, title, enrollmentDate, progress }) {
   const isComplete = progress === 100;
 
   return (
-    <div className="px-4 py-4 rounded-md border border-blue-600 border-solid bg-[#246bfd]/21  bg-opacity-10 min-w-60 w-[350px]">
-      <h3 className="text-lg font-medium leading-5 text-white">
+    <div className="px-5 py-5 rounded-xl border border-gray-100 bg-white shadow-sm min-w-[300px] w-full max-w-[350px] flex flex-col hover:shadow-md transition-shadow duration-200">
+      <h3 className="text-lg font-semibold leading-tight text-gray-800">
         {title}
       </h3>
-      <div className="flex flex-col mt-3 w-full">
-        <div className="flex gap-2 items-center self-start text-xs leading-5 text-blue-600">
-          <img
-            src="https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/72debafd6f9c76659075d6c0e3253f76838f5e0b?placeholderIfAbsent=true"
-            className="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
-            alt=""
-          />
-          <span className="self-stretch my-auto text-blue-600 text-ellipsis w-[272px]">
+      
+      <div className="flex flex-col mt-4 w-full">
+        {/* Enrollment Date */}
+        <div className="flex gap-2 items-center text-sm text-gray-500 mb-3">
+           {/* Simple Calendar Icon */}
+           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#9411a8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+           </svg>
+          <span className="truncate">
             Enrolled on {formattedDate}
           </span>
         </div>
-        <div className="flex gap-1.5 items-center mt-1.5 w-full">
-          <div className="flex overflow-hidden flex-col flex-1 shrink items-start self-stretch my-auto bg-gray-100 rounded-md basis-0 min-w-60">
+
+        {/* Progress Bar */}
+        <div className="flex gap-3 items-center w-full">
+          <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
             <div
-              className="flex shrink-0 h-1.5 bg-emerald-500 rounded-md"
-              style={{ width: `${(progress / 100) * 165}px` }}
+              className="h-full bg-[#9411a8] rounded-full transition-all duration-500 ease-out"
+              style={{ width: `${progress}%` }} 
             />
           </div>
-          <span className="self-stretch my-auto text-xs font-medium leading-none text-right text-white">
+          <span className="text-sm font-bold text-gray-700 min-w-[3ch] text-right">
             {progress}%
           </span>
         </div>
       </div>
-      <div className="flex gap-2.5 items-start mt-3 w-full text-base leading-tight whitespace-nowrap">
+
+      {/* Action Buttons */}
+      <div className="flex gap-3 mt-5 w-full">
+        {/* Resume Button (Light Blue) */}
         <Link
          to={`/courses/${courseId}`}
-         className="flex flex-1 shrink gap-2.5 justify-center items-center px-8 py-3 text-blue-600 rounded-md border border-blue-600 border-solid basis-0 min-h-[45px] max-md:px-5">
-          <span className="self-stretch my-auto text-blue-600">
-            Resume
-          </span>
-          <img
-            src="https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/9098b40a75750f3b763bdd055f5779f789797781?placeholderIfAbsent=true"
-            className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
-            alt=""
-          />
+         className="flex-1 flex justify-center items-center px-4 py-2.5 rounded-lg bg-[#e0f2fe] text-[#0284c7] font-semibold hover:bg-[#bae6fd] transition-colors text-sm"
+        >
+          Resume
         </Link>
+
+        {/* Certificate Button (Solid Purple) */}
         <button 
-        onClick={handleCertificateDownload}
-        disabled={!isComplete}
-        className="flex flex-1 shrink gap-2.5 justify-center items-center px-8 py-3 text-white bg-blue-600 rounded-md basis-0 min-h-[45px] max-md:px-5">
-          <span className="self-stretch my-auto">
-            Certificate
-          </span>
-          <img
-            src="https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/13e049a96a8e81e8f0d0cb12baf76de160c60c14?placeholderIfAbsent=true"
-            className="object-contain shrink-0 self-stretch my-auto w-3 aspect-square"
-            alt=""
-          />
+          onClick={handleCertificateDownload}
+          disabled={!isComplete}
+          className={`flex-1 flex justify-center items-center px-4 py-2.5 rounded-lg font-medium text-sm text-white transition-colors
+            ${isComplete 
+              ? 'bg-[#9411a8] hover:bg-[#7a0e8a] shadow-sm' 
+              : 'bg-gray-300 cursor-not-allowed'}`
+          }
+        >
+          Certificate
         </button>
       </div>
     </div>
   );
 }
-
 export default CourseCard;

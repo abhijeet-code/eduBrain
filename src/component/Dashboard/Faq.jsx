@@ -1,6 +1,5 @@
-import React from 'react';
-import BackgroundSVG from '../Course Page/Faq/BackgroundSVG';
-import FAQItem from '../Course Page/Faq/FAQItem';
+import React, { useState } from 'react';
+import { Plus } from 'lucide-react';
 
 const faqData = [
   {
@@ -30,29 +29,54 @@ const faqData = [
 ];
 
 const Faq = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <section className="flex relative flex-col items-center px-5  w-full py-20 bg-[#0c0c0d] max-md:px-5 max-md:py-16 max-md:min-h-[auto] max-sm:px-4 max-sm:py-10">
-      
+    <div className="w-full p-6 md:p-10">
+      <div className="w-full max-w-[1060px] mx-auto">
+        <div className="mb-10 text-center md:text-left">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#9411a8] mb-2">
+            Frequently Asked Questions
+          </h1>
+          <p className="text-base md:text-lg text-text-secondary">
+            Uncover quick insights about Edubraining.
+          </p>
+        </div>
 
-      <header className="flex relative flex-col gap-6 items-center mb-24 w-full max-w-[745px] z-[2] max-sm:gap-5 max-sm:mb-10">
-        <p className="text-2xl leading-8 text-blue-300 max-sm:text-xl max-sm:leading-7">
-          FAQ
-        </p>
-        <h1 className="relative w-fit mt-[-3.90px] [font-family:'Inter-SemiBold',Helvetica]  text-[#0356ff] text-[41.9px] tracking-[0] leading-[39.1px] whitespace-nowrap">
-          Frequently Asked Questions
-        </h1>
-        <p className="text-base leading-6 text-center text-zinc-500 max-sm:text-sm max-sm:leading-5">
-          Uncover quick insights about Edubraining. Get ready for your tech
-          journey by exploring our FAQs. Dive in now!
-        </p>
-      </header>
+        <div className="space-y-4">
+          {faqData.map((item, index) => (
+            <div
+              key={index}
+              className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm"
+            >
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="w-full flex items-center justify-between cursor-pointer p-5 text-left hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-gray-800 font-medium text-base">
+                  {item.question}
+                </span>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-4 transition-colors ${openIndex === index ? 'bg-[#9411a8]/10' : 'bg-gray-100'}`}>
+                  <Plus
+                    className={`w-5 h-5 transition-transform duration-200 ${openIndex === index ? 'rotate-45 text-[#9411a8]' : 'text-gray-500'}`}
+                  />
+                </div>
+              </button>
 
-      <div className="flex relative flex-col gap-3 items-start -mt-10 w-full max-w-screen-md z-[2] max-md:max-w-full">
-        {faqData.map((item, index) => (
-          <FAQItem key={index} question={item.question} answer={item.answer} />
-        ))}
+              {openIndex === index && (
+                <div className="px-5 pb-5 text-gray-600 text-base border-t border-gray-50 pt-3">
+                  <p>{item.answer}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 

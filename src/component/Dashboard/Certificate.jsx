@@ -37,28 +37,27 @@ export default function MyCertificates() {
   };
 
   return (
-    <div className="min-h-screen -ml-4 text-white p-6 max-md:p-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="w-full p-6 md:p-10">
+      <div className="w-full max-w-[1060px] mx-auto">
         {/* Header */}
-        <div className="mb-8 text-center md:text-left">
-          <h1 className="text-4xl max-md:text-2xl font-bold text-[#1545C2] mb-2">
+        <div className="mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#9411a8] mb-2">
             My Certificates
           </h1>
-          <p className="text-[#B9B9B9] max-md:text-sm">
+          <p className="text-base md:text-lg text-text-secondary">
             View and download your course completion certificates.
           </p>
         </div>
 
         {/* Certificates Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 ml-3 md:ml-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {certificates.map((cert) => (
             <div
               key={cert.id}
-              className="bg-[#1545C21A] border border-[#1545C2] rounded-xl overflow-hidden p-6 
-                 flex flex-col max-md:w-[90%] max-md:mx-auto"
+              className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden p-6 flex flex-col hover:shadow-md transition-shadow"
             >
               {/* Certificate Image */}
-              <div className="rounded-xl w-full overflow-hidden mb-2">
+              <div className="rounded-xl w-full overflow-hidden mb-4 bg-gray-50 border border-gray-100">
                 <img
                   src="/certificate.png"
                   alt="Certificate"
@@ -67,20 +66,20 @@ export default function MyCertificates() {
               </div>
 
               {/* Certificate Info */}
-              <div className="px-2 pb-2 flex flex-col items-center text-center md:text-left md:items-start">
-                <h3 className="font-semibold text-[#F5F8FF] text-lg max-md:text-base mb-2">
+              <div className="flex flex-col items-start">
+                <h3 className="font-semibold text-gray-800 text-lg mb-1">
                   {cert.title}
                 </h3>
-                <p className="text-[#B9B9B9] text-sm mb-4">
+                <p className="text-gray-500 text-sm mb-4">
                   Issued: {cert.issuedDate}
                 </p>
 
-                <button className="w-full md:w-[300px] mx-auto bg-[#FFFFFF] cursor-pointer hover:bg-gray-100 text-black py-2 px-4 rounded-lg font-medium transition-colors mb-3 block text-sm md:text-base">
+                <button className="w-full bg-[#e0f2fe] text-[#0284c7] hover:bg-[#bae6fd] py-2.5 px-4 rounded-lg font-semibold transition-colors mb-3 text-sm shadow-sm">
                   View/Download Certificate
                 </button>
 
-                <p className="text-[#F5F8FF] text-center text-xs break-words">
-                  Certificate ID: {cert.certificateId}
+                <p className="text-gray-400 text-xs break-all w-full text-center">
+                  ID: {cert.certificateId}
                 </p>
               </div>
             </div>
@@ -89,39 +88,38 @@ export default function MyCertificates() {
 
 
         {/* FAQ Section */}
-        <div className="text-center mb-8 px-2">
-          <div className="inline-block bg-gray-800 border border-[#1545C2] rounded-full px-4 py-2 mb-4 text-sm md:text-base">
-            <span className="text-blue-400 font-semibold">FAQ</span>
+        <div className="mb-8">
+          <div className="inline-block bg-[#9411a8]/10 border border-[#9411a8]/20 rounded-full px-4 py-1.5 mb-4">
+            <span className="text-[#9411a8] font-semibold text-sm">FAQ</span>
           </div>
-          <h2 className="text-3xl max-md:text-xl font-bold text-[#1545C2]">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#9411a8]">
             Frequently Asked Questions
           </h2>
         </div>
 
         {/* FAQ Items */}
-        <div className="max-w-4xl mx-auto space-y-3 px-2 ml-4 md:ml-50">
+        <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-[#1545C21A] border border-[#1545C2] rounded-xl overflow-hidden"
+              className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex items-center justify-between cursor-pointer p-4 text-left hover:bg-gray-700 transition-colors"
+                className="w-full flex items-center justify-between cursor-pointer p-5 text-left hover:bg-gray-50 transition-colors"
               >
-                <span className="text-white font-medium text-sm md:text-base">
+                <span className="text-gray-800 font-medium text-base">
                   {faq}
                 </span>
-                <div className="w-6 h-6 border border-[#1545C2] rounded flex items-center justify-center flex-shrink-0 ml-4">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-4 transition-colors ${expandedFAQ === index ? 'bg-[#9411a8]/10' : 'bg-gray-100'}`}>
                   <Plus
-                    className={`w-4 h-4 text-[#1545C2] transition-transform ${expandedFAQ === index ? 'rotate-45' : ''
-                      }`}
+                    className={`w-5 h-5 transition-transform duration-200 ${expandedFAQ === index ? 'rotate-45 text-[#9411a8]' : 'text-gray-500'}`}
                   />
                 </div>
               </button>
 
               {expandedFAQ === index && (
-                <div className="px-4 pb-4 text-gray-300 text-sm md:text-base">
+                <div className="px-5 pb-5 text-gray-600 text-base border-t border-gray-50 pt-3">
                   <p>This is the answer content for: {faq}</p>
                 </div>
               )}

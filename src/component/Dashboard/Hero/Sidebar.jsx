@@ -36,30 +36,38 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
   ];
 
   return (
-    <aside className={`w-3/4 md:w-1/5 z-20 fixed left-0 top-0 pt-[89px] h-screen transform transition-transform duration-300 ease-in-out bg-[#0c0c0d] ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
-    <nav className="flex flex-col w-full border-r border-blue-600 h-full overflow-y-auto">
-      <div className="flex flex-col gap-3 p-4">
+    <aside className={`
+      w-3/4 md:w-1/5 z-20 fixed left-0 top-0 pt-[80px] h-screen 
+      transform transition-transform duration-300 ease-in-out 
+      bg-white border-r border-gray-100 shadow-sm
+      ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0
+    `}>
+      <nav className="flex flex-col w-full h-full overflow-y-auto">
+        <div className="flex flex-col gap-2 p-4">
           {menuItems.map((item, index) => (
-         <div key={index}  onClick={() => setIsSidebarOpen(false)}>
-         <div className={index > 0 ? "mt-2" : ""}>
+            <div key={index} onClick={() => setIsSidebarOpen(false)}>
               <SidebarMenuItem
                 icon={item.icon}
                 label={item.label}
-                isActive={item.isActive}
+              // isActive={item.isActive} 
+              // NOTE: You need to update SidebarMenuItem.jsx to use 'text-brand' for active state
               />
-            </div>
             </div>
           ))}
         </div>
-        <Link to={'/profile-dashboard/my-profile'} onClick={() => setIsSidebarOpen(false)}   className="flex gap-4 items-center p-4 mt-auto w-full border-t border-blue-600 hover:bg-white/5 transition-colors">
-        <div className="flex justify-center items-center w-[34px] h-[34px] rounded-full bg-blue-500/20">
-        <img
-              src="https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/e544583d6e8bf8d8ef70a3fa4f8fb8ac22497152?placeholderIfAbsent=true"
-              className="w-[22px] h-[22px]"
-               alt=""
-            />
+
+        <Link
+          to={'/profile-dashboard/my-profile'}
+          onClick={() => setIsSidebarOpen(false)}
+          className="flex gap-4 items-center p-4 mt-auto w-full border-t border-gray-100 hover:bg-gray-50 transition-colors"
+        >
+          <div className="flex justify-center items-center w-[34px] h-[34px] rounded-full bg-[#9411a8]/10 text-[#9411a8]">
+            {/* Use a simple icon or your image here */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+            </svg>
           </div>
-          <span className="text-lg font-medium text-blue-600">
+          <span className="text-lg font-medium text-gray-800 hover:text-[#9411a8] transition-colors">
             My Profile
           </span>
         </Link>
@@ -69,3 +77,4 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
 }
 
 export default Sidebar;
+

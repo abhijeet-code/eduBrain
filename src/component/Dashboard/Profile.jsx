@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import BackgroundSvg from "../Contact Us/BackgroundSvg";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -148,112 +147,79 @@ const Profile = () => {
   ];
 
   return (
-    <div className="w-full p-4 md:p-6 lg:p-8">
-    <div className="mt-10 md:mt-20 w-full max-w-7xl mx-auto rounded-xl border border-solid border-[#1545c2] bg-[#0c0c0d] p-6 md:p-10 flex flex-col gap-8">
-      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-semibold text-[#0356ff] leading-tight">
+    <div className="w-full p-6 md:p-10">
+      <div className="w-full max-w-[1060px] mx-auto">
+        <div className="mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#9411a8] mb-2">
             My Profile
           </h1>
-          <h2 className="text-lg md:text-xl text-gray-400 mt-1">
-            Personal Details
-          </h2>
+          <p className="text-base md:text-lg text-text-secondary">
+            Manage your personal information.
+          </p>
         </div>
 
-          <button
-             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#6687ff] bg-[#1545c2]/10 border border-transparent rounded-lg hover:bg-[#1545c2]/20 focus:outline-none focus:ring-2 focus:ring-[#1545c2] focus:ring-offset-2 focus:ring-offset-black transition-colors self-start sm:self-center"
-             onClick={toggleEditMode}
-            aria-label={isEditing ? "Cancel Editing" : "Edit Profile"}
-          >
-            <div className="relative w-6 h-6" aria-hidden="true">
-              <div className="relative w-[22px] h-[22px] top-px left-px">
-                <img
-                  className="absolute w-2.5 h-0.5 top-[19px] left-[11px]"
-                  alt=""
-                // src={vector}
-                />
-                <img
-                  className="absolute w-[22px] h-[22px] top-0 left-0"
-                  alt=""
-                // src={image}
-                />
-              </div>
+        <div className="bg-white p-6 md:p-10 rounded-2xl shadow-sm border border-gray-100">
+          <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 border-b border-gray-100 pb-6">
+            <div>
+              <h2 className="text-xl font-semibold text-gray-800">
+                Personal Details
+              </h2>
+              <p className="text-gray-500 text-sm mt-1">
+                Update your personal details here.
+              </p>
             </div>
-            <span className="relative w-fit [font-family:'Inter-Medium',Helvetica] font-medium text-[#6687ff] text-base tracking-[0] leading-[normal] whitespace-nowrap">
-              {isEditing ? "Cancel" : "Edit Profile"}
-            </span>
-          </button>
-      </header>
 
-      <main className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
-       {formFields.slice(0, 2).map((field) => (
-            <div
-              key={field.id}
-              className="flex flex-col gap-2 relative self-stretch w-full flex-[0_0_auto]"
+            <button
+              className={`flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg transition-colors ${isEditing
+                  ? "bg-red-50 text-red-600 hover:bg-red-100"
+                  : "bg-[#e0f2fe] text-[#0284c7] hover:bg-[#bae6fd]"
+                }`}
+              onClick={toggleEditMode}
+              aria-label={isEditing ? "Cancel Editing" : "Edit Profile"}
             >
-              <label
-                htmlFor={field.id}
-                className="font-medium text-[#6687ff] text-base"
-              >
-                {field.label}
-              </label>
-                <input
-                  id={field.id}
-                  type={field.type}
-                  value={field.value}
-                  onChange={(e) => handleInputChange(field.id, e.target.value)}
-                  placeholder={field.placeholder}
-                  disabled={!isEditing}
-                  className="h-12 px-3 w-full rounded-md border border-solid border-[#1545c2] bg-transparent text-gray-300 placeholder:text-gray-500 focus:border-[#0356ff] focus:ring-1 focus:ring-[#0356ff] outline-none transition-all"
-                 aria-describedby={`${field.id}-description`}
-                />
-            </div>
-          ))}
+              {isEditing ? "Cancel" : "Edit Profile"}
+            </button>
+          </header>
 
-
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6"> */}
-         {formFields.slice(2, 4).map((field) => (
-            <div
-              key={field.id}
-              className="flex flex-col gap-2 relative self-stretch w-full flex-[0_0_auto]"
+          <main className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            {formFields.map((field) => (
+              <div
+                key={field.id}
+                className="flex flex-col gap-2"
               >
-              <label
-                htmlFor={field.id}
-                className="font-medium text-[#6687ff] text-base"
+                <label
+                  htmlFor={field.id}
+                  className="font-medium text-gray-700 text-sm"
                 >
-                {field.label}
-              </label>
+                  {field.label}
+                </label>
                 <input
                   id={field.id}
                   type={field.type}
-                  value={field.value}
+                  value={field.value || ""}
                   onChange={(e) => handleInputChange(field.id, e.target.value)}
                   placeholder={field.placeholder}
                   disabled={!isEditing}
-                  className="h-12 px-3 w-full rounded-md border border-solid border-[#1545c2] bg-transparent text-gray-300 placeholder:text-gray-500 focus:border-[#0356ff] focus:ring-1 focus:ring-[#0356ff] outline-none transition-all"
-                  aria-describedby={`${field.id}-description`}
+                  className="h-12 px-4 w-full rounded-lg border border-gray-200 bg-white text-gray-800 placeholder:text-gray-400 focus:border-[#9411a8] focus:ring-2 focus:ring-[#9411a8]/20 outline-none transition-all disabled:bg-gray-50 disabled:text-gray-500"
                 />
               </div>
-          ))}
-      </main>
-      </div>
-      
+            ))}
+          </main>
 
-
-      {isEditing && (
-        <footer className="flex justify-end gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-          <button
-            className="inline-flex items-center gap-3.5 p-2.5 relative flex-[0_0_auto] bg-[#1545c21a] rounded-[5px] border border-solid border-[#1545c2] hover:bg-[#1545c230] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1545c2] focus:ring-offset-2"
-            onClick={handleSaveProfile}
-            aria-label="Save Profile"
-          >
-            <span className="relative w-fit [font-family:'Inter-Medium',Helvetica] font-medium text-[#6687ff] text-base tracking-[3] leading-[normal] whitespace-nowrap">
-              Save Profile
-            </span>
-          </button>
-        </footer>
-      )}
+          {isEditing && (
+            <footer className="flex justify-end mt-8 pt-6 border-t border-gray-100">
+              <button
+                className="px-8 py-3 bg-[#9411a8] text-white font-semibold rounded-lg hover:bg-[#7a0e8a] transition-colors shadow-sm hover:shadow-md"
+                onClick={handleSaveProfile}
+                aria-label="Save Profile"
+              >
+                Save Profile
+              </button>
+            </footer>
+          )}
+        </div>
       </div>
+    </div>
   );
 };
 
