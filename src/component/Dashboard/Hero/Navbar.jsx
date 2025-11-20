@@ -114,7 +114,7 @@ const Navbar = ({ onLogout, isSidebarOpen, setIsSidebarOpen }) => {
           {/* Use a colored logo if you have one, otherwise this stays as is */}
           <a href="/" className="flex-shrink-0 ml-1 sm:ml-4 md:ml-7">
           <img
-            src="nav.png"
+            src="https://cdn.builder.io/api/v1/image/assets%2Fa775d79b68d74d178db9269674a079b2%2F51d6d5225f964b1d8af9636f3f0f2c70"
             className="h-12 sm:h-20 md:h-25 object-cover w-auto"
             alt="Logo"
           />
