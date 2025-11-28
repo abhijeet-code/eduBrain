@@ -1,6 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function NextJourneyContent() {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/courses');
+  };
   return (
     <>
       <header className="flex absolute top-16 left-16 flex-col shrink-0 gap-0 items-start py-0 pr-28 pl-0 h-[116px] w-[624px] max-md:left-10 max-md:top-[50px] max-md:w-[500px] max-sm:relative max-sm:top-auto max-sm:left-auto max-sm:order-2 max-sm:p-0 max-sm:mb-5 max-sm:w-full max-sm:text-center">
@@ -21,8 +26,10 @@ function NextJourneyContent() {
         </p>
       </section>
 
-      <nav className="flex md:absolute md:left-16 justify-center items-center pt-3.5 md:pr-24 pb-3.5 md:pl-24 rounded-lg cursor-pointer bg-neutral-950 h-[52px] top-[302px] w-[300px] max-md:left-10 max-md:top-[250px] max-md:w-[250px] max-sm:relative max-sm:top-auto max-sm:left-auto max-sm:order-4 max-sm:mx-auto max-sm:my-0 max-sm:w-[200px]">
-        <button className="w-full text-lg font-bold leading-6 h-[25px] text-slate-50 text-nowrap ">
+      <nav className="flex md:absolute md:left-16 justify-center items-center pt-3.5 md:pr-24 pb-3.5 md:pl-24 rounded-lg cursor-pointer bg-[#9411a8] hover:bg-[#7a0c8b] h-[52px] top-[302px] w-[300px] max-md:left-10 max-md:top-[250px] max-md:w-[250px] max-sm:relative max-sm:top-auto max-sm:left-auto max-sm:order-4 max-sm:mx-auto max-sm:my-0 max-sm:w-[200px] transition-all shadow-md">
+        <button
+          onClick={handleClick}
+          className="w-full text-lg font-bold leading-6 h-[25px] text-white text-nowrap ">
           Explore Now!
         </button>
       </nav>

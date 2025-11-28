@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-export const CourseHero= ({ course,isLoggedIn }) => {
+export const CourseHero = ({ course, isLoggedIn }) => {
   if (!course) return null;
 
   const handleScrollToCurriculum = () => {
@@ -10,69 +10,69 @@ export const CourseHero= ({ course,isLoggedIn }) => {
       // Smoothly scroll to it
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  }; 
+  };
   return (
-  <header className="relative w-full bg-[#0C0C0D]">
+    <header className="relative w-full bg-gray-50">
       {/* Decorative SVG Elements */}
       <div className='absolute top-0'
         dangerouslySetInnerHTML={{
           __html:
-            "<svg id=\"537:744\" width=\"426\" height=\"116\" viewBox=\"0 0 426 116\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" class=\"vector-decoration-1\" style=\"display: flex; width: 426px; height: 116px; padding: 0.809px 0 2.018px 0; justify-content: center; align-items: center; flex-shrink: 0; position: absolute; left: 998px; top: 2262px\"> <g clip-path=\"url(#clip0_537_744)\"> <path d=\"M423.968 20.6016H306.552L292.319 35.8266H189.644L158.129 62.7241H62.5697M423.968 32.2741H318.751L302.485 48.5141H197.776L168.803 76.4266H94.5923L77.3103 91.6516H24.4475L1.57422 72.3666M426.001 45.9766H323.834L311.126 62.7241H206.417L173.886 91.6516H94.5923L74.2605 113.982M426.001 59.1716H335.016L315.193 81.5016H284.187L275.037 91.6516H232.849M384.321 0.809082H299.435L280.12 17.5566H216.583\" stroke=\"url(#paint0_linear_537_744)\" stroke-opacity=\"0.2\" stroke-width=\"0.6\"></path> </g> <defs> <linearGradient id=\"paint0_linear_537_744\" x1=\"122.04\" y1=\"57.1416\" x2=\"425.99\" y2=\"25.0699\" gradientUnits=\"userSpaceOnUse\"> <stop stop-color=\"#04D5FF\"></stop> <stop offset=\"1\" stop-color=\"#246BFD\"></stop> </linearGradient> <clipPath id=\"clip0_537_744\"> <rect width=\"426\" height=\"116\" fill=\"white\"></rect> </clipPath> </defs> </svg>",
+            "<svg id=\"537:744\" width=\"426\" height=\"116\" viewBox=\"0 0 426 116\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" class=\"vector-decoration-1\" style=\"display: flex; width: 426px; height: 116px; padding: 0.809px 0 2.018px 0; justify-content: center; align-items: center; flex-shrink: 0; position: absolute; left: 998px; top: 2262px\"> <g clip-path=\"url(#clip0_537_744)\"> <path d=\"M423.968 20.6016H306.552L292.319 35.8266H189.644L158.129 62.7241H62.5697M423.968 32.2741H318.751L302.485 48.5141H197.776L168.803 76.4266H94.5923L77.3103 91.6516H24.4475L1.57422 72.3666M426.001 45.9766H323.834L311.126 62.7241H206.417L173.886 91.6516H94.5923L74.2605 113.982M426.001 59.1716H335.016L315.193 81.5016H284.187L275.037 91.6516H232.849M384.321 0.809082H299.435L280.12 17.5566H216.583\" stroke=\"url(#paint0_linear_537_744)\" stroke-opacity=\"0.2\" stroke-width=\"0.6\"></path> </g> <defs> <linearGradient id=\"paint0_linear_537_744\" x1=\"122.04\" y1=\"57.1416\" x2=\"425.99\" y2=\"25.0699\" gradientUnits=\"userSpaceOnUse\"> <stop stop-color=\"#9411a8\"></stop> <stop offset=\"1\" stop-color=\"#d8b4fe\"></stop> </linearGradient> <clipPath id=\"clip0_537_744\"> <rect width=\"426\" height=\"116\" fill=\"white\"></rect> </clipPath> </defs> </svg>",
         }}
       />
 
       <div
         dangerouslySetInnerHTML={{
           __html:
-            "<svg id=\"537:746\" width=\"425\" height=\"116\" viewBox=\"0 0 425 116\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" class=\"vector-decoration-2\" style=\"display: flex; width: 425px; height: 116px; padding: 0.81px 1.57px 2.017px 0; justify-content: center; align-items: center; flex-shrink: 0; position: absolute; left: 0px; top: 226px\"> <path d=\"M2.02841 94.1901H119.169L133.368 78.9651H235.803L267.243 52.0676H362.578M2.02841 82.5176H106.999L123.226 66.2776H227.689L256.594 38.3651H330.631L347.872 23.1401H400.611L423.43 42.4251M0 68.8151H101.928L114.605 52.0676H219.068L251.523 23.1401H330.631L350.915 0.810089M0 55.6201H90.7713L110.548 33.2901H141.482L150.609 23.1401H192.699M41.5824 113.983H126.268L145.538 97.2351H208.926\" stroke=\"url(#paint0_linear_537_746)\" stroke-opacity=\"0.2\" stroke-width=\"0.6\"></path> <defs> <linearGradient id=\"paint0_linear_537_746\" x1=\"303.247\" y1=\"57.6501\" x2=\"-0.00521567\" y2=\"89.573\" gradientUnits=\"userSpaceOnUse\"> <stop stop-color=\"#04D5FF\"></stop> <stop offset=\"1\" stop-color=\"#246BFD\"></stop> </linearGradient> </defs> </svg>",
+            "<svg id=\"537:746\" width=\"425\" height=\"116\" viewBox=\"0 0 425 116\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" class=\"vector-decoration-2\" style=\"display: flex; width: 425px; height: 116px; padding: 0.81px 1.57px 2.017px 0; justify-content: center; align-items: center; flex-shrink: 0; position: absolute; left: 0px; top: 226px\"> <path d=\"M2.02841 94.1901H119.169L133.368 78.9651H235.803L267.243 52.0676H362.578M2.02841 82.5176H106.999L123.226 66.2776H227.689L256.594 38.3651H330.631L347.872 23.1401H400.611L423.43 42.4251M0 68.8151H101.928L114.605 52.0676H219.068L251.523 23.1401H330.631L350.915 0.810089M0 55.6201H90.7713L110.548 33.2901H141.482L150.609 23.1401H192.699M41.5824 113.983H126.268L145.538 97.2351H208.926\" stroke=\"url(#paint0_linear_537_746)\" stroke-opacity=\"0.2\" stroke-width=\"0.6\"></path> <defs> <linearGradient id=\"paint0_linear_537_746\" x1=\"303.247\" y1=\"57.6501\" x2=\"-0.00521567\" y2=\"89.573\" gradientUnits=\"userSpaceOnUse\"> <stop stop-color=\"#9411a8\"></stop> <stop offset=\"1\" stop-color=\"#d8b4fe\"></stop> </linearGradient> </defs> </svg>",
         }}
       />
 
 
       {/* Hero Section */}
       <section className="flex flex-col gap-9 items-center px-4 md:px-5 py-12 md:py-20  w-full">
-        <h1 className="text-3xl sm:text-4xl md:text-6xl text-center text-white leading-10 sm:leading-[55px] md:leading-[80px] max-w-[824px] font-semibold">
-            {course.heroTitle} 
+        <h1 className="text-3xl sm:text-4xl md:text-6xl text-center text-gray-900 leading-10 sm:leading-[55px] md:leading-[80px] max-w-[824px] font-semibold">
+          {course.heroTitle}
         </h1>
         <div className="flex flex-col gap-3.5 items-center w-full">
           <div className="flex flex-row gap-4 sm:gap-7 items-center w-full max-w-[400px] justify-center ">
-            <Link 
-            to= {`/billing?course=${course._id}`} className="flex gap-3.5 justify-center items-center px-6 py-3 bg-white rounded-xl w-fit min-w-fit max-w-[180px]">
-              <span className="text-base font-medium leading-6 text-black">Enroll Now</span>
+            <Link
+              to={`/billing?course=${course._id}`} className="flex gap-3.5 justify-center items-center px-6 py-3 bg-[#e0f2fe] hover:bg-[#bae6fd] rounded-xl w-fit min-w-fit max-w-[180px] transition-colors">
+              <span className="text-base font-medium leading-6 text-[#0284c7]">Enroll Now</span>
             </Link>
             <button
-            onClick={handleScrollToCurriculum} className="flex gap-3.5 justify-center items-center px-5 py-3 rounded-xl border border-white border-solid w-fit min-w-[120px] max-w-[180px]">
-              <span className="text-base font-medium leading-6 text-white">See the curriculum</span>
+              onClick={handleScrollToCurriculum} className="flex gap-3.5 justify-center items-center px-5 py-3 rounded-xl border border-[#9411a8] border-solid w-fit min-w-[120px] max-w-[180px] hover:bg-[#9411a8]/5 transition-colors">
+              <span className="text-base font-medium leading-6 text-[#9411a8]">See the curriculum</span>
             </button>
           </div>
-            {isLoggedIn ? (<div className="flex gap-2 items-end mt-2">
-              <span className="text-base sm:text-xl font-bold leading-7 text-white">₹{course.price}</span>
-              {course.originalPrice && course.discountPercentage && (
-              <span className="text-xs sm:text-sm leading-6 text-zinc-400 flex gap-2"> <span className='line-through'>₹{course.originalPrice}</span>
-            ({course.discountPercentage}% OFF)</span> )}
-            </div>) : (
-          <div className="h-[48px] flex items-center mb-4">
-            <span className="text-base text-zinc-400">Login to see price</span>
-          </div>
-        )}
+          {isLoggedIn ? (<div className="flex gap-2 items-end mt-2">
+            <span className="text-base sm:text-xl font-bold leading-7 text-gray-900">₹{course.price}</span>
+            {course.originalPrice && course.discountPercentage && (
+              <span className="text-xs sm:text-sm leading-6 text-gray-500 flex gap-2"> <span className='line-through'>₹{course.originalPrice}</span>
+                ({course.discountPercentage}% OFF)</span>)}
+          </div>) : (
+            <div className="h-[48px] flex items-center mb-4">
+              <span className="text-base text-gray-500">Login to see price</span>
+            </div>
+          )}
         </div>
       </section>
 
       {/* overview section  */}
       <section className="flex flex-col gap-6 md:gap-8 px-4 md:px-5 py-8 md:py-12 mx-auto my-0 w-full max-w-[1076px]">
-        <div className="flex flex-col gap-4 md:gap-8 items-start pb-5 md:pb-7 w-full border-b-2 border-solid border-b-neutral-700">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-7 text-white">
-          {course.longTitle}
+        <div className="flex flex-col gap-4 md:gap-8 items-start pb-5 md:pb-7 w-full border-b-2 border-solid border-b-gray-200">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-7 text-[#9411a8]">
+            {course.longTitle}
           </h2>
-          <p className="text-lg sm:text-xl md:text-2xl leading-7 sm:leading-9 text-zinc-400">
-             {course.heroSubtitle}
+          <p className="text-lg sm:text-xl md:text-2xl leading-7 sm:leading-9 text-gray-500">
+            {course.heroSubtitle}
           </p>
         </div>
         <div className="flex flex-col w-full gap-2 ">
-        {(course.taglines || []).map((tagline, index) => (
-          <div key = {index} className="flex gap-2 items-center px-3 py-1 rounded-xl bg-[#1545C233] bg-opacity-20 w-full sm:w-fit">
-            <p className="text-xs sm:text-sm leading-5 text-white" dangerouslySetInnerHTML={{ __html: tagline }} />
-          </div> ))}
+          {(course.taglines || []).map((tagline, index) => (
+            <div key={index} className="flex gap-2 items-center px-3 py-1 rounded-xl bg-[#9411a8]/10 w-full sm:w-fit">
+              <p className="text-xs sm:text-sm leading-5 text-[#9411a8]" dangerouslySetInnerHTML={{ __html: tagline }} />
+            </div>))}
         </div>
       </section>
     </header>

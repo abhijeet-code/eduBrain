@@ -6,7 +6,8 @@ function TabButton({ title, isActive, isExpanded, onClick, children }) {
       className="relative cursor-pointer w-full max-w-2xl mx-auto"
       onClick={onClick}
     >
-      <h3 className="relative w-full h-7 text-xl font-bold leading-7 text-zinc-500 text-center max-sm:mb-2 max-sm:text-lg">
+      <h3 className={`relative w-full h-7 text-xl font-bold leading-7 text-center max-sm:mb-2 max-sm:text-lg transition-colors ${isActive ? 'text-[#9411a8]' : 'text-gray-600 hover:text-[#9411a8]'
+        }`}>
         {title}
       </h3>
 
@@ -16,9 +17,9 @@ function TabButton({ title, isActive, isExpanded, onClick, children }) {
         </div>
       )}
 
-      <div className={`flex relative items-center h-0.5 bg-zinc-800 w-full max-w-2xl mx-auto max-sm:mt-4`}>
+      <div className={`flex relative items-center h-0.5 bg-gray-200 w-full max-w-2xl mx-auto max-sm:mt-4`}>
         {isActive && (
-          <span className="absolute left-1/2 -translate-x-1/2 -top-0.5 shrink-0 h-1 bg-blue-300 rounded-full w-[100px] max-sm:hidden" />
+          <span className="absolute left-1/2 -translate-x-1/2 -top-0.5 shrink-0 h-1 bg-[#9411a8] rounded-full w-[100px] max-sm:hidden" />
         )}
       </div>
     </button>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useToast } from "../../contexts/ToastContext";
 import Hr from "../Hr";
 import { EnrollmentModal } from "./EnrollmentModal";
 
-export const PurchaseSummarySection = ({course, userData}) => {
+export const PurchaseSummarySection = ({ course, userData }) => {
+  const { showToast } = useToast();
   const [couponCode, setCouponCode] = useState("");
   const [showModal, setShowModal] = useState(false);
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -25,104 +27,104 @@ export const PurchaseSummarySection = ({course, userData}) => {
     discountPercent: course.discountPercentage || 0,
     total: course.price || 0,
     savings: (course.originalPrice || 0) - course.price,
-};
+  };
 
-   // const handleProceedToPay = () => {
+  // const handleProceedToPay = () => {
   // setShowModal(true);
   // setTimeout(() => setShowModal(false), 5000);
   // };
   const loadRazorpayScript = () => {
     return new Promise((resolve) => {
-        const script = document.createElement("script");
-        script.src = "https://checkout.razorpay.com/v1/checkout.js";
-        script.onload = () => resolve(true);
-        script.onerror = () => resolve(false);
-        document.body.appendChild(script);
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
     });
-};
+  };
 
-const handleProceedToPay = async () => {
-  const scriptLoaded = await loadRazorpayScript();
-  if (!scriptLoaded) {
-      alert("Payment gateway failed to load. Please check your internet connection.");
+  const handleProceedToPay = async () => {
+    const scriptLoaded = await loadRazorpayScript();
+    if (!scriptLoaded) {
+      showToast("Payment gateway failed to load. Please check your internet connection.", "error");
       return;
-  }
+    }
 
-  const token = localStorage.getItem('token');
-  if (!token) {
-      alert("You must be logged in to make a purchase.");
+    const token = localStorage.getItem('token');
+    if (!token) {
+      showToast("You must be logged in to make a purchase.", "warning");
       // You might want to trigger the login modal here
       return;
-  }
+    }
 
-  try {
+    try {
       // 1. Create the Order
       const orderRes = await fetch(`${BASE_URL}/api/payments/create-order`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ courseId: course._id })
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ courseId: course._id })
       });
 
       if (!orderRes.ok) {
-          const errorData = await orderRes.json();
-          throw new Error(errorData.msg || 'Failed to create payment order.');
+        const errorData = await orderRes.json();
+        throw new Error(errorData.msg || 'Failed to create payment order.');
       }
       const orderData = await orderRes.json();
 
       // 2. Configure Razorpay Options
       const options = {
-          key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
-          amount: orderData.amount,
-          currency: orderData.currency,
-          name: "EduBraining",
-          description: `Enrollment for ${course.title}`,
-          order_id: orderData.id,
-          
-          // 3. Verification Handler
-          handler: async (response) => {
-              const verificationRes = await fetch(`${BASE_URL}/api/payments/verify-payment`, {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${token}`
-                  },
-                  body: JSON.stringify({ ...response, courseId: course._id })
-              });
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: "EduBraining",
+        description: `Enrollment for ${course.title}`,
+        order_id: orderData.id,
 
-              if (!verificationRes.ok) {
-                  const errorData = await verificationRes.json();
-                  throw new Error(errorData.msg || 'Payment verification failed.');
-              }
-              
-              // --- SUCCESS ---
-              setShowModal(true); // Show the success modal
-          },
-          prefill: {
-              name: userData?.name || "Valued User", // You can get this from your /api/auth/user endpoint
-              email: userData?.email || "user.email@example.com",
-          },
-          theme: {
-              color: "#1545C2"
+        // 3. Verification Handler
+        handler: async (response) => {
+          const verificationRes = await fetch(`${BASE_URL}/api/payments/verify-payment`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ ...response, courseId: course._id })
+          });
+
+          if (!verificationRes.ok) {
+            const errorData = await verificationRes.json();
+            throw new Error(errorData.msg || 'Payment verification failed.');
           }
+
+          // --- SUCCESS ---
+          setShowModal(true); // Show the success modal
+        },
+        prefill: {
+          name: userData?.name || "Valued User", // You can get this from your /api/auth/user endpoint
+          email: userData?.email || "user.email@example.com",
+        },
+        theme: {
+          color: "#1545C2"
+        }
       };
 
       // 4. Open the Razorpay Checkout
       const rzp = new window.Razorpay(options);
       rzp.open();
 
-  } catch (error) {
+    } catch (error) {
       console.error(error);
-      alert(error.message);
-  }
-};
+      showToast(error.message, "error");
+    }
+  };
 
-const handleCouponApply = () => {
-  // Handle coupon application logic
-  console.log("Applying coupon:", couponCode);
-};
+  const handleCouponApply = () => {
+    // Handle coupon application logic
+    console.log("Applying coupon:", couponCode);
+  };
 
   return (
     <section
@@ -130,39 +132,39 @@ const handleCouponApply = () => {
       role="main"
       aria-labelledby="purchase-summary-title"
     >
-  <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-10 relative self-stretch w-full flex-[0_0_auto]">
-        <blockquote className="flex flex-col w-full max-w-[473.02px] items-center gap-3 sm:gap-5 md:gap-[24.49px] px-4 sm:px-8 py-3 sm:py-5 md:py-[16.76px] relative flex-[0_0_auto] rounded-[19.33px] border border-solid border-[#484848] mx-auto">
-          <p className="relative w-full max-w-[473.02px] mt-0 sm:mt-[-1.00px] sm:ml-0 sm:mr-0 [font-family:'Inter-Regular',Helvetica] font-normal text-white text-sm sm:text-base md:text-[15.5px] text-center tracking-[0] leading-[normal]">
+      <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-10 relative self-stretch w-full flex-[0_0_auto]">
+        <blockquote className="flex flex-col w-full max-w-[473.02px] items-center gap-3 sm:gap-5 md:gap-[24.49px] px-4 sm:px-8 py-3 sm:py-5 md:py-[16.76px] relative flex-[0_0_auto] rounded-[19.33px] border border-solid border-gray-200 bg-white shadow-sm mx-auto">
+          <p className="relative w-full max-w-[473.02px] mt-0 sm:mt-[-1.00px] sm:ml-0 sm:mr-0 [font-family:'Inter-Regular',Helvetica] font-normal text-gray-600 text-sm sm:text-base md:text-[15.5px] text-center tracking-[0] leading-[normal]">
             "{testimonialData.quote}"
           </p>
 
-          <cite className="relative self-stretch [font-family:'Inter-Bold',Helvetica] font-bold text-[#246bfd] text-sm sm:text-base md:text-[15.5px] text-center tracking-[0] leading-[normal] not-italic">
+          <cite className="relative self-stretch [font-family:'Inter-Bold',Helvetica] font-bold text-[#9411a8] text-sm sm:text-base md:text-[15.5px] text-center tracking-[0] leading-[normal] not-italic">
             → {testimonialData.author}
           </cite>
         </blockquote>
 
-  <div className="flex flex-col items-start gap-3 sm:gap-5 relative self-stretch w-full flex-[0_0_auto]">
+        <div className="flex flex-col items-start gap-3 sm:gap-5 relative self-stretch w-full flex-[0_0_auto]">
           <h1
             id="purchase-summary-title"
-            className="relative self-stretch mt-0 sm:mt-[-1.00px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-white text-xl sm:text-2xl md:text-3xl lg:text-[32.9px] tracking-[0] leading-7 sm:leading-8 md:leading-[34.1px]"
+            className="relative self-stretch mt-0 sm:mt-[-1.00px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-gray-900 text-xl sm:text-2xl md:text-3xl lg:text-[32.9px] tracking-[0] leading-7 sm:leading-8 md:leading-[34.1px]"
           >
             Purchase Summary
           </h1>
 
           <div className="flex flex-col items-start gap-4 sm:gap-6 md:gap-[30.71px] relative self-stretch w-full flex-[0_0_auto]">
             <div
-              className="flex flex-col items-start justify-center gap-3 sm:gap-5 md:gap-[26.33px] px-3 sm:px-6 md:px-[32.91px] py-3 sm:py-5 md:py-[21.94px] relative self-stretch w-full flex-[0_0_auto] rounded-[16.45px] border-[1.1px] border-solid border-white"
+              className="flex flex-col items-start justify-center gap-3 sm:gap-5 md:gap-[26.33px] px-3 sm:px-6 md:px-[32.91px] py-3 sm:py-5 md:py-[21.94px] relative self-stretch w-full flex-[0_0_auto] rounded-[16.45px] border-[1.1px] border-solid border-gray-200 bg-white shadow-sm"
               role="region"
               aria-label="Price breakdown"
             >
               <div className="inline-flex flex-col items-start gap-[13.16px] relative flex-[0_0_auto] w-full min-w-0">
                 <div className="flex flex-wrap w-full min-w-0 items-center justify-between relative flex-[0_0_auto]">
-                  <span className="relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-white text-[17.6px] tracking-[0] leading-[34.1px] whitespace-nowrap">
+                  <span className="relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-gray-900 text-[17.6px] tracking-[0] leading-[34.1px] whitespace-nowrap">
                     Price
                   </span>
 
                   <span
-                    className="relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-white text-[17.6px] tracking-[0] leading-[34.1px] whitespace-nowrap"
+                    className="relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-gray-900 text-[17.6px] tracking-[0] leading-[34.1px] whitespace-nowrap"
                     aria-label={`Price: ${purchaseData.price} rupees`}
                   >
                     ₹{purchaseData.price}
@@ -171,17 +173,17 @@ const handleCouponApply = () => {
 
                 <div className="flex flex-wrap w-full min-w-0 items-start justify-between relative flex-[0_0_auto]">
                   <div className="inline-flex flex-col items-center gap-[3.29px] relative flex-[0_0_auto]">
-                    <span className="relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-white text-[17.6px] tracking-[0] leading-[17.6px] whitespace-nowrap">
+                    <span className="relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-gray-900 text-[17.6px] tracking-[0] leading-[17.6px] whitespace-nowrap">
                       Discount
                     </span>
 
-                    <span className="[font-family:'Inter-Regular',Helvetica] font-normal text-[#246bfd] text-[9.9px] leading-[11.0px] relative w-fit tracking-[0] whitespace-nowrap">
+                    <span className="[font-family:'Inter-Regular',Helvetica] font-normal text-[#9411a8] text-[9.9px] leading-[11.0px] relative w-fit tracking-[0] whitespace-nowrap">
                       ({purchaseData.discountPercent} percent)
                     </span>
                   </div>
 
                   <span
-                    className="text-[#246bfd] text-[17.6px] leading-[17.6px] relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold tracking-[0] whitespace-nowrap"
+                    className="text-[#9411a8] text-[17.6px] leading-[17.6px] relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold tracking-[0] whitespace-nowrap"
                     aria-label={`Discount: minus ${purchaseData.discount} rupees`}
                   >
                     - ₹{purchaseData.discount}
@@ -189,22 +191,22 @@ const handleCouponApply = () => {
                 </div>
               </div>
 
-              <div className="flex flex-wrap w-full min-w-0 items-start justify-between pt-8 pb-0 px-0 relative flex-[0_0_auto] border-t-[1.1px] [border-top-style:solid] border-[#246bfd]">
-                <span className="relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-white text-[26.9px] tracking-[0] leading-[34.1px] whitespace-nowrap">
+              <div className="flex flex-wrap w-full min-w-0 items-start justify-between pt-8 pb-0 px-0 relative flex-[0_0_auto] border-t-[1.1px] [border-top-style:solid] border-[#9411a8]/20">
+                <span className="relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-gray-900 text-[26.9px] tracking-[0] leading-[34.1px] whitespace-nowrap">
                   Total
                 </span>
 
                 <div className="inline-flex flex-col items-center gap-[3.29px] relative flex-[0_0_auto]">
                   <span
-                    className="text-white text-[27.4px] leading-[27.4px] relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold tracking-[0] whitespace-nowrap"
+                    className="text-gray-900 text-[27.4px] leading-[27.4px] relative w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold tracking-[0] whitespace-nowrap"
                     aria-label={`Total: ${purchaseData.total} rupees`}
                   >
                     ₹{purchaseData.total}
                   </span>
 
-                  <div className="inline-flex items-center justify-center gap-[17.55px] px-[10.97px] py-0 relative flex-[0_0_auto] bg-[linear-gradient(90deg,rgba(36,107,253,1)_0%,rgba(0,80,245,0)_100%)]">
+                  <div className="inline-flex items-center justify-center gap-[17.55px] px-[10.97px] py-0 relative flex-[0_0_auto] bg-[#9411a8]/10 rounded-full">
                     <span
-                      className="relative w-fit mt-[-1.76px] [font-family:'Inter-Regular',Helvetica] font-normal text-white text-[10.5px] tracking-[0] leading-[17.6px] whitespace-nowrap"
+                      className="relative w-fit mt-[-1.76px] [font-family:'Inter-Regular',Helvetica] font-normal text-[#9411a8] text-[10.5px] tracking-[0] leading-[17.6px] whitespace-nowrap"
                       aria-label={`You are saving ${purchaseData.savings} rupees`}
                     >
                       Saving ₹{purchaseData.savings}
@@ -214,39 +216,39 @@ const handleCouponApply = () => {
               </div>
             </div>
 
-              {showModal && (
-                <div
-                  className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md"
-                  onClick={() => setShowModal(false)}
-                >
-                  {/* <div className="relative" onClick={e => e.stopPropagation()}> */}
-                    <EnrollmentModal />
-                 {/* </div> */}
-                 </div>
-              )}
-              <div className="relative w-full text-white">
-                <input placeholder="Apply Coupon code"
-                className="flex items-center justify-between px-[32.91px] py-[21.94px] relative self-stretch w-full flex-[0_0_auto] rounded-[16.45px] placeholder:text-gray-200  text-md border-[1.1px] border-solid border-gray-200"
+            {showModal && (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md"
+                onClick={() => setShowModal(false)}
+              >
+                {/* <div className="relative" onClick={e => e.stopPropagation()}> */}
+                <EnrollmentModal />
+                {/* </div> */}
+              </div>
+            )}
+            <div className="relative w-full text-gray-900">
+              <input placeholder="Apply Coupon code"
+                className="flex items-center justify-between px-[32.91px] py-[21.94px] relative self-stretch w-full flex-[0_0_auto] rounded-[16.45px] placeholder:text-gray-400 text-md border-[1.1px] border-solid border-gray-200 bg-white text-gray-900"
               ></input>
 
               <button
                 type="button"
                 onClick={handleCouponApply}
-                className="absolute top-5 right-10  w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-[#0356ff] text-[21.9px] tracking-[0] leading-[34.1px] whitespace-nowrap hover:text-[#246bfd] focus:outline-none focus:ring-2 focus:ring-[#246bfd] focus:ring-opacity-50 transition-colors duration-200"
+                className="absolute top-5 right-10  w-fit mt-[-1.10px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-[#9411a8] text-[21.9px] tracking-[0] leading-[34.1px] whitespace-nowrap hover:text-[#7a0c8b] focus:outline-none focus:ring-2 focus:ring-[#9411a8] focus:ring-opacity-50 transition-colors duration-200"
                 aria-label="Apply coupon code"
               >
                 Apply
               </button>
-              </div>
             </div>
-         
+          </div>
+
         </div>
       </div>
 
       <button
         type="button"
         onClick={handleProceedToPay}
-        className="inline-flex h-[55px] items-center justify-center px-[50px] py-0 relative rounded-[15px] bg-[linear-gradient(90deg,rgba(114,160,255,1)_0%,rgba(36,108,255,1)_48%,rgba(0,84,255,1)_100%)] hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#246bfd] focus:ring-opacity-50 transition-opacity duration-200"
+        className="inline-flex h-[55px] items-center justify-center px-[50px] py-0 relative rounded-[15px] bg-[#9411a8] hover:bg-[#7a0c8b] focus:outline-none focus:ring-2 focus:ring-[#9411a8] focus:ring-opacity-50 transition-colors duration-200"
         aria-label="Proceed to payment"
       >
         <span className="relative w-fit [font-family:'Roboto-Medium',Helvetica] font-medium text-white text-[22.7px] tracking-[0] leading-[34px] whitespace-nowrap">

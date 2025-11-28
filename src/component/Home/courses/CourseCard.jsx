@@ -1,6 +1,6 @@
 import React from 'react';
 import CourseIcon from './CourseIcon';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 const CourseCard = ({ course, courseId, isLoggedIn }) => {
   const {
@@ -10,13 +10,13 @@ const CourseCard = ({ course, courseId, isLoggedIn }) => {
     description,
     lectures,
     duration,
-  originalPrice,
-  discountedPrice,
-  discount
+    originalPrice,
+    discountedPrice,
+    discount
   } = course;
 
   return (
-  <article className="flex relative flex-col justify-between items-start bg-white rounded-lg shadow-md h-[592px] w-[286px] max-md:w-[280px] max-sm:w-full max-sm:max-w-none max-sm:px-0" style={{maxWidth: '100vw'}}>
+    <article className="flex relative flex-col justify-between items-start bg-white rounded-lg shadow-md h-[592px] w-[286px] max-md:w-[280px] max-sm:w-full max-sm:max-w-none max-sm:px-0" style={{ maxWidth: '100vw' }}>
       {image.isSpecial ? (
         <div className="flex overflow-hidden relative justify-center items-center h-48 rounded-[8px_8px_0_0] w-[286px] max-md:w-[280px] max-sm:w-full">
           <img
@@ -33,8 +33,8 @@ const CourseCard = ({ course, courseId, isLoggedIn }) => {
         />
       )}
 
-  <div className="box-border flex flex-col flex-1 justify-between p-6 w-[286px] max-md:w-[280px] max-sm:p-5 max-sm:w-full max-sm:max-w-none">
-  <div className="flex relative flex-col justify-between items-center h-full min-h-[340px]">
+      <div className="box-border flex flex-col flex-1 justify-between p-6 w-[286px] max-md:w-[280px] max-sm:p-5 max-sm:w-full max-sm:max-w-none">
+        <div className="flex relative flex-col justify-between items-center h-full min-h-[340px]">
           <CourseIcon iconSvg={icon} />
 
           {title.isMultiLine ? (
@@ -53,7 +53,7 @@ const CourseCard = ({ course, courseId, isLoggedIn }) => {
           )}
 
           <div className="flex flex-col flex-1 items-center mb-4 text-center min-h-[48px] max-h-[48px] w-full max-w-[220px] justify-center overflow-hidden">
-            <p className="text-base leading-6 text-black w-full text-wrap overflow-hidden line-clamp-2" style={{display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical'}}>
+            <p className="text-base leading-6 text-black w-full text-wrap overflow-hidden line-clamp-2" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
               {Array.isArray(description) ? description.join(' ') : description}
             </p>
           </div>
@@ -71,22 +71,22 @@ const CourseCard = ({ course, courseId, isLoggedIn }) => {
             </div>
             <span className="text-sm leading-5 text-black">{duration}</span>
           </div>
-        {isLoggedIn ?(
-          <div className="flex relative gap-2 justify-center items-center mb-4 w-full max-sm:flex-wrap max-sm:gap-1">
-            <span className="text-base leading-6 text-black line-through">₹1450</span>
-            <span className="text-xl font-bold leading-7 text-black">₹1299</span>
-            <span className="inline-flex justify-center items-center px-2 py-1 rounded-full shadow-sm bg-white bg-opacity-0">
-              <span className="text-xs leading-4 text-green-600">10% OFF</span>
-            </span>
-          </div>
-        ) : (
-          <div className="h-[48px] flex items-center mb-4">
-            <span className="text-base text-zinc-400">Login to see price</span>
-          </div>
-        )}
+          {isLoggedIn ? (
+            <div className="flex relative gap-2 justify-center items-center mb-4 w-full max-sm:flex-wrap max-sm:gap-1">
+              <span className="text-base leading-6 text-black line-through">₹1450</span>
+              <span className="text-xl font-bold leading-7 text-black">₹1299</span>
+              <span className="inline-flex justify-center items-center px-2 py-1 rounded-full shadow-sm bg-white bg-opacity-0">
+                <span className="text-xs leading-4 text-green-600">10% OFF</span>
+              </span>
+            </div>
+          ) : (
+            <div className="h-[48px] flex items-center mb-4">
+              <span className="text-base text-zinc-400">Login to see price</span>
+            </div>
+          )}
           <Link
-            to={`/courses/${courseId}`} className="flex justify-center items-center px-16 pt-3 pb-3 w-full bg-gray-900 rounded-lg transition-all cursor-pointer border-[none] duration-[0.2s] ease-[ease]">
-            <span className="text-base leading-6 text-blue-300">
+            to={`/courses/${courseId}`} className="flex justify-center items-center px-16 pt-3 pb-3 w-full bg-[#9411a8] hover:bg-[#7a0c8b] rounded-lg transition-all cursor-pointer border-[none] duration-[0.2s] ease-[ease]">
+            <span className="text-base leading-6 text-white">
               Let's Explore It
             </span>
           </Link>

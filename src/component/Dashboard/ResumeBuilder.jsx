@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useToast } from "../../contexts/ToastContext";
 
 // Initial state structure matching the backend model
 const initialResumeState = {
@@ -19,6 +20,7 @@ const initialResumeState = {
 };
 
 const ResumeBuilder = () => {
+  const { showToast } = useToast();
   const [resumeData, setResumeData] = useState(initialResumeState);
   const [currentSkill, setCurrentSkill] = useState("");
   const [currentAchievement, setCurrentAchievement] = useState("");
@@ -122,15 +124,15 @@ const ResumeBuilder = () => {
         body: JSON.stringify(resumeData),
       });
       if (res.ok) {
-        alert("Resume saved successfully!");
+        showToast("Resume saved successfully!", "success");
         const savedData = await res.json();
         setResumeData({ ...initialResumeState, ...savedData });
       } else {
-        alert("Failed to save resume.");
+        showToast("Failed to save resume.", "error");
       }
     } catch (error) {
       console.error("Error saving resume:", error);
-      alert("An error occurred while saving.");
+      showToast("An error occurred while saving.", "error");
     }
   };
 
@@ -166,7 +168,7 @@ const ResumeBuilder = () => {
 
     } catch (error) {
       console.error("Download error:", error);
-      alert("Could not download the resume.");
+      showToast("Could not download the resume.", "error");
     }
   };
 

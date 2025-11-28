@@ -23,7 +23,7 @@ export default function ForgetOTP({ onClose, onGoBack, onContinue, context }) {
     if (!/^\d{6}$/.test(otpCode)) {
       return setError("Please enter a valid 6-digit OTP.");
     }
-    
+
     try {
       const res = await fetch(`${BASE_URL}/api/auth/verify-otp`, {
         method: 'POST',
@@ -57,42 +57,65 @@ export default function ForgetOTP({ onClose, onGoBack, onContinue, context }) {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black/50 z-50 p-4">
-      <div className="flex flex-col md:flex-row rounded-[37px] overflow-hidden shadow-2xl border border-[#1545C2] w-full max-w-[1108px] bg-[#020817]">
+      <div className="flex flex-col md:flex-row rounded-[37px] overflow-hidden shadow-2xl bg-white w-full max-w-[1108px] max-h-[90vh] md:h-[625px]">
         {/* Left Decorative Panel */}
-        <div className="relative hidden md:flex w-full md:w-1/2 bg-[#1545C2] flex-col justify-center p-8 text-white">
-          <h2 className="font-bold text-2xl mb-4">Master the Skills for Tomorrow's Top Tech Jobs.</h2>
-          <p className="text-blue-200">Elevate Your Skills, Secure Your Future</p>
+        <div className="relative hidden md:flex w-full md:w-1/2 bg-[#9411a8] flex-col justify-center p-8 text-white">
+          <div
+            className="absolute top-0 left-0 w-38 h-38 z-0 blur-[70px]"
+            style={{
+              background:
+                "linear-gradient(224.6deg, rgba(216, 180, 254, 0.72) -3.85%, rgba(148, 17, 168, 0.72) 121.24%)",
+              borderBottomRightRadius: "50%",
+            }}
+          />
+          <div
+            className="absolute top-0 left-0 w-38 h-38 z-0 blur-[50px]"
+            style={{
+              background:
+                "linear-gradient(224.6deg, rgba(216, 180, 254, 0.72) -3.85%, rgba(148, 17, 168, 0.72) 121.24%)",
+              borderBottomRightRadius: "50%",
+            }}
+          />
+          <div className="relative z-10">
+            <h2 className="font-bold text-2xl mb-4">Master the Skills for Tomorrow's Top Tech Jobs.</h2>
+            <p className="text-blue-100">Elevate Your Skills, Secure Your Future</p>
+          </div>
+          <img
+            src="/signup.png"
+            alt="Person working"
+            className="hidden md:block object-contain w-full max-w-[577px] h-auto max-h-[390px] mt-8"
+          />
         </div>
-        
+
         {/* Right Form Panel */}
-        <div className="relative w-full md:w-1/2 text-white p-8 flex flex-col justify-center">
-          <button onClick={onClose} className="absolute top-6 right-6 text-gray-400 hover:text-white"><X size={24} /></button>
+        <div className="relative w-full md:w-1/2 text-gray-900 p-8 flex flex-col justify-center bg-white">
+          <button onClick={onClose} className="absolute top-6 right-6 text-gray-400 hover:text-gray-600"><X size={24} /></button>
           <div className="w-full max-w-sm mx-auto">
-            <h2 className="text-2xl font-semibold text-center mb-4">Check Your Inbox</h2>
-            <p className="text-center text-sm text-gray-400 mb-6">Enter the verification code sent to <span className="font-semibold text-white">{email}</span></p>
-            
+            <h2 className="text-2xl font-semibold text-center mb-4 text-gray-900">Check Your Inbox</h2>
+            <p className="text-center text-sm text-gray-500 mb-6">Enter the verification code sent to <span className="font-semibold text-[#9411a8]">{email}</span></p>
+
             <div className="space-y-6">
               <input
                 type="text"
                 value={otpCode}
                 onChange={(e) => setOtpCode(e.target.value)}
                 placeholder="6-digit code"
-                className="w-full px-4 py-3 bg-transparent border border-blue-600 rounded-full text-center text-white placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                className="w-full px-4 py-3 bg-transparent border border-gray-300 rounded-full text-center text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#9411a8] focus:ring-1 focus:ring-[#9411a8]"
                 maxLength="6"
               />
 
               {/* Error and Success Messages */}
               {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-              {message && <p className="text-green-500 text-sm text-center">{message}</p>}
+              {message && <p className="text-green-600 text-sm text-center">{message}</p>}
 
-              <button onClick={handleContinue} className="w-full py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition">Confirm</button>
-              
+              <button onClick={handleContinue} className="w-full py-3 bg-[#9411a8] hover:bg-[#7a0c8b] text-white font-medium rounded-full transition shadow-md">Confirm</button>
+
               <div className="text-center">
-                <button onClick={handleResendOTP} className="text-blue-400 text-sm hover:text-blue-300">Resend Email</button>
+                <button onClick={handleResendOTP} className="text-[#1545C2] text-sm hover:text-[#0f3bb0] font-medium">Resend Email</button>
               </div>
 
               <div className="flex justify-start mt-8">
-                <button onClick={onGoBack} className="inline-flex items-center text-white px-3 py-2 rounded-full border border-blue-600 hover:border-gray-400">
+                <button onClick={onGoBack} className="inline-flex items-center text-gray-600 px-3 py-2 rounded-full border border-gray-300 hover:border-gray-500 hover:text-gray-900 transition-colors">
                   <ChevronLeft size={16} className="mr-2" /> Go back
                 </button>
               </div>

@@ -1,1 +1,58 @@
 @import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --- Light Theme Palette (Inspired by Tutedude) --- */
+
+  /* Backgrounds */
+  --color-background: #FFFFFF;
+  /* Main white background */
+  --color-background-soft: #F9FAFB;
+  /* Very light gray for sidebar/sections */
+  --color-background-card: #FFFFFF;
+  /* White for cards */
+
+  /* Primary Brand Color (The Purple/Pink you asked for) */
+  --color-primary: #9411a8;
+  /* Your requested purple */
+  --color-primary-soft: #F3E5F5;
+  /* Light purple background for active items */
+
+  /* Accents (Orange for CTAs like Tutedude) */
+  --color-accent: #FF9900;
+  /* Orange for buttons/highlights */
+  --color-accent-hover: #E68A00;
+  /* Darker orange for hover */
+
+  /* Text */
+  --color-text-primary: #111827;
+  /* Near-black for headings */
+  --color-text-secondary: #6B7280;
+  /* Gray for subtitles/descriptions */
+  --color-text-brand: #9411a8;
+  /* Purple text */
+
+  /* Borders */
+  --color-border: #E5E7EB;
+  /* Light gray borders */
+}
+
+/* Toast Animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out;
+}

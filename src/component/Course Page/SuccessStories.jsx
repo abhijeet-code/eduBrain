@@ -4,7 +4,7 @@ import PaginationDots from './PaginationDots';
 function TestimonialCard({ testimonial }) {
   return (
     <div
-      className="flex flex-col justify-between items-center box-border p-[15.2007px_16.2865px] gap-[9.77px] min-w-[353.1px] min-h-[506.02px] bg-[rgba(21,69,194,0.05)] rounded-[17.3722px] border border-[#1545C2]"
+      className="flex flex-col justify-between items-center box-border p-[15.2007px_16.2865px] gap-[9.77px] min-w-[353.1px] min-h-[506.02px] bg-white rounded-[17.3722px] border border-[#9411a8]"
       style={{ mixBlendMode: 'normal', flex: 'none', order: 0, flexGrow: 0 }}
     >
       {/* Image Container */}
@@ -24,26 +24,26 @@ function TestimonialCard({ testimonial }) {
       >
         <div className="flex flex-col items-center gap-1">
           <h3
-            className="font-montserrat text-lg font-bold leading-tight text-white"
+            className="font-montserrat text-lg font-bold leading-tight text-gray-900"
           >
             {testimonial.title}
           </h3>
           <p
-            className="font-montserrat text-md leading-5 text-[#0356FF]"
+            className="font-montserrat text-md leading-5 text-[#9411a8]"
           >
             {testimonial.role}
           </p>
         </div>
 
         <p
-          className="font-montserrat text-sm font-normal leading-5 text-justify text-[#A0AEC0]"
+          className="font-montserrat text-sm font-normal leading-5 text-justify text-gray-500"
         >
           "{testimonial.quote}"
         </p>
 
         {/* Blue line accent */}
         <div
-          className="mt-2 self-start bg-[#1545C2] rounded-[6158.31px] w-[61.59px] h-[2.46px]"
+          className="mt-2 self-start bg-[#9411a8] rounded-[6158.31px] w-[61.59px] h-[2.46px]"
           style={{ mixBlendMode: 'normal' }}
         ></div>
       </div>
@@ -52,7 +52,7 @@ function TestimonialCard({ testimonial }) {
 }
 
 
-export default function SuccessStories({ heading, subheading  }) {
+export default function SuccessStories({ heading, subheading }) {
   const [startIndex, setStartIndex] = useState(0);
 
   const testimonials = [
@@ -124,7 +124,7 @@ export default function SuccessStories({ heading, subheading  }) {
   const numDots = total;
 
   return (
-    <div className="min-h-screen relative bg-edubraining-dark overflow-hidden" style={{ backgroundColor: '#0c0c0d' }}>
+    <div className="min-h-screen relative bg-gray-50 overflow-hidden" style={{ backgroundColor: '#f9fafb' }}>
       <div className="max-w-7xl mx-auto px-4  py-12 lg:py-16">
         {/* Main Content Container */}
         <div className="flex flex-col items-center gap-16 lg:gap-24 ">
@@ -135,7 +135,7 @@ export default function SuccessStories({ heading, subheading  }) {
               {/* Subtitle */}
               <div
                 className="font-roboto text-xl lg:text-2xl font-normal leading-8"
-                style={{ color: '#91B5FE' }}
+                style={{ color: '#9411a8' }}
               >
                 {heading}
               </div>
@@ -143,7 +143,7 @@ export default function SuccessStories({ heading, subheading  }) {
               {/* Main Title */}
               <h1
                 className="font-montserrat text-3xl md:text-4xl lg:text-5xl font-bold leading-tight lg:leading-snug"
-                style={{ color: '#0356FF' }}
+                style={{ color: '#111827' }}
               >
                 {subheading}
               </h1>
@@ -151,7 +151,7 @@ export default function SuccessStories({ heading, subheading  }) {
               {/* Description */}
               <p
                 className="max-w-4xl font-roboto text-base lg:text-lg font-normal leading-6 lg:leading-7 text-center"
-                style={{ color: '#A0AEC0' }}
+                style={{ color: '#6b7280' }}
               >
                 Edubraining internships and courses provide real skills and industry exposure that pave the way for your professional success. Experience learning that drives your career forward.
               </p>
@@ -183,14 +183,14 @@ export default function SuccessStories({ heading, subheading  }) {
         {/* Desktop */}
         <button
           onClick={prevSlide}
-          className="hidden md:flex absolute z-10 items-center justify-center text-white border-2 border-white rounded-full shadow-md left-[31px] top-1/2 -translate-y-1/2 w-[74px] h-[74px]"
+          className="hidden md:flex absolute z-10 items-center justify-center text-[#9411a8] border-2 border-[#9411a8] rounded-full shadow-md left-[31px] top-1/2 -translate-y-1/2 w-[74px] h-[74px] hover:bg-[#9411a8]/5 transition-colors"
           aria-label="Previous testimonial"
         >
           <span className="font-montserrat flex items-center justify-center pb-3 text-4xl font-normal">‹</span>
         </button>
         <button
           onClick={nextSlide}
-          className="hidden md:flex absolute z-10 items-center justify-center text-white border-2 border-white rounded-full shadow-md right-[31px] top-1/2 -translate-y-1/2 w-[74px] h-[74px]"
+          className="hidden md:flex absolute z-10 items-center justify-center text-[#9411a8] border-2 border-[#9411a8] rounded-full shadow-md right-[31px] top-1/2 -translate-y-1/2 w-[74px] h-[74px] hover:bg-[#9411a8]/5 transition-colors"
           aria-label="Next testimonial"
         >
           <span className="font-montserrat flex items-center justify-center pb-3 text-4xl font-normal">›</span>
@@ -199,14 +199,14 @@ export default function SuccessStories({ heading, subheading  }) {
         <div className="flex md:hidden w-full justify-center gap-6 mt-6">
           <button
             onClick={prevSlide}
-            className="flex items-center justify-center text-white border-2 border-white rounded-full shadow-md w-10 h-10"
+            className="flex items-center justify-center text-[#9411a8] border-2 border-[#9411a8] rounded-full shadow-md w-10 h-10 hover:bg-[#9411a8]/5 transition-colors"
             aria-label="Previous testimonial"
           >
             <span className="font-montserrat flex items-center justify-center text-2xl font-normal">‹</span>
           </button>
           <button
             onClick={nextSlide}
-            className="flex items-center justify-center text-white border-2 border-white rounded-full shadow-md w-10 h-10"
+            className="flex items-center justify-center text-[#9411a8] border-2 border-[#9411a8] rounded-full shadow-md w-10 h-10 hover:bg-[#9411a8]/5 transition-colors"
             aria-label="Next testimonial"
           >
             <span className="font-montserrat flex items-center justify-center text-2xl font-normal">›</span>

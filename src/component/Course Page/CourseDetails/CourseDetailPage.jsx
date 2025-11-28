@@ -7,7 +7,7 @@ import CourseRequirements from "./CourseRequirements";
 import CourseDescription from "./CourseDescription";
 import CourseSidebar from "./CourseSidebar";
 
-function CourseDetailPageWrapper({ isEnrolled, isLoggedIn}) {
+function CourseDetailPageWrapper({ isEnrolled, isLoggedIn }) {
   const [course, setCourse] = useState(null);
   const { courseId } = useParams();
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -40,19 +40,19 @@ function CourseDetailPageWrapper({ isEnrolled, isLoggedIn}) {
   }, [courseId, BASE_URL]);
 
   if (!course) {
-    return <div className="text-white text-center py-40">Loading course details...</div>;
+    return <div className="text-gray-800 text-center py-40">Loading course details...</div>;
   }
 
   // Pass the fetched course data to the actual page layout component
-  return <CoursePageLayout course={course}  isEnrolled={isEnrolled} isLoggedIn={isLoggedIn}/>;
+  return <CoursePageLayout course={course} isEnrolled={isEnrolled} isLoggedIn={isLoggedIn} />;
 }
 
 
-const CoursePageLayout = ({ course, isEnrolled,isLoggedIn }) => {
+const CoursePageLayout = ({ course, isEnrolled, isLoggedIn }) => {
   if (!course) return null;
   return (
     // Reverted container styling to match original structure
-    <div className="min-h-screen bg-transparent text-white relative overflow-hidden mx-auto py-10 md:py-20 px-2 md:px-0">
+    <div className="min-h-screen bg-gray-50 text-gray-800 relative overflow-hidden mx-auto py-10 md:py-20 px-2 md:px-0">
       {/* Reverted layout flexbox and max-width to match original */}
       <div className="flex flex-col-reverse md:flex-row md:flex-wrap gap-10 items-start w-full max-w-[1424px] mx-auto">
         {/* Reverted main content width */}
@@ -72,7 +72,7 @@ const CoursePageLayout = ({ course, isEnrolled,isLoggedIn }) => {
           </div>
         </main>
         <aside className="w-full md:w-[406px] mx-auto mt-8 md:mt-0">
-          <CourseSidebar course={course} isEnrolled= {isEnrolled} isLoggedIn={isLoggedIn} />
+          <CourseSidebar course={course} isEnrolled={isEnrolled} isLoggedIn={isLoggedIn} />
         </aside>
       </div>
     </div>

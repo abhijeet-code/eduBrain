@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Navbar = ({ onLogout, isSidebarOpen, setIsSidebarOpen }) => {
   const navLinkMap = {
     "About Us": "/#about",
-    "Courses": "/#courses",
+    "Courses": "/courses",
     "Process": "/#process",
     "Certification": "/#certification",
     "FAQ": "/#faq"
@@ -13,7 +13,7 @@ const Navbar = ({ onLogout, isSidebarOpen, setIsSidebarOpen }) => {
   const [userName, setUserName] = useState('Guest');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -45,10 +45,9 @@ const Navbar = ({ onLogout, isSidebarOpen, setIsSidebarOpen }) => {
           }
         }
 
-        const userRes = await fetch(`${BASE_URL}/api/auth/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        // Fallback: Fetch from Auth User endpoint
+        const userRes = await fetch(`${BASE_URL}/api/auth/user`, {
+          headers: { Authorization: `Bearer ${token}` },
         });
         if (userRes.ok) {
           const userData = await userRes.json();
@@ -79,9 +78,6 @@ const Navbar = ({ onLogout, isSidebarOpen, setIsSidebarOpen }) => {
   }, []);
 
   const handleLogout = () => {
-    // localStorage.removeItem('token');
-    // setUserName('Guest');
-    // setIsDropdownOpen(false);
     onLogout();
     setIsDropdownOpen(false);
     navigate('/', { replace: true }); // Use replace to avoid history issues
@@ -113,11 +109,11 @@ const Navbar = ({ onLogout, isSidebarOpen, setIsSidebarOpen }) => {
 
           {/* Use a colored logo if you have one, otherwise this stays as is */}
           <a href="/" className="flex-shrink-0 ml-1 sm:ml-4 md:ml-7">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets%2Fa775d79b68d74d178db9269674a079b2%2F51d6d5225f964b1d8af9636f3f0f2c70"
-            className="h-12 sm:h-20 md:h-25 object-cover w-auto"
-            alt="Logo"
-          />
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2Fa775d79b68d74d178db9269674a079b2%2F51d6d5225f964b1d8af9636f3f0f2c70"
+              className="h-12 sm:h-20 md:h-25 object-cover w-auto"
+              alt="Logo"
+            />
           </a>
         </div>
 

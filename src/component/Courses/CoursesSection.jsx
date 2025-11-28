@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import DecorativeVectors from './DecorativeVectors';
 import CourseCard from './CourseCard';
-    
-export const CoursesSection = ({isLoggedIn}) => {
+
+export const CoursesSection = ({ isLoggedIn }) => {
     const [liveCourses, setLiveCourses] = useState([]);
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -12,14 +12,14 @@ export const CoursesSection = ({isLoggedIn}) => {
                 const res = await fetch(`${BASE_URL}/api/courses`);
                 if (res.ok) {
                     const data = await res.json();
-                    setLiveCourses(data); 
+                    setLiveCourses(data);
                 }
             } catch (error) {
                 console.error("Failed to fetch courses:", error);
             }
         };
         fetchCourses();
-    }, [BASE_URL]);    
+    }, [BASE_URL]);
 
     const courseIdMap = liveCourses.reduce((map, course) => {
         map[course.title] = course._id;
@@ -244,9 +244,9 @@ export const CoursesSection = ({isLoggedIn}) => {
     ];
 
     return (
-        <section className="relative px-28 w-full  bg-[#0C0C0D] max-xl:px-16 max-lg:px-10 max-md:px-6 max-md:pt-20 max-md:pb-0 max-sm:px-2 max-sm:pt-10 max-sm:pb-0">
-            {/* Glow effect */}
-            <svg width="495" height="675" viewBox="0 0 495 675" fill="none" xmlns="http://www.w3.org/2000/svg" className='absolute  -left-5 overflow-hidden'>
+        <section className="relative px-28 w-full bg-gray-50 max-xl:px-16 max-lg:px-10 max-md:px-6 max-md:pt-20 max-md:pb-0 max-sm:px-2 max-sm:pt-10 max-sm:pb-0">
+            {/* Glow effect - Adjusted for light mode (Soft Purple) */}
+            <svg width="495" height="675" viewBox="0 0 495 675" fill="none" xmlns="http://www.w3.org/2000/svg" className='absolute -left-5 overflow-hidden opacity-30'>
                 <g filter="url(#filter0_f_396_1025)">
                     <rect width="433" height="275" transform="matrix(1 0 0 -1 -138 475)" fill="url(#paint0_linear_396_1025)" fillOpacity="0.3" />
                 </g>
@@ -257,23 +257,23 @@ export const CoursesSection = ({isLoggedIn}) => {
                         <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_396_1025" />
                     </filter>
                     <linearGradient id="paint0_linear_396_1025" x1="433" y1="-21.0191" x2="125.676" y2="469.701" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#9AC4FE" />
-                        <stop offset="1" stopColor="#1545C2" />
+                        <stop stopColor="#9411a8" />
+                        <stop offset="1" stopColor="#d8b4fe" />
                     </linearGradient>
                 </defs>
             </svg>
 
             <header className="flex flex-col gap-6 items-center mx-auto mt-0 mb-32 w-[815px] max-xl:w-[700px] max-lg:w-[600px] max-md:mb-20 max-md:w-full max-sm:mb-16 max-sm:w-full">
-                <div className="flex gap-2 sm:gap-3 justify-center items-center px-3 sm:px-6 py-2 sm:py-[8px] sm:pb-[10px] bg-[#A4A8FF2E] bg-opacity-[16%] rounded-[34.286px] w-full max-w-[320px] max-sm:max-w-[220px]">
-                    <span className="text-lg sm:text-3xl leading-8 sm:leading-9 text-[#91B5FE]">
+                <div className="flex gap-2 sm:gap-3 justify-center items-center px-3 sm:px-6 py-2 sm:py-[8px] sm:pb-[10px] bg-[#9411a8]/10 rounded-[34.286px] w-full max-w-[320px] max-sm:max-w-[220px]">
+                    <span className="text-lg sm:text-3xl leading-8 sm:leading-9 text-[#9411a8] font-semibold">
                         Our Courses
                     </span>
                 </div>
-                <h1 className="text-5xl font-bold text-center leading-[57.6px] text-slate-50 max-xl:text-4xl max-xl:leading-[44px] max-lg:text-3xl max-lg:leading-10 max-md:text-2xl max-md:leading-8 max-sm:text-xl max-sm:leading-7">
+                <h1 className="text-5xl font-bold text-center leading-[57.6px] text-gray-900 max-xl:text-4xl max-xl:leading-[44px] max-lg:text-3xl max-lg:leading-10 max-md:text-2xl max-md:leading-8 max-sm:text-xl max-sm:leading-7">
                     Unlock Your Potential by our Tech Courses
                 </h1>
                 <div className="flex relative justify-center items-center h-12 w-[628px] max-xl:w-[500px] max-lg:w-[400px] max-md:w-full max-sm:w-full">
-                    <p className="absolute top-0 h-12 text-2xl leading-6 text-center left-[-118px] text-zinc-400 w-[866px] max-xl:w-[500px] max-lg:w-[400px] max-md:static max-md:w-full max-md:text-lg max-sm:text-base max-sm:leading-6 max-sm:w-full">
+                    <p className="absolute top-0 h-12 text-2xl leading-6 text-center left-[-118px] text-gray-500 w-[866px] max-xl:w-[500px] max-lg:w-[400px] max-md:static max-md:w-full max-md:text-lg max-sm:text-base max-sm:leading-6 max-sm:w-full">
                         Explore tech excellence with Edubraining courses. Transformative
                         learning for a future of possibilities.
                     </p>

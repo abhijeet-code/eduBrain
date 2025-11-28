@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useToast } from "../../contexts/ToastContext";
 
 const Profile = () => {
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({
     fullName: "",
     phoneNumber: "",
@@ -15,39 +17,46 @@ const Profile = () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
+      let defaultName = "";
+      let defaultEmail = "";
+
       try {
-        const res = await fetch(`${BASE_URL}/api/profile/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        // 1. Fetch Auth User Data (for defaults)
+        const authRes = await fetch(`${BASE_URL}/api/auth/user`, {
+          headers: { Authorization: `Bearer ${token}` },
         });
-        let defaultName = "";
-        let defaultEmail = "";
-        if (res.ok) {
-          const data = await res.json();
-          defaultName = data.name;
-          defaultEmail = data.email;
-          const formattedData = {
-            ...data,
-            dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth).toISOString().split('T')[0] : "",
-          };
-          setFormData(formattedData);
+        if (authRes.ok) {
+          const authData = await authRes.json();
+          defaultName = authData.name;
+          defaultEmail = authData.email;
         }
+
+        // 2. Fetch Profile Data
         const profileRes = await fetch(`${BASE_URL}/api/profile/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (profileRes.ok) {
           // --- 3. Profile Exists: Merge data ---
           const profileData = await profileRes.json();
+
+          const finalName = profileData.fullName || defaultName;
+          const finalEmail = profileData.emailAddress || defaultEmail;
+
           setFormData({
-            fullName: profileData.fullName || defaultName, // Use profile data, fallback to default
-            emailAddress: profileData.emailAddress || defaultEmail, // Use profile data, fallback to default
+            fullName: finalName,
+            emailAddress: finalEmail,
             phoneNumber: profileData.phoneNumber || "",
             dateOfBirth: profileData.dateOfBirth ? new Date(profileData.dateOfBirth).toISOString().split('T')[0] : "",
           });
+
+          // If the fetched profile has no name (meaning it's essentially empty/incomplete), prompt the user
+          if (!profileData.fullName) {
+            showToast("Please complete your profile to proceed.", "info");
+            setIsEditing(true);
+          }
         }
         else {
-          console.log("No profile found, user can create one.");
+          showToast("Please complete your profile to proceed.", "info");
           setFormData({
             fullName: defaultName,
             emailAddress: defaultEmail,
@@ -73,7 +82,7 @@ const Profile = () => {
   const handleSaveProfile = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Please log in to save your profile.");
+      showToast("Please log in to save your profile.", "warning");
       return;
     }
     try {
@@ -86,7 +95,7 @@ const Profile = () => {
         body: JSON.stringify(formData),
       });
       if (res.status === 401) {
-        alert("Session expired. Please log in again.");
+        showToast("Session expired. Please log in again.", "error");
         localStorage.removeItem("token");
         // Redirect to login page (uncomment if using react-router-dom)
         // navigate("/login");
@@ -99,15 +108,15 @@ const Profile = () => {
           dateOfBirth: updatedProfile.dateOfBirth ? new Date(updatedProfile.dateOfBirth).toISOString().split('T')[0] : "",
         };
         setFormData(formattedData);
-        alert("Profile saved successfully!");
+        showToast("Profile saved successfully!", "success");
         setIsEditing(false);
       } else {
         const errorData = await res.json();
-        alert(`Failed to save profile: ${errorData.msg}`);
+        showToast(`Failed to save profile: ${errorData.msg}`, "error");
       }
     } catch (error) {
       console.error("Error saving profile:", error);
-      alert("An error occurred while saving the profile.");
+      showToast("An error occurred while saving the profile.", "error");
     }
   };
 
@@ -119,7 +128,7 @@ const Profile = () => {
     {
       id: "fullName",
       label: "Full Name",
-      placeholder: "Enter your name",
+      placeholder: "Enter your name [Appears on certificates]",
       type: "text",
       value: formData.fullName,
     },
@@ -171,8 +180,8 @@ const Profile = () => {
 
             <button
               className={`flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg transition-colors ${isEditing
-                  ? "bg-red-50 text-red-600 hover:bg-red-100"
-                  : "bg-[#e0f2fe] text-[#0284c7] hover:bg-[#bae6fd]"
+                ? "bg-red-50 text-red-600 hover:bg-red-100"
+                : "bg-[#e0f2fe] text-[#0284c7] hover:bg-[#bae6fd]"
                 }`}
               onClick={toggleEditMode}
               aria-label={isEditing ? "Cancel Editing" : "Edit Profile"}

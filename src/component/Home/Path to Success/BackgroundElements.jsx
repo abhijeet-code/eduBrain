@@ -11,14 +11,6 @@ const BackgroundElements = () => {
           }}
         />
       </div>
-      {/* <div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html:
-              "<svg id=\"396:1469\" width=\"475\" height=\"1149\" viewBox=\"0 0 475 1149\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" class=\"blur-gradient\" style=\"width: 550px; height: 749px; border-radius: 749px; background: linear-gradient(225deg, rgba(154, 196, 254, 0.30) -3.85%, rgba(21, 69, 194, 0.30) 121.24%); filter: blur(100px); position: absolute; left: -275px; top: -284px; z-index: 0\"> <g filter=\"url(#filter0_f_396_1469)\"> <ellipse cy=\"574.5\" rx=\"275\" ry=\"374.5\" fill=\"url(#paint0_linear_396_1469)\" fill-opacity=\"0.3\"></ellipse> </g> <defs> <filter id=\"filter0_f_396_1469\" x=\"-475\" y=\"0\" width=\"950\" height=\"1149\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\"> <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"></feFlood> <feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"BackgroundImageFix\" result=\"shape\"></feBlend> <feGaussianBlur stdDeviation=\"100\" result=\"effect1_foregroundBlur_396_1469\"></feGaussianBlur> </filter> <linearGradient id=\"paint0_linear_396_1469\" x1=\"275\" y1=\"142.752\" x2=\"-616.359\" y2=\"806.518\" gradientUnits=\"userSpaceOnUse\"> <stop stop-color=\"#9AC4FE\"></stop> <stop offset=\"1\" stop-color=\"#1545C2\"></stop> </linearGradient> </defs> </svg>",
-          }}
-        />
-      </div> */}
       <div>
         <div
           dangerouslySetInnerHTML={{

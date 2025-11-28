@@ -1,19 +1,19 @@
 import React from 'react';
 
 const ProcessStep = ({
-  step , index
+  step, index
 }) => {
 
   const {
-  stepNumber,
-  title,
-  description,
-  imageSrc,
-  imageAlt = "",
-  imageOpacity = 1,
-  cardOpacity = 1,
-  cardHeight = "auto",
-  hasDecorations = false
+    stepNumber,
+    title,
+    description,
+    imageSrc,
+    imageAlt = "",
+    imageOpacity = 1,
+    cardOpacity = 1,
+    cardHeight = "auto",
+    hasDecorations = false
   } = step
 
   // Fix reversed logic: odd index = reversed
@@ -34,29 +34,29 @@ const ProcessStep = ({
       {/* Center line and number for mobile, position for desktop */}
       <div className="flex flex-col items-center justify-center relative">
         {/* Center line for mobile/small screens, hidden on desktop */}
-        <div className="w-1 h-12 bg-gray-700 rounded-full md:hidden mb-2 " />
+        <div className="w-1 h-12 bg-gray-200 rounded-full md:hidden mb-2 " />
         <div className={` flex justify-center items-center rounded-xl h-[60px] w-[60px] md:h-[70px] 
-           md:w-[70px] bg-gray-900 md:absolute ${isReversed ? 'md:left-0': 'md:right-0'} `}>
+           md:w-[70px] bg-[#9411a8] md:absolute ${isReversed ? 'md:left-0' : 'md:right-0'} `}>
           <span className="text-xl md:text-2xl font-bold leading-8 z-[50] text-center text-white">
             {stepNumber}
           </span>
         </div>
         {/* Center line for mobile/small screens, hidden on desktop */}
-       
+
       </div>
       <article
-        className="flex relative flex-col gap-3 md:gap-4 items-start px-4 py-4 md:px-8 md:py-6 bg-gray-900 rounded-2xl md:rounded-3xl border border-solid border-neutral-800 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg overflow-hidden"
+        className="flex relative flex-col gap-3 md:gap-4 items-start px-4 py-4 md:px-8 md:py-6 bg-white rounded-2xl md:rounded-3xl border border-solid border-gray-100 shadow-md w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg overflow-hidden"
         style={{
           opacity: cardOpacity,
           height: cardHeight !== "auto" ? cardHeight : "auto"
         }}
       >
-        <h2 className="text-lg md:text-2xl font-bold leading-6 md:leading-7 text-white">
+        <h2 className="text-lg md:text-2xl font-bold leading-6 md:leading-7 text-gray-900">
           {title}
         </h2>
         <div className="flex flex-col items-start w-full">
           {description.map((line, index) => (
-            <p key={index} className="text-sm md:text-base leading-5 md:leading-6 text-zinc-400">
+            <p key={index} className="text-sm md:text-base leading-5 md:leading-6 text-gray-600">
               {line}
             </p>
           ))}
@@ -80,11 +80,11 @@ const ProcessStep = ({
   );
 
   // For steps 2, 4, 6 - reversed layout on desktop
-  
+
 
   // Default layout for step 1
   return (
-  <div className="flex relative gap-7 items-center w-full z-[2]">
+    <div className="flex relative gap-7 items-center w-full z-[2]">
       {stepContent}
     </div>
   );

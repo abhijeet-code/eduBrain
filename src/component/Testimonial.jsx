@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const TestimonialsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -92,27 +93,24 @@ const TestimonialsSection = () => {
   const totalSlides = Math.ceil(testimonials.length / cardsPerView);
 
   return (
-    <section className="bg-[#0C0C0D] text-white min-h-screen py-16 lg:py-24">
+    <section className="bg-gray-50 text-gray-900 min-h-screen py-16 lg:py-24" id="testimonials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block mb-6">
-            <span
-              className="text-[#91B5FE] text-[24px] leading-[32px] font-normal align-middle font-roboto"
-            >
+          <div className="inline-block mb-4">
+            <span className="text-[#9411a8] text-sm font-bold tracking-widest uppercase">
               Testimonials
             </span>
           </div>
 
-          <h1 className="text-[49.7px] leading-[57.6px] font-semibold text-[#F5F8FF] text-center align-middle font-montserrat mb-6">
-            How Edubraining Boosts Your Career
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            How Edubraining Boosts <span className="text-[#9411a8]">Your Career</span>
           </h1>
 
-          <p className="text-[#7A7C80] text-[16px] leading-[24px] font-normal text-center align-middle font-roboto max-w-4xl mx-auto">
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
             Edubraining internships and courses provide real skills and industry exposure that pave the way for your
             professional success. Experience learning that drives your career forward.
           </p>
-
         </div>
 
         {/* Testimonials Carousel */}
@@ -120,24 +118,20 @@ const TestimonialsSection = () => {
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors duration-300 lg:flex hidden"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white border border-gray-200 shadow-lg hover:bg-gray-50 rounded-full flex items-center justify-center transition-all duration-300 lg:flex hidden text-gray-600 hover:text-[#9411a8]"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+            <ChevronLeft className="w-6 h-6" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors duration-300 lg:flex hidden"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white border border-gray-200 shadow-lg hover:bg-gray-50 rounded-full flex items-center justify-center transition-all duration-300 lg:flex hidden text-gray-600 hover:text-[#9411a8]"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            <ChevronRight className="w-6 h-6" />
           </button>
 
           {/* Cards Container */}
-          <div className="overflow-hidden">
+          <div className="overflow-hidden py-4">
             <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{
@@ -148,33 +142,40 @@ const TestimonialsSection = () => {
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="px-3"
+                  className="px-4"
                   style={{ width: `${100 / cardsPerView}%` }}
                 >
-                  <div className="bg-opacity-50 border border-blue-500 border-opacity-50 rounded-2xl p-4 h-full flex flex-col">
-                    {/* Image */}
-                    <div className="mb-6 rounded-xl overflow-hidden bg-gray-700 h-78">
-                      <img
-                        src={testimonial.image}
-                        alt="Student testimonial"
-                        className="w-full h-full object-cover"
-                      />
+                  <div className="bg-white rounded-2xl p-8 h-full flex flex-col shadow-lg border border-gray-100 hover:border-[#9411a8]/30 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    {/* Quote Icon */}
+                    <div className="mb-6">
+                      <div className="w-12 h-12 bg-[#9411a8]/10 rounded-full flex items-center justify-center">
+                        <Quote className="w-6 h-6 text-[#9411a8]" />
+                      </div>
                     </div>
 
                     {/* Content */}
                     <div className="flex-1 flex flex-col">
-                      <h3 className="text-[18px] leading-[20.99px] font-bold text-[#91B5FE] text-center font-montserrat mb-2">
-                        {testimonial.title}
-                      </h3>
-
-                      <p className="text-[11.89px] leading-[20.99px] font-medium text-[#1545C2] text-center font-montserrat mb-4">
-                        {testimonial.role}
-                      </p>
-
-                      <p className="text-[13.03px] leading-[15.53px] font-normal text-[#ABAEB2] text-center font-montserrat flex-1">
+                      <p className="text-gray-600 text-base leading-relaxed mb-6 flex-1 italic">
                         "{testimonial.testimonial}"
                       </p>
 
+                      <div className="flex items-center mt-auto pt-6 border-t border-gray-100">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 mr-4">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.role}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-900">
+                            {testimonial.title}
+                          </h3>
+                          <p className="text-sm font-medium text-[#9411a8]">
+                            {testimonial.role}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -186,30 +187,28 @@ const TestimonialsSection = () => {
           <div className="flex justify-center space-x-4 mt-8 lg:hidden">
             <button
               onClick={prevSlide}
-              className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors duration-300"
+              className="w-10 h-10 bg-white border border-gray-200 shadow-md hover:bg-gray-50 rounded-full flex items-center justify-center transition-colors duration-300 text-gray-600"
             >
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
+              <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextSlide}
-              className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors duration-300"
+              className="w-10 h-10 bg-white border border-gray-200 shadow-md hover:bg-gray-50 rounded-full flex items-center justify-center transition-colors duration-300 text-gray-600"
             >
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
 
         {/* Pagination Dots */}
-        <div className="flex justify-center space-x-2 mt-8">
+        <div className="flex justify-center space-x-2 mt-12">
           {Array.from({ length: totalSlides }, (_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-colors duration-300 ${Math.floor(currentSlide / cardsPerView) === index ? 'bg-blue-500' : 'bg-gray-600 hover:bg-gray-500'
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${Math.floor(currentSlide / cardsPerView) === index
+                  ? 'bg-[#9411a8] w-8'
+                  : 'bg-gray-300 hover:bg-gray-400'
                 }`}
             />
           ))}

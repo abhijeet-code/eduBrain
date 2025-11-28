@@ -24,7 +24,7 @@ import Home from "./component/Home/Home";
 import Dashboard from "./component/Dashboard/Hero/Dashboard";
 import Profile from "./component/Dashboard/Profile";
 import MainContent from "./component/Dashboard/Hero/MainContent";
-import {MyCourses} from "./component/Dashboard/MyCourses"
+import { MyCourses } from "./component/Dashboard/MyCourses"
 import Certificate from "./component/Dashboard/Certificate";
 import ResumeBuilder from "./component/Dashboard/ResumeBuilder";
 import ReferEarn from "./component/Dashboard/ReferEarn";
@@ -32,7 +32,10 @@ import Mentor from "./component/Dashboard/Mentor";
 import Assignments from "./component/Dashboard/Assignments";
 
 
+import { useToast } from "./contexts/ToastContext";
+
 export default function App() {
+  const { showToast } = useToast();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showLogin, setShowLogin] = useState(false);
@@ -42,7 +45,7 @@ export default function App() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showForgetotp, setShowForgetotp] = useState(false);
   const [showResetPassword, setShowResetPassword] = useState(false);
-  
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -67,8 +70,8 @@ export default function App() {
 
   const handleSignupSuccess = () => {
     handleLoginSuccess(); //  updates the navbar
-    setShowPassword(false); 
-    alert("Signup Successful!"); 
+    setShowPassword(false);
+    showToast("Signup Successful!", "success");
   };
 
   const handleLogout = () => {
@@ -125,7 +128,7 @@ export default function App() {
               onSignupSuccess={handleSignupSuccess}
             />
           )}
-          
+
           {/* MODIFIED: This is for the SIGNUP flow. The prop is now 'context'. */}
           {showOTP && (
             <ForgetOTP
@@ -218,7 +221,7 @@ export default function App() {
       path: "/courses/:courseId",
       element: (
         <ModalWrapper>
-          <CoursePage isLoggedIn={isLoggedIn}  />
+          <CoursePage isLoggedIn={isLoggedIn} />
         </ModalWrapper>
       ),
     },
@@ -234,8 +237,8 @@ export default function App() {
       path: "/profile-dashboard",
       element: (
         <ProtectedRoute isLoggedIn={isLoggedIn} loading={loading}>
-        {/* <Dashboard /> */}
-        <Dashboard onLogout={handleLogout} />
+          {/* <Dashboard /> */}
+          <Dashboard onLogout={handleLogout} />
         </ProtectedRoute>
       ),
       children: [

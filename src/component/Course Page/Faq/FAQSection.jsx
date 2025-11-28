@@ -55,18 +55,18 @@ const faqData = [
 
 const FAQSection = () => {
   return (
-    <section className="flex relative flex-col items-center px-5  w-full py-20 bg-neutral-950  min-h-[1370px] max-md:px-5 max-md:py-16 max-md:min-h-[auto] max-sm:px-4 max-sm:py-10">
+    <section className="flex relative flex-col items-center px-5  w-full py-20 bg-gray-50  min-h-[1370px] max-md:px-5 max-md:py-16 max-md:min-h-[auto] max-sm:px-4 max-sm:py-10">
       <BackgroundSVG position="left" />
       <BackgroundSVG position="right" />
 
       <header className="flex relative flex-col gap-6 items-center mb-24 w-full max-w-[745px] z-[2] max-sm:gap-5 max-sm:mb-10">
-        <p className="text-2xl leading-8 text-blue-300 max-sm:text-xl max-sm:leading-7">
+        <p className="text-2xl leading-8 text-[#9411a8] font-medium max-sm:text-xl max-sm:leading-7">
           FAQ
         </p>
-        <h1 className="text-5xl font-bold text-center leading-[57.6px] text-slate-50 max-md:text-4xl max-md:leading-10 max-sm:text-3xl max-sm:leading-9">
+        <h1 className="text-5xl font-bold text-center leading-[57.6px] text-gray-900 max-md:text-4xl max-md:leading-10 max-sm:text-3xl max-sm:leading-9">
           Frequently Asked Questions
         </h1>
-        <p className="text-base leading-6 text-center text-zinc-500 max-sm:text-sm max-sm:leading-5">
+        <p className="text-base leading-6 text-center text-gray-500 max-sm:text-sm max-sm:leading-5">
           Uncover quick insights about Edubraining. Get ready for your tech
           journey by exploring our FAQs. Dive in now!
         </p>

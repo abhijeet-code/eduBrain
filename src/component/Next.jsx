@@ -2,9 +2,9 @@ import React from 'react';
 
 const TechJourneyCTA = () => {
   return (
-    <section className="bg-[#0C0C0D] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+    <section className="bg-gray-50 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
       <div className="max-w-7xl w-full mx-auto">
-        <div className="bg-[#91B5FE] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden">
+        <div className="bg-[#91B5FE] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden shadow-xl">
           {/* Decorative Left Image */}
           <img
             src="/left.png"
@@ -24,7 +24,7 @@ const TechJourneyCTA = () => {
                 Revolutionize Your Learning Journey with AI-Enhanced Courses!
               </p>
 
-              <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-800 transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+              <button className="bg-[#9411a8] hover:bg-[#7a0c8b] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                 Explore Now!
               </button>
             </div>

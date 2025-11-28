@@ -11,7 +11,7 @@ export default function DotPattern() {
           {Array.from({ length: cols }).map((_, colIndex) => (
             <div
               key={colIndex}
-              className="w-2 h-2 rounded-full bg-gray-400"
+              className="w-2 h-2 rounded-full bg-[#9411a8] opacity-20"
             ></div>
           ))}
         </div>

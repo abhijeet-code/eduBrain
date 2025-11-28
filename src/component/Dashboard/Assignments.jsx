@@ -12,8 +12,10 @@
 // export default Assignments;
 
 import React, { useState, useEffect } from 'react';
+import { useToast } from "../../contexts/ToastContext";
 
 const Assignments = () => {
+    const { showToast } = useToast();
     // State to hold the assignments, grouped by course
     const [assignmentsByCourse, setAssignmentsByCourse] = useState([]);
     // State to manage the input field for each submission link
@@ -41,7 +43,7 @@ const Assignments = () => {
             setAssignmentsByCourse(data);
         } catch (error) {
             console.error("Fetch Assignments Error:", error);
-            alert(error.message); // Use alert for user-facing errors
+            showToast(error.message, "error");
         } finally {
             setLoading(false);
         }
@@ -67,7 +69,7 @@ const Assignments = () => {
             window.open(data.url, '_blank'); // Open the secure S3 link in a new tab
         } catch (error) {
             console.error("View Task Error:", error);
-            alert(error.message);
+            showToast(error.message, "error");
         }
     };
 
@@ -85,7 +87,7 @@ const Assignments = () => {
         const link = submissionLinks[assignmentId];
 
         if (!link || !link.trim()) {
-            alert('Please enter a valid link to submit.');
+            showToast('Please enter a valid link to submit.', "warning");
             return;
         }
 
@@ -102,11 +104,11 @@ const Assignments = () => {
                 const errorData = await res.json();
                 throw new Error(errorData.msg || 'Submission failed.');
             }
-            alert('Submission successful!');
+            showToast('Submission successful!', "success");
             fetchAssignments(); // Re-fetch assignments to show the updated status
         } catch (error) {
             console.error("Submit Error:", error);
-            alert(error.message);
+            showToast(error.message, "error");
         }
     };
 
@@ -135,8 +137,8 @@ const Assignments = () => {
                                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
                                                 <h3 className="text-xl font-medium text-gray-800">{assignment.title}</h3>
                                                 <span className={`px-4 py-1.5 text-sm font-medium rounded-full ${assignment.submissionStatus === 'Submitted' ? 'bg-yellow-100 text-yellow-700' :
-                                                        assignment.submissionStatus === 'Evaluated' ? 'bg-green-100 text-green-700' :
-                                                            'bg-gray-200 text-gray-600'
+                                                    assignment.submissionStatus === 'Evaluated' ? 'bg-green-100 text-green-700' :
+                                                        'bg-gray-200 text-gray-600'
                                                     }`}>
                                                     {assignment.submissionStatus}
                                                 </span>

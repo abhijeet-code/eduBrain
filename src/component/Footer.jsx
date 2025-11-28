@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Facebook, Twitter, Instagram, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
     const [email, setEmail] = useState('');
@@ -11,125 +12,106 @@ const Footer = () => {
     };
 
     return (
-        <footer className="bg-[#0C0C0D] text-white border-t border-[#FFFFFF]">
-            <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
+        <footer className="bg-white text-gray-600 border-t border-gray-200 font-roboto">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8">
                     {/* Brand Section */}
-                    <div className="lg:col-span-1">
-                        <div className="flex items-center mb-6">
-                            <div className="w-[80px] h-[80px] flex items-center justify-center mr-3">
-                                <img src="/icon.png" alt="icon" className="w-[80px] h-[80px]" />
+                    <div className="lg:col-span-1 space-y-6">
+                        <div className="flex items-center">
+                            <div className="w-12 h-12 flex items-center justify-center mr-3 rounded-xl bg-[#9411a8]/10">
+                                <img src="/icon.png" alt="EduBraining" className="w-8 h-8 object-contain" />
                             </div>
+                            <span className="text-xl font-bold text-gray-900 font-montserrat">EduBraining</span>
                         </div>
-                        <p className="text-white text-[16px] leading-[22.75px] font-roboto font-normal align-middle tracking-[0px]">
+                        <p className="text-gray-600 text-sm leading-relaxed">
                             Empowering learners through accessible, modern, and industry-ready education. Join thousands of students shaping their future.
                         </p>
-
+                        <div className="flex space-x-4">
+                            <a href="#" className="text-gray-400 hover:text-[#9411a8] transition-colors">
+                                <Facebook className="w-5 h-5" />
+                            </a>
+                            <a href="#" className="text-gray-400 hover:text-[#9411a8] transition-colors">
+                                <Twitter className="w-5 h-5" />
+                            </a>
+                            <a href="#" className="text-gray-400 hover:text-[#9411a8] transition-colors">
+                                <Instagram className="w-5 h-5" />
+                            </a>
+                            <a href="#" className="text-gray-400 hover:text-[#9411a8] transition-colors">
+                                <Linkedin className="w-5 h-5" />
+                            </a>
+                        </div>
                     </div>
 
-                    {/* Explore & Support Section - side by side on mobile */}
-                    <div className="lg:col-span-2 w-full">
-                        <div className="flex flex-col gap-8 sm:gap-12 max-sm:flex-row max-sm:gap-4 max-sm:justify-between">
-                            {/* Explore Section */}
-                            <div className="w-full">
-                                <h4 className="text-[20.5px] leading-[28px] font-inter font-semibold align-middle tracking-[0px] mb-6">Explore</h4>
-                                <ul className="space-y-2 font-Roboto ">
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            About Us
+                    {/* Explore & Support Section */}
+                    <div className="lg:col-span-2 grid grid-cols-2 gap-8 sm:gap-12">
+                        {/* Explore Section */}
+                        <div>
+                            <h4 className="text-gray-900 font-bold mb-6 font-montserrat">Explore</h4>
+                            <ul className="space-y-3">
+                                {['About Us', 'Courses', 'Process', 'Certification', 'Refund Policy'].map((item) => (
+                                    <li key={item}>
+                                        <a href="#" className="text-gray-600 hover:text-[#9411a8] transition-colors text-sm">
+                                            {item}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            Courses
-                                        </a>
-                                    </li> 
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            Process
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            Certification
+                                ))}
+                            </ul>
+                        </div>
+                        {/* Support Section */}
+                        <div>
+                            <h4 className="text-gray-900 font-bold mb-6 font-montserrat">Support</h4>
+                            <ul className="space-y-3">
+                                {['FAQs', 'Privacy Policy', 'Contact Us', 'Terms of Service', 'Careers'].map((item) => (
+                                    <li key={item}>
+                                        <a href="#" className="text-gray-600 hover:text-[#9411a8] transition-colors text-sm">
+                                            {item}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            Refund Policy
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            {/* Support Section */}
-                            <div className="w-full">
-                                <h4 className="text-[20.5px] leading-[28px] font-inter font-semibold align-middle tracking-[0px] mb-6">Support</h4>
-                                <ul className="space-y-2 font-Roboto">
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            FAQs
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            Privacy Policy
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            Contact Us
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            Terms of Service
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="text-white hover:text-white transition-colors text-[14px] leading-[20px] font-normal font-roboto align-middle tracking-[0px]">
-                                            Careers
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                                ))}
+                            </ul>
                         </div>
                     </div>
 
                     {/* Newsletter Section */}
                     <div className="lg:col-span-1">
-                        <h4 className="text-xl font-semibold mb-6">Join our Newsletter</h4>
-                        <div className="space-y-2">
-                            <div>
+                        <h4 className="text-gray-900 font-bold mb-6 font-montserrat">Join our Newsletter</h4>
+                        <form onSubmit={handleSubscribe} className="space-y-3">
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="Your email address"
-                                    className="w-[284px] h-[40px] bg-white text-black border border-gray-700 rounded-[6px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-sm opacity-100 text-center"
+                                    className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#9411a8] focus:ring-1 focus:ring-[#9411a8] text-gray-900 placeholder-gray-400 text-sm transition-all"
+                                    required
                                 />
                             </div>
                             <button
-                                onClick={handleSubscribe}
-                                className="w-[284px] h-[40px] bg-[#0D5DFF] hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors text-sm"
+                                type="submit"
+                                className="w-full bg-[#9411a8] hover:bg-[#7a0c8b] text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg text-sm"
                             >
                                 Subscribe
                             </button>
-                        </div>
-                        <p className="text-gray-400 text-xs mt-4 leading-relaxed">
+                        </form>
+                        <p className="text-gray-500 text-xs mt-4 leading-relaxed">
                             No spam. Only helpful updates and learning resources.
                         </p>
                     </div>
                 </div>
 
                 {/* Bottom Section */}
-                <div className="mt-12 pt-8 border-t border-[#FFFFFF]">
-                    <div className="flex flex-col sm:flex-row items-end justify-end space-y-4 sm:space-y-0">
-                        {/* Copyright */}
-                        <div className="text-white text-sm">
+                <div className="mt-12 pt-8 border-t border-gray-100">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="text-gray-500 text-sm">
                             © 2025 EduBraining. All rights reserved.
                         </div>
+                        <div className="flex space-x-6 text-sm text-gray-500">
+                            <a href="#" className="hover:text-[#9411a8] transition-colors">Privacy</a>
+                            <a href="#" className="hover:text-[#9411a8] transition-colors">Terms</a>
+                            <a href="#" className="hover:text-[#9411a8] transition-colors">Cookies</a>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </footer>

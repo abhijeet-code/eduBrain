@@ -10,23 +10,23 @@ function TabSection() {
       title: "Practical Application",
       content: (
         <>
-          <p className="relative text-sm leading-5 text-zinc-400">
+          <p className="relative text-sm leading-5 text-gray-600">
             An internship with Edubraining transforms your resume into a
             powerhouse, showcasing your ability to thrive
           </p>
-          <p className="relative text-sm leading-5 text-zinc-400">
+          <p className="relative text-sm leading-5 text-gray-600">
             professionally. This distinguished experience highlights your
             practical skills, industry knowledge, and adaptability,
           </p>
-          <p className="relative text-sm leading-5 text-zinc-400">
+          <p className="relative text-sm leading-5 text-gray-600">
             setting you apart from other candidates. Potential employers
             value hands-on experience, and your internship with
           </p>
-          <p className="relative text-sm leading-5 text-zinc-400">
+          <p className="relative text-sm leading-5 text-gray-600">
             Edubraining demonstrates your commitment to personal and
             professional growth. It's not just a line on your
           </p>
-          <p className="relative text-sm leading-5 text-zinc-400">
+          <p className="relative text-sm leading-5 text-gray-600">
             resume; it's a testament to your readiness to excel in the
             workforce.
           </p>
@@ -52,7 +52,7 @@ function TabSection() {
   ];
 
   return (
-  <section className="flex relative flex-col gap-6 items-center w-full max-w-2xl mx-auto max-md:w-full max-sm:gap-4">
+    <section className="flex relative flex-col gap-6 items-center w-full max-w-2xl mx-auto max-md:w-full max-sm:gap-4">
       {tabs.map((tab, index) => (
         <TabButton
           key={index}

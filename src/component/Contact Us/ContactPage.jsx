@@ -6,9 +6,9 @@ import BackgroundSvg from './BackgroundSvg';
 
 
 
-const ContactPage = () =>  {
+const ContactPage = () => {
   return (
-    <div className="overflow-hidden relative w-full bg-neutral-950 min-h-[880px] py-5">
+    <div className="overflow-hidden relative w-full bg-gray-50 min-h-[880px] py-5">
       <BackgroundSvg />
 
       <div className="flex flex-col relative gap-24 justify-center items-center px-4 sm:px-6 md:px-11 py-4 mx-auto my-0 w-full max-w-[1200px] min-h-[739px] z-[2] md:gap-16 sm:gap-10">

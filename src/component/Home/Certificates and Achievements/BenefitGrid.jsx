@@ -122,16 +122,16 @@ function BenefitGrid() {
 
           {/* Third column with overlapping card and image */}
           <div className="flex items-center justify-center w-[400px] h-[218.8px] max-md:w-full max-md:min-h-[218.8px]">
-            <article className="flex z-10 flex-col items-center justify-center px-6 py-6 w-[400px] h-[218.8px] max-md:w-full max-md:min-h-[218.8px] text-base bg-gray-900 rounded-3xl border border-solid bg-blend-normal border-neutral-800 text-zinc-400">
+            <article className="flex z-10 flex-col items-center justify-center px-6 py-6 w-[400px] h-[218.8px] max-md:w-full max-md:min-h-[218.8px] text-base bg-white rounded-3xl border border-gray-100 text-gray-600 hover:border-[#9411a8]/30 transition-all duration-300 hover:shadow-lg">
               <img
                 src="https://api.builder.io/api/v1/image/assets/92dbd61d4c7248e0a6300c516c4d3fc9/9ed08e037a554f3526189c8c85bb82f955c16b4c?placeholderIfAbsent=true"
                 alt=""
-                className="object-contain w-10 bg-blend-normal aspect-square"
+                className="object-contain w-10 aspect-square"
               />
-              <h3 className="mt-6 text-2xl font-semibold leading-none text-white">
+              <h3 className="mt-6 text-2xl font-semibold leading-none text-gray-900">
                 Network Growth
               </h3>
-              <div className="mt-3 text-zinc-400 text-center">
+              <div className="mt-3 text-gray-600 text-center">
                 <div>
                   Join a community of certified professionals, expanding your network and connecting with like-minded individuals in your field.
                 </div>

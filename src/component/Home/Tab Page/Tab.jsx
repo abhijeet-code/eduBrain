@@ -32,18 +32,18 @@ const Tab = () => {
   ];
 
   return (
-    <div className="relative w-full min-h-screen bg-[#0c0c0d] flex flex-col items-center px-2 md:px-8">
+    <div className="relative w-full min-h-screen bg-gray-50 flex flex-col items-center px-2 md:px-8">
       <div className="w-full max-w-[1254px] gap-8 md:gap-[62px] relative pt-8 md:pt-[137px] px-2">
         <header className="flex flex-col items-start gap-4 md:gap-6 relative flex-[0_0_auto] mx-auto w-full">
-          <div className="relative [font-family:'Roboto-Regular',Helvetica] font-normal text-[#91b5fe] text-xl md:text-2xl tracking-[0] leading-7 md:leading-8 whitespace-nowrap text-center w-full">
+          <div className="relative [font-family:'Roboto-Regular',Helvetica] font-normal text-[#9411a8] text-xl md:text-2xl tracking-[0] leading-7 md:leading-8 whitespace-nowrap text-center w-full">
             Internship Opportunities
           </div>
 
-          <h1 className="relative [font-family:'Montserrat-SemiBold',Helvetica] font-semibold text-[#f5f8ff] text-2xl md:text-5xl tracking-[0] leading-[32px] md:leading-[57.6px] whitespace-normal w-full">
+          <h1 className="relative [font-family:'Montserrat-SemiBold',Helvetica] font-semibold text-gray-900 text-2xl md:text-5xl tracking-[0] leading-[32px] md:leading-[57.6px] whitespace-normal w-full">
             How It Propels Your Career?
           </h1>
 
-          <p className="relative [font-family:'Roboto-Regular',Helvetica] font-normal text-[#7a7c80] text-sm md:text-base tracking-[0] leading-5 md:leading-6 max-w-full md:max-w-3xl">
+          <p className="relative [font-family:'Roboto-Regular',Helvetica] font-normal text-gray-600 text-sm md:text-base tracking-[0] leading-5 md:leading-6 max-w-full md:max-w-3xl">
             Internships aren't just about gaining work experience; they are your pathway to professional triumph. Discover how internships with Edubraing propels your career.
           </p>
         </header>
@@ -53,7 +53,7 @@ const Tab = () => {
             <img
               src="/internship.png"
               alt="Internship"
-              className="rounded-2xl w-full max-w-xs sm:max-w-md md:w-[500px] md:h-[416.4px] object-cover"
+              className="rounded-2xl w-full max-w-xs sm:max-w-md md:w-[500px] md:h-[416.4px] object-cover shadow-lg"
               style={{ minWidth: 0 }}
             />
           </div>
@@ -69,11 +69,10 @@ const Tab = () => {
                 }}
               >
                 <button
-                  className={`relative h-7 top-0 [font-family:'Inter-SemiBold',Helvetica] font-semibold text-base md:text-lg lg:text-[20.5px] tracking-[0] leading-7 whitespace-nowrap cursor-pointer transition-colors duration-200 w-full text-left md:text-center ${
-                    index === activeTab
-                      ? "text-[#91b5fe]"
-                      : "text-[#7a7c80] hover:text-[#91b5fe]"
-                  }`}
+                  className={`relative h-7 top-0 [font-family:'Inter-SemiBold',Helvetica] font-semibold text-base md:text-lg lg:text-[20.5px] tracking-[0] leading-7 whitespace-nowrap cursor-pointer transition-colors duration-200 w-full text-left md:text-center ${index === activeTab
+                      ? "text-[#9411a8]"
+                      : "text-gray-600 hover:text-[#9411a8]"
+                    }`}
                   onClick={() => setActiveTab(index)}
                   aria-expanded={index === activeTab}
                   aria-controls={`tab-content-${index}`}
@@ -88,7 +87,7 @@ const Tab = () => {
                       {tab.content.split(". ").map((sentence, sentenceIndex) => (
                         <p
                           key={sentenceIndex}
-                          className="relative w-full [font-family:'Roboto-Regular',Helvetica] font-normal text-[#abaeb2] text-xs md:text-sm tracking-[0] leading-5 whitespace-normal mb-1 md:mb-2"
+                          className="relative w-full [font-family:'Roboto-Regular',Helvetica] font-normal text-gray-600 text-xs md:text-sm tracking-[0] leading-5 whitespace-normal mb-1 md:mb-2"
                         >
                           {sentence}
                           {sentenceIndex < tab.content.split(". ").length - 1
@@ -97,8 +96,8 @@ const Tab = () => {
                         </p>
                       ))}
                     </div>
-                    <div className="relative w-full h-0.5 bg-[#313233] mt-1 md:mt-2">
-                      <div className="absolute -translate-x-1/2 w-[60px] md:w-[100px] h-1 -bottom-0.5 left-[30px] md:left-[50px] bg-[#91b5fe] rounded-full" />
+                    <div className="relative w-full h-0.5 bg-gray-200 mt-1 md:mt-2">
+                      <div className="absolute -translate-x-1/2 w-[60px] md:w-[100px] h-1 -bottom-0.5 left-[30px] md:left-[50px] bg-[#9411a8] rounded-full" />
                     </div>
                   </div>
                 )}

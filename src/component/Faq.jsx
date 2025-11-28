@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Plus, Minus } from 'lucide-react';
 
 const FAQSection = () => {
     const [openItem, setOpenItem] = useState(null);
@@ -59,35 +60,27 @@ const FAQSection = () => {
     ];
 
     return (
-        <section className="bg-[#0C0C0D] text-white min-h-screen relative overflow-hidden ">
+        <section className="bg-gray-50 text-gray-900 min-h-screen relative overflow-hidden py-16 lg:py-24" id="faq">
+            {/* Background Elements */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-0 left-0 w-96 h-96 bg-[#9411a8]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#1545C2]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+            </div>
 
-            {/* Left Corner Image */}
-            <img
-                src="/left.png"
-                alt="Left Decoration"
-                className="absolute top-16 left-0 z-0 w-100 h-45 hidden md:block"
-            />
-            {/* Right Corner Image */}
-            <img
-                src="/right.png"
-                alt="Right Decoration"
-                className="absolute top-54 right-0 z-0 w-95 h-40 hidden md:block"
-            />
-
-            <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
+            <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <div className="inline-block mb-6">
-                        <span className="text-[#91B5FE] text-[24px] font-bold leading-[32px] align-middle font-roboto">
+                    <div className="inline-block mb-4">
+                        <span className="text-[#9411a8] text-sm font-bold tracking-widest uppercase">
                             FAQ
                         </span>
                     </div>
 
-                    <h1 className="text-[49.7px] leading-[57.6px] font-semibold text-[#F5F8FF] text-center align-middle font-montserrat mb-6">
-                        Frequently Asked Questions
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                        Frequently Asked <span className="text-[#9411a8]">Questions</span>
                     </h1>
 
-                    <p className="text-[16px] leading-[24px] font-normal text-[#7A7C80] text-center align-middle font-roboto max-w-3xl mx-auto">
+                    <p className="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
                         Uncover quick insights about Edubraining. Get ready for your tech journey by exploring our FAQs. Dive in now!
                     </p>
                 </div>
@@ -97,46 +90,42 @@ const FAQSection = () => {
                     {faqData.map((item, index) => (
                         <div
                             key={index}
-                            className="bg-opacity-50 border border-gray-800 rounded-lg hover:border-gray-700 transition-all duration-300"
+                            className={`bg-white rounded-xl border transition-all duration-300 ${openItem === index
+                                    ? 'border-[#9411a8] shadow-lg'
+                                    : 'border-gray-200 hover:border-[#9411a8]/50 hover:shadow-md'
+                                }`}
                         >
                             <button
                                 onClick={() => toggleItem(index)}
                                 className="w-full px-6 py-5 text-left flex items-center cursor-pointer justify-between focus:outline-none"
                             >
-                                <span className="text-[#F5F8FF] font-normal text-[18.7px] leading-[28px] align-middle font-inter pr-4">
+                                <span className={`font-semibold text-lg transition-colors duration-300 ${openItem === index ? 'text-[#9411a8]' : 'text-gray-900'
+                                    }`}>
                                     {item.question}
                                 </span>
 
-                                <div className="flex-shrink-0">
-                                    <div className="w-8 h-8 border border-[white] rounded-lg flex items-center justify-center transition-all duration-300 hover:border-gray-500">
-                                        <svg
-                                            className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${openItem === index ? 'transform rotate-45' : ''
-                                                }`}
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                            />
-                                        </svg>
+                                <div className="flex-shrink-0 ml-4">
+                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${openItem === index
+                                            ? 'bg-[#9411a8] text-white'
+                                            : 'bg-gray-100 text-gray-500 group-hover:bg-[#9411a8]/10 group-hover:text-[#9411a8]'
+                                        }`}>
+                                        {openItem === index ? (
+                                            <Minus className="w-4 h-4" />
+                                        ) : (
+                                            <Plus className="w-4 h-4" />
+                                        )}
                                     </div>
                                 </div>
                             </button>
 
                             <div
-                                className={`overflow-hidden transition-all duration-300 ${openItem === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                                className={`overflow-hidden transition-all duration-300 ease-in-out ${openItem === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                                     }`}
                             >
-                                <div className="px-6 pb-5">
-                                    <div className="border-t border-gray-800 pt-4">
-                                        <p className="text-gray-300 leading-relaxed">
-                                            {item.answer}
-                                        </p>
-                                    </div>
+                                <div className="px-6 pb-6 pt-0">
+                                    <p className="text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
+                                        {item.answer}
+                                    </p>
                                 </div>
                             </div>
                         </div>

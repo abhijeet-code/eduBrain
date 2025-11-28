@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { ChevronLeft, X } from "lucide-react";
+import { useToast } from "../contexts/ToastContext";
 
 export default function OTP({ onClose, onGoBack, onLoginClick, onSubmit }) {
+  const { showToast } = useToast();
   const [otpCode, setOtpCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleGoBack = () => {
     if (onGoBack) {
@@ -11,17 +14,18 @@ export default function OTP({ onClose, onGoBack, onLoginClick, onSubmit }) {
       onClose();
     }
   };
-const handleContinue = () => {
+  const handleContinue = () => {
     if (!otpCode.trim()) {
-      alert("Please enter the OTP code.");
+      showToast("Please enter the OTP code.", "warning");
       return;
     }
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const email = localStorage.getItem('email');
     if (!email) {
-      alert("Email not found. Please start over.");
+      showToast("Email not found. Please start over.", "error");
       return;
     }
+    setIsLoading(true);
     fetch(BASE_URL + '/api/auth/verify-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -31,9 +35,10 @@ const handleContinue = () => {
       .then(data => {
         onSubmit(otpCode);
       })
-      .catch(err => alert('Error: ' + err.message));
+      .catch(err => showToast('Error: ' + err.message, "error"))
+      .finally(() => setIsLoading(false));
   };
- 
+
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black/50 z-50 p-4">
@@ -108,7 +113,7 @@ const handleContinue = () => {
               <p>Enter the verification code we just sent to</p>
               {/* <p className="font-medium text-white">xyz@gmail.com</p> */}
             </div>
-<br/>
+            <br />
             <div className="space-y-4">
               <div className="relative w-full">
                 <label className="absolute -top-3 left-4 bg-[#020817] px-1 text-sm text-white">
@@ -122,13 +127,15 @@ const handleContinue = () => {
                   className="w-full px-4 py-3 bg-transparent border border-blue-600 rounded-full text-white placeholder-blue-400 focus:outline-none focus:border-blue-400 text-center"
                 />
               </div>
-              <br/>
+              <br />
 
               <button
                 onClick={handleContinue}
-                className="w-full py-3 bg-white text-black cursor-pointer font-medium rounded-full hover:bg-gray-100 transition"
+                disabled={isLoading}
+                className={`w-full py-3 text-black cursor-pointer font-medium rounded-full transition ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-white hover:bg-gray-100"
+                  }`}
               >
-                Submit
+                {isLoading ? "Verifying..." : "Submit"}
               </button>
 
               <div className="text-right">

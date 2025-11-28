@@ -9,8 +9,8 @@ const PaginationDots = ({ totalPages, currentPage, onPageChange }) => (
         onClick={() => onPageChange(idx)}
         className={`w-5 h-5 rounded-full transition-colors
           ${idx === currentPage
-            ? "bg-[#1545C2]"
-            : "bg-[#91B5FE] hover:bg-[#1545C2]/70"}
+            ? "bg-[#9411a8]"
+            : "bg-[#d8b4fe] hover:bg-[#9411a8]/70"}
         `}
         aria-label={`Go to page ${idx + 1}`}
       />

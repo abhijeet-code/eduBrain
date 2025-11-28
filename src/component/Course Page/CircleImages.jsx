@@ -4,7 +4,7 @@ export default function CircleImages() {
   return (
     <div className="relative flex items-center justify-center w-[420px] h-[420px] mx-auto">
       {/* Outer Circle - smaller */}
-      <div className="absolute w-[320px] h-[320px] rounded-full border-2 border-cyan-400"></div>
+      <div className="absolute w-[320px] h-[320px] rounded-full border-2 border-[#9411a8]"></div>
 
       {/* MacBook (Left) */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2">
@@ -20,7 +20,7 @@ export default function CircleImages() {
       {/* iPhone (Bottom) */}
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
         <div className="bg-white p-2 rounded-full shadow-lg w-[80px] h-[80px] flex items-center justify-center">
-         <img
+          <img
             src="/iphone.png"
             alt="Watch"
             className="max-w-[100%] max-h-[200%] object-cover"

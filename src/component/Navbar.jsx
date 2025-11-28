@@ -24,9 +24,9 @@ const Navbar = ({ onLoginClick }) => {
   ];
 
   return (
-    <div className={`sticky top-0 z-50 bg-[#0C0C0D] ${scrolled ? "opacity-95" : "opacity-100"} transition-opacity duration-300 w-full`}>
+    <div className={`sticky top-0 z-50 bg-white ${scrolled ? "shadow-md" : ""} transition-all duration-300 w-full`}>
       <div className="w-full px-2 sm:px-4 md:px-6 lg:px-12">
-        <div className="rounded-xl shadow-md border border-[#1545C2] px-2 sm:px-4 md:px-6 lg:px-10 bg-[#1545C21A] mt-4 w-full max-w-full overflow-x-auto">
+        <div className="rounded-xl shadow-sm border border-gray-200 px-2 sm:px-4 md:px-6 lg:px-10 bg-white mt-4 w-full max-w-full overflow-x-auto">
           <div className="flex flex-wrap items-center w-full min-w-0">
             {/* Left: Logo */}
             <a href="/" className="flex-shrink-0 ml-1 sm:ml-4 md:ml-7">
@@ -39,7 +39,7 @@ const Navbar = ({ onLoginClick }) => {
                 <Link
                   key={item.name}
                   to={item.to}
-                  className="text-white text-base md:text-lg tracking-wide transition whitespace-nowrap px-1"
+                  className="text-gray-700 hover:text-[#9411a8] text-base md:text-lg tracking-wide transition whitespace-nowrap px-1 font-medium"
                 >
                   {item.name}
                 </Link>
@@ -50,7 +50,7 @@ const Navbar = ({ onLoginClick }) => {
             <div className="hidden md:flex justify-end flex-shrink-0 mr-2 sm:mr-4 md:mr-7">
               <button
                 onClick={onLoginClick}
-                className="bg-gradient-to-r from-[#72A0FF] via-[#246CFF] to-[#0054FF] text-white px-4 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm transition"
+                className="bg-gradient-to-r from-[#9411a8] to-[#1545C2] hover:from-[#7a0c8b] hover:to-[#0f3bb0] text-white px-4 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm transition shadow-md hover:shadow-lg"
               >
                 Login / Sign Up
               </button>
@@ -60,7 +60,7 @@ const Navbar = ({ onLoginClick }) => {
             <div className="md:hidden ml-auto mr-1 sm:mr-2">
               <button
                 onClick={toggleMenu}
-                className="text-gray-300 hover:text-white focus:outline-none"
+                className="text-gray-600 hover:text-gray-900 focus:outline-none"
               >
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
@@ -70,12 +70,12 @@ const Navbar = ({ onLoginClick }) => {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="md:hidden mt-3">
-              <div className="bg-[#0C0C0D] rounded-lg px-2 sm:px-4 py-3 space-y-2 shadow-md">
+              <div className="bg-white rounded-lg px-2 sm:px-4 py-3 space-y-2 shadow-md border border-gray-100">
                 {navItems.map((item) => (
                   <Link
                     key={item.name}
                     to={item.to}
-                    className="block text-gray-300 hover:text-white text-base font-medium transition px-1"
+                    className="block text-gray-700 hover:text-[#9411a8] text-base font-medium transition px-1"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
@@ -86,7 +86,7 @@ const Navbar = ({ onLoginClick }) => {
                     onLoginClick();
                     setIsMenuOpen(false);
                   }}
-                  className="bg-gradient-to-r from-[#72A0FF] via-[#246CFF] to-[#0054FF] hover:from-blue-500 hover:to-blue-600 text-white font-medium px-8 py-3 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap min-w-fit text-sm"
+                  className="bg-gradient-to-r from-[#9411a8] to-[#1545C2] hover:from-[#7a0c8b] hover:to-[#0f3bb0] text-white font-medium px-8 py-3 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap min-w-fit text-sm"
                 >
                   Login / Sign Up
                 </button>

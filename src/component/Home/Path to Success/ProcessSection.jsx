@@ -96,7 +96,7 @@ const ProcessSection = () => {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700&family=Roboto:wght@400&display=swap"
       />
-      <section className="relative w-full bg-[#0C0C0D] py-20 overflow-hidden">
+      <section className="relative w-full bg-gray-50 py-20 overflow-hidden">
         {/* Background Glow */}
         <svg
           width="495"
@@ -112,7 +112,7 @@ const ProcessSection = () => {
               height="275"
               transform="matrix(1 0 0 -1 -138 475)"
               fill="url(#paint0_linear_396_1025)"
-              fillOpacity="0.3"
+              fillOpacity="0.1"
             />
           </g>
           <defs>
@@ -145,7 +145,7 @@ const ProcessSection = () => {
               y2="469.701"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#9AC4FE" />
+              <stop stopColor="#9411a8" />
               <stop offset="1" stopColor="#1545C2" />
             </linearGradient>
           </defs>
@@ -159,7 +159,7 @@ const ProcessSection = () => {
         {/* Steps Section */}
         <main className="relative flex flex-col gap-12 items-center mt-10  md:mt-56 w-full max-w-[1024px] mx-auto px-4 z-[2]">
           {/* Vertical Line */}
-          <div className="absolute w-1 bg-zinc-400 top-0 bottom-0 left-1/2 -translate-x-1/2 z-0" />
+          <div className="absolute w-1 bg-gray-200 top-0 bottom-0 left-1/2 -translate-x-1/2 z-0" />
 
           {processSteps.map((step, index) => (
             <ProcessStep key={step.stepNumber} step={step} index={index} />

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { ChevronLeft, X } from "lucide-react";
+import { useToast } from "../contexts/ToastContext";
 
 export default function Forget({ onClose, onContinue, onLoginClick }) {
+  const { showToast } = useToast();
   const [email, setEmail] = useState("");
-  
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleGoBack = () => {
     onClose();
     onLoginClick();
@@ -11,10 +14,19 @@ export default function Forget({ onClose, onContinue, onLoginClick }) {
 
   const handleContinue = () => {
     if (!email.trim()) {
-      alert("Please enter an email address.");
+      showToast("Please enter an email address.", "warning");
       return;
     }
-    const BASE_URL = import.meta.env.VITE_API_BASE_URL;;
+
+    // Strict email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showToast("Please enter a valid email address.", "warning");
+      return;
+    }
+
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    setIsLoading(true);
     fetch(`${BASE_URL}/api/auth/forgot-password`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -25,19 +37,20 @@ export default function Forget({ onClose, onContinue, onLoginClick }) {
         localStorage.setItem('email', email);
         onContinue(email);
       })
-      .catch(err => alert('Error: ' + err.message));
+      .catch(err => showToast('Error: ' + err.message, "error"))
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black/50 z-50 p-4">
-      <div className="flex flex-col md:flex-row rounded-[37px] md:rounded-[37px] overflow-hidden shadow-2xl border border-[#1545C2] border-1 bg-opacity-100 w-full max-w-[1108px] max-h-[90vh] md:h-[625px]">
+      <div className="flex flex-col md:flex-row rounded-[37px] md:rounded-[37px] overflow-hidden shadow-2xl bg-white w-full max-w-[1108px] max-h-[90vh] md:h-[625px]">
         {/* Left Side */}
-        <div className="relative w-full md:w-1/2 bg-[#1545C2] flex flex-col justify-center items-start text-white p-6 md:p-8 text-start">
+        <div className="relative w-full md:w-1/2 bg-[#9411a8] flex flex-col justify-center items-start text-white p-6 md:p-8 text-start">
           <div
             className="absolute top-0 left-0 w-38 h-38 z-0 blur-[70px]"
             style={{
               background:
-                "linear-gradient(224.6deg, rgba(154, 196, 254, 0.72) -3.85%, rgba(21, 69, 194, 0.72) 121.24%)",
+                "linear-gradient(224.6deg, rgba(216, 180, 254, 0.72) -3.85%, rgba(148, 17, 168, 0.72) 121.24%)",
               borderBottomRightRadius: "50%",
             }}
           />
@@ -45,7 +58,7 @@ export default function Forget({ onClose, onContinue, onLoginClick }) {
             className="absolute top-0 left-0 w-38 h-38 z-0 blur-[50px]"
             style={{
               background:
-                "linear-gradient(224.6deg, rgba(154, 196, 254, 0.72) -3.85%, rgba(21, 69, 194, 0.72) 121.24%)",
+                "linear-gradient(224.6deg, rgba(216, 180, 254, 0.72) -3.85%, rgba(148, 17, 168, 0.72) 121.24%)",
               borderBottomRightRadius: "50%",
             }}
           />
@@ -77,32 +90,24 @@ export default function Forget({ onClose, onContinue, onLoginClick }) {
         </div>
 
         {/* Right Side */}
-        <div className="relative w-full md:w-1/2 bg-[#020817] text-white p-6 md:p-12 flex items-center justify-center overflow-y-auto">
-          <div
-            className="absolute bottom-0 right-0 w-38 h-38 z-0 blur-[50px]"
-            style={{
-              background:
-                "linear-gradient(224.6deg, rgba(154, 196, 254, 0.72) -3.85%, rgba(21, 69, 194, 0.72) 121.24%)",
-              borderTopLeftRadius: "50%",
-            }}
-          />
+        <div className="relative w-full md:w-1/2 bg-white text-gray-900 p-6 md:p-12 flex items-center justify-center overflow-y-auto">
           <button
             onClick={onClose}
-            className="absolute cursor-pointer top-6 right-6 text-gray-400 hover:text-white hidden md:block z-10"
+            className="absolute cursor-pointer top-6 right-6 text-gray-400 hover:text-gray-600 hidden md:block z-10"
           >
             <X size={24} />
           </button>
 
           <div className="w-full max-w-md space-y-6">
-            <h2 className="text-xl sm:text-2xl font-semibold text-center text-white">
+            <h2 className="text-xl sm:text-2xl font-semibold text-center text-gray-900">
               Forget Password
             </h2>
-            <p className="text-center text-gray-400 text-sm sm:text-base leading-relaxed">
+            <p className="text-center text-gray-500 text-sm sm:text-base leading-relaxed">
               No worries! Just enter your email and we'll help you reset your password.
             </p>
 
             <div className="relative w-full">
-              <label className="absolute -top-3 left-4 bg-[#020817] px-1 text-sm text-white">
+              <label className="absolute -top-3 left-4 bg-white px-1 text-sm text-gray-600">
                 Email address
               </label>
               <input
@@ -110,21 +115,23 @@ export default function Forget({ onClose, onContinue, onLoginClick }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
-                className="w-full px-4 py-3 bg-transparent border border-blue-600 rounded-full text-white placeholder-blue-400 focus:outline-none focus:border-blue-400 text-center"
+                className="w-full px-4 py-3 bg-transparent border border-gray-300 rounded-full text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#9411a8] focus:ring-1 focus:ring-[#9411a8] text-center"
               />
             </div>
 
             <button
               onClick={handleContinue}
-              className="w-full py-3 bg-white text-black cursor-pointer font-medium rounded-full hover:bg-gray-100 transition"
+              disabled={isLoading}
+              className={`w-full py-3 text-white cursor-pointer font-medium rounded-full transition shadow-md ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#9411a8] hover:bg-[#7a0c8b]"
+                }`}
             >
-              Continue
+              {isLoading ? "Processing..." : "Continue"}
             </button>
 
             <div className="flex justify-start">
               <button
                 onClick={handleGoBack}
-                className="inline-flex items-center text-white transition-colors px-4 py-2 rounded-full border border-blue-600 hover:border-gray-500"
+                className="inline-flex items-center text-gray-600 transition-colors px-4 py-2 rounded-full border border-gray-300 hover:border-gray-500 hover:text-gray-900"
               >
                 <ChevronLeft className="w-4 h-4 mr-2" />
                 Go back
