@@ -68,12 +68,11 @@ const EdubrainingHero = () => {
                   <span className="text-gray-900 font-bold font-roboto">Edubraining</span> is your gateway to a high-growth tech career.
                 </p>
                 <p className="mb-2">
-                  we're on a mission to make top-
+                  we're on a mission to make top-tier technical education accessible, 
                 </p>
                 <p className="">
-                  tier technical education accessible, affordable, and truly career-
+                 affordable, and truly career-focused for everyone.
                 </p>
-                <p>focused for everyone.</p>
                 <p className="mt-5 mb-0 font-roboto size-17px text-gray-700">
                   Explore courses today and take the first step toward your <span className="text-[#9411a8] font-semibold">dream tech job</span>.
                 </p>
