@@ -111,7 +111,6 @@ export default function OTP({ onClose, onGoBack, onLoginClick, onSubmit }) {
 
             <div className="text-center text-gray-400 text-sm mb-6">
               <p>Enter the verification code we just sent to</p>
-              {/* <p className="font-medium text-white">xyz@gmail.com</p> */}
             </div>
             <br />
             <div className="space-y-4">

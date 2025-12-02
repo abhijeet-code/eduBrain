@@ -65,10 +65,10 @@ const EdubrainingHero = () => {
 
               <div className="text-gray-700 leading-relaxed font-roboto text-base sm:text-lg md:text-xl ">
                 <p className="mb-2 mt-7">
-                  <span className="text-gray-900 font-bold font-roboto">Edubraining</span> is your gateway to a high-growth tech career. Founded by
+                  <span className="text-gray-900 font-bold font-roboto">Edubraining</span> is your gateway to a high-growth tech career.
                 </p>
                 <p className="mb-2">
-                  <span className="text-[#1545C2] cursor-pointer hover:text-[#0f3bb0]">Name1</span> and <span className="text-[#1545C2] cursor-pointer hover:text-[#0f3bb0]">Name2</span>, we're on a mission to make top-
+                  we're on a mission to make top-
                 </p>
                 <p className="">
                   tier technical education accessible, affordable, and truly career-

@@ -74,8 +74,7 @@ const EduBrainingWebsite = () => {
               <div className="text-gray-600 font-size-24px font-roboto leading-relaxed space-y-8 mt-4 text-base sm:text-xl lg:text-2xl">
                 <p>
                   At <span className="text-[#9411a8] font-roboto font-semibold ">EduBraining</span>, we believe that world-class technical
-                  education should be accessible, affordable, and transformative. Founded by Name1 and
-                  Name2, our mission is to shape the tech pioneers of tomorrow through innovative, industry-aligned learning powered by the latest advancements
+                  education should be accessible, affordable, and transformative. Our mission is to shape the tech pioneers of tomorrow through innovative, industry-aligned learning powered by the latest advancements
                   in artificial intelligence.
                 </p>
               </div>
@@ -95,7 +94,7 @@ const EduBrainingWebsite = () => {
                 <p className="text-gray-700 font-roboto italic text-base sm:text-lg leading-6 sm:leading-8 md:leading-9 break-words whitespace-pre-line mb-4">
                   Education is not just about skills, but about building possibilities - one learner at a time.
                 </p>
-                <span className="block text-[#9411a8] font-medium text-sm sm:text-base mt-4 mb-2 pl-0 text-left" style={{ lineHeight: '1.6' }}>— XYZ, Co-Founder</span>
+                <span className="block text-[#9411a8] font-medium text-sm sm:text-base mt-4 mb-2 pl-0 text-left" style={{ lineHeight: '1.6' }}></span>
               </blockquote>
             </div>
           </div>
