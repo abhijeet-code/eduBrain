@@ -50,7 +50,7 @@ const EduBrainingWebsite = () => {
 
       {/* Main Content Section */}
       <main className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 py-5 md:ml-10 md:mr-10">
-        <div className="flex flex-col md:flex-row max-h-[600px] gap-8 md:gap-12 items-center">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
           {/* Left Side - Image */}
           <div className="w-full md:w-1/2 h-auto flex justify-center">
             <div className="relative rounded-xl overflow-hidden shadow-xl border border-gray-100">
