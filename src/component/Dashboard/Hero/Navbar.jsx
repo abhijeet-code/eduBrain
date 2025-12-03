@@ -12,7 +12,7 @@ const Navbar = ({ onLogout, isSidebarOpen, setIsSidebarOpen }) => {
   const [scrollY, setScrollY] = useState(0);
   const [userName, setUserName] = useState('Guest');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL ;
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 

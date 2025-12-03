@@ -39,7 +39,7 @@ export default function Reset({ onClose, onGoBack, onLoginClick, onReset }) {
       .then(data => {
         localStorage.removeItem('email');
         showToast("Password reset successful", "success");
-        onReset(newPassword);
+        if (onReset) onReset(newPassword);
         onLoginClick();
       })
       .catch(err => showToast('Error: ' + err.message, "error"));
