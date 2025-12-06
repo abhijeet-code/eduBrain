@@ -110,6 +110,26 @@ export const CoursesSection = ({ isLoggedIn }) => {
         },
         {
             image: {
+                src: "https://www.sirtbhopal.ac.in/assets/images/blogs/why-should-we-have-to-learn-python.webp?width=572",
+                isSpecial: false
+            },
+            icon: `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 36px; margin-bottom: 16px"><path d="M33.75 5.14287V8.35713C33.75 11.1897 26.6953 13.5 18 13.5C9.30466 13.5 2.25 11.1897 2.25 8.35713V5.14287C2.25 2.31026 9.30466 0 18 0C26.6953 0 33.75 2.31026 33.75 5.14287ZM33.75 12.375V19.6071C33.75 22.4397 26.6953 24.75 18 24.75C9.30466 24.75 2.25 22.4397 2.25 19.6071V12.375C5.63379 14.7054 11.8271 15.7902 18 15.7902C24.1729 15.7902 30.3661 14.7054 33.75 12.375ZM33.75 23.625V30.8571C33.75 33.6897 26.6953 36 18 36C9.30466 36 2.25 33.6897 2.25 30.8571V23.625C5.63379 25.9554 11.8271 27.0402 18 27.0402C24.1729 27.0402 30.3661 25.9554 33.75 23.625Z" fill="black"></path></svg>`,
+            title: { text: "Pyhton", isMultiLine: false },
+            description: [
+                "Comprehensive course covering",
+                "fundamentals of Python",
+                "Programming with hands-on,",
+                "coding projects and skills",
+                "relevant to industry..."
+            ],
+            lectures: "30",
+            duration: "10h 36m",
+            originalPrice: "₹1450",
+            discountedPrice: "₹1299",
+            discount: "10% OFF"
+        },
+        {
+            image: {
                 src: "https://api.builder.io/api/v1/image/assets/TEMP/cadbefd3d5e5fd10273f44002af99d10d52602ed?width=572",
                 isSpecial: false
             },
