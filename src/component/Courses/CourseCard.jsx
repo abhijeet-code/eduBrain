@@ -45,7 +45,7 @@ const CourseCard = ({ course, courseId, isLoggedIn }) => {
                 </h2>
 
                 {/* Description */}
-                <p className="mb-5 text-sm leading-5 text-gray-500">
+                <p className="mb-5 text-sm leading-5 text-gray-500 line-clamp-3">
                     {description.join(' ')}
                 </p>
 
