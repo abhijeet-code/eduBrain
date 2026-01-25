@@ -263,17 +263,7 @@ This project is proprietary software developed for EduBraining.
 
 ---
 
-## 📞 Support
-
-For support, please contact us through:
-- **Website**: [edubraining.com](#)
-- **Email**: support@edubraining.com
-
----
-
 <div align="center">
-
-**Built with ❤️ by the EduBraining Team**
 
 *Discover the future of learning*
 
