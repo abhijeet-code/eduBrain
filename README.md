@@ -1,4 +1,4 @@
-# 🎓 EduBraining - AI-Powered E-Learning Platform
+# 🎓 EduBraining -  E-Learning Platform
 
 <div align="center">
 
@@ -17,7 +17,7 @@
 
 ## 📋 Overview
 
-**EduBraining** is a modern, AI-enhanced e-learning platform designed to make top-tier technical education accessible, affordable, and truly career-focused. Built with React 19 and Vite 7, it offers a seamless learning experience with features like course enrollment, progress tracking, certificate generation, and resume building.
+**EduBraining** is a modern, e-learning platform designed to make top-tier technical education accessible, affordable, and truly career-focused. Built with React 19 and Vite 7, it offers a seamless learning experience with features like course enrollment, progress tracking, certificate generation, and resume building.
 
 ## ✨ Features
 
